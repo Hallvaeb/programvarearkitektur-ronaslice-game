@@ -8,8 +8,8 @@ import com.mygdx.game.states.GameStateManager;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-	public final static int WIDTH = 800;
-	public final static int HEIGHT = 480;
+	public final static int WIDTH = 480;
+	public final static int HEIGHT = 800;
 	public final static String TITLE = "RonaSlice";
 	private GameStateManager gsm;
 
