@@ -14,6 +14,8 @@ Diagrammer:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/v
 
 KOK: https://github.com/yosraemad/FruitNinja 
 
+Hei Hallvard
+
 hello! jeg fikk lov
 Mo er en sopp
 
@@ -32,4 +34,12 @@ Ulrik tester igjen
 
 mats123
 
+
 ulrik123
+matsengangtil
+hei på deg din gamle sei
+
+mats tester gang 1000
+
+
+skal vi dele inn oppgaver?
