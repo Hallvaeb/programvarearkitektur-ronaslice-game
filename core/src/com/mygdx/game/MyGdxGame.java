@@ -1,5 +1,4 @@
 package com.mygdx.game;
-private GameStateManager gsm;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
