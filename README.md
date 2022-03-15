@@ -15,3 +15,5 @@ Diagrammer:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/v
 KOK: https://github.com/yosraemad/FruitNinja 
 
 hello! jeg fikk lov
+
+mats er kul
