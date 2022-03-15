@@ -18,5 +18,18 @@ hello! jeg fikk lov
 Mo er en sopp
 
 Hello! Jeg prøver også U
+mats er kul
+hallaaa
+
+
+Try try try
 mats er
+hallaaa kristofer
 hallaaa toffen
+Hallvard tester.
+
+Ulrik tester igjen
+
+mats123
+
+ulrik123
