@@ -1,4 +1,5 @@
 package com.mygdx.game;
+private GameStateManager gsm;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.Texture;
@@ -6,13 +7,19 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class MyGdxGame extends ApplicationAdapter {
+
+	public final static int WIDTH = 800;
+	public final static int HEIGHT = 480;
+	public final static String TITLE = "RonaSlice";
+	private GameStateManager gsm;
+
 	SpriteBatch batch;
 	Texture img;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		img = new Texture("bg_bare_himmel.png");
 	}
 
 	@Override
