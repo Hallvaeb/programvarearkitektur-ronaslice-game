@@ -16,4 +16,5 @@ KOK: https://github.com/yosraemad/FruitNinja
 
 hello! jeg fikk lov
 
+Hello! Jeg prøver også U
 mats er kul
