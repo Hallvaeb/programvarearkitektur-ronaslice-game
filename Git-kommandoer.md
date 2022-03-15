@@ -1,30 +1,19 @@
 Første gang, initialisering og pull:
 
-git init .
+git clone https://github.com/Hallvaeb/TDT4240_progark_prosjekt.git
 
-git remote add origin https://github.com/Hallvaeb/TDT4240_progark_prosjekt.git
+---
 
-git branch --set-upstream-to=origin/master master
-
-git pull
-
-Deretter skal det bare være å skrive: 
+For å hente oppdateringer:
 
 git pull
 
-For å pushe første gang:
+---
+
+For å pushe:
 
 git add .
 
 git commit -m "Beskjed"
-
-git push --set-upstream origin master
-
-
-Deretter:
-
-git add .
-
-git commit -m "egendefinert beskjed: make this change"
 
 git push
