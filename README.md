@@ -15,8 +15,24 @@ Diagrammer:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/v
 KOK: https://github.com/yosraemad/FruitNinja 
 
 hello! jeg fikk lov
+Mo er en sopp
 
 Hello! Jeg prøver også U
 mats er kul
+hallaaa
 
-test fra studio
+
+Try try try
+mats er
+hallaaa kristofer
+hallaaa toffen
+Hallvard tester.
+
+Ulrik tester igjen
+
+mats123
+
+
+ulrik123
+matsengangtil
+hei på deg din gamle sei
