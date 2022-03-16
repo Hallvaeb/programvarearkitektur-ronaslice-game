@@ -1,4 +1,9 @@
 package com.mygdx.game.states;
 
-public interface Playstate {
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+public interface PlayState {
+    public void update(float dt);
+    public void render(SpriteBatch sb);
+    public void dispose();
 }
