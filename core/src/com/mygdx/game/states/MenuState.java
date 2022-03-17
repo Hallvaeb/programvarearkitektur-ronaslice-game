@@ -27,7 +27,7 @@ public class MenuState extends State {
         multiBtn = new Sprite(new Texture("multiplayerButton.png"));
         scoreBtn = new Sprite(new Texture("highScoreButton.png"));
         settingBtn = new Sprite(new Texture("settingsButton.png"));
-        helpBtn = new Sprite(new Texture("settingsButton.png"));
+        helpBtn = new Sprite(new Texture("tutorialButton.png"));
 
         playBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
         playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-playBtn.getHeight());
