@@ -40,7 +40,6 @@ public class MenuState extends State {
         helpBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
         helpBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-5*playBtn.getHeight());
 
-
     }
 
     @Override
@@ -51,8 +50,8 @@ public class MenuState extends State {
             }
             /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
-            }*/
-           /* if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            }
+            if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new ScoreState(gsm));
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
