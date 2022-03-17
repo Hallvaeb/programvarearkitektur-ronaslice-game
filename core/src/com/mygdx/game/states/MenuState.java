@@ -19,6 +19,7 @@ public class MenuState extends State {
     private Sprite settingBtn;
     private Sprite helpBtn;
     private Texture img;
+    private int margin = 80;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -30,15 +31,15 @@ public class MenuState extends State {
         helpBtn = new Sprite(new Texture("tutorialButton.png"));
 
         playBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
-        playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-playBtn.getHeight());
+        playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-playBtn.getHeight());
         multiBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
-        multiBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-2*playBtn.getHeight());
+        multiBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-2*playBtn.getHeight());
         scoreBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
-        scoreBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-3*playBtn.getHeight());
+        scoreBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-3*playBtn.getHeight());
         settingBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
-        settingBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-4*playBtn.getHeight());
+        settingBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-4*playBtn.getHeight());
         helpBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
-        helpBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-5*playBtn.getHeight());
+        helpBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-5*playBtn.getHeight());
 
     }
 
