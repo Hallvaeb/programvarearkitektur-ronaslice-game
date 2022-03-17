@@ -23,17 +23,23 @@ public class MenuState extends State {
     public MenuState(GameStateManager gsm) {
         super(gsm);
         img = new Texture("bg_bare_himmel.png");
-        playBtn = new Sprite(new Texture("heli1.png"));
-        multiBtn = new Sprite(new Texture("heli1.png"));
-        scoreBtn = new Sprite(new Texture("heli1.png"));
-        settingBtn = new Sprite(new Texture("heli1.png"));
-        helpBtn = new Sprite(new Texture("heli1.png"));
+        playBtn = new Sprite(new Texture("newGameButton.png"));
+        multiBtn = new Sprite(new Texture("multiplayerButton.png"));
+        scoreBtn = new Sprite(new Texture("highScoreButton.png"));
+        settingBtn = new Sprite(new Texture("settingsButton.png"));
+        helpBtn = new Sprite(new Texture("settingsButton.png"));
 
-        playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-2*playBtn.getHeight());
-        multiBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-4*playBtn.getHeight());
-        scoreBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-6*playBtn.getHeight());
-        settingBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-8*playBtn.getHeight());
-        helpBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-10*playBtn.getHeight());
+        playBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-playBtn.getHeight());
+        multiBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        multiBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-2*playBtn.getHeight());
+        scoreBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        scoreBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-3*playBtn.getHeight());
+        settingBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        settingBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-4*playBtn.getHeight());
+        helpBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        helpBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, Gdx.graphics.getHeight()-5*playBtn.getHeight());
+
 
     }
 
@@ -43,11 +49,10 @@ public class MenuState extends State {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SingleplayerState(gsm));
             }
-            if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
-            }
-            /*
-           if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            }*/
+           /* if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new ScoreState(gsm));
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
@@ -55,8 +60,7 @@ public class MenuState extends State {
             }
             if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new HelpState(gsm));
-            }
-            */
+            }*/
         }
     }
 
@@ -69,11 +73,11 @@ public class MenuState extends State {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(img,0, 0);
-        sb.draw(playBtn, playBtn.getX(), playBtn.getY());
-        sb.draw(multiBtn, multiBtn.getX(), multiBtn.getY());
-        sb.draw(scoreBtn, scoreBtn.getX(), scoreBtn.getY());
-        sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY());
-        sb.draw(helpBtn, helpBtn.getX(), helpBtn.getY());
+        sb.draw(playBtn, playBtn.getX(), playBtn.getY(), Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        sb.draw(multiBtn, multiBtn.getX(), multiBtn.getY(), Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        sb.draw(scoreBtn, scoreBtn.getX(), scoreBtn.getY(), Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
+        sb.draw(helpBtn, helpBtn.getX(), helpBtn.getY(), Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
         sb.end();
     }
 
