@@ -43,3 +43,5 @@ mats tester gang 1000
 
 
 skal vi dele inn oppgaver?
+
+dette er til multiplayer
