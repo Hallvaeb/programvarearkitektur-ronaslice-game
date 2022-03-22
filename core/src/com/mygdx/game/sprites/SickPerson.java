@@ -1,6 +1,7 @@
 package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.math.Rectangle;
 
 public class SickPerson extends UFO {
     private Texture texture;
@@ -8,6 +9,8 @@ public class SickPerson extends UFO {
     public SickPerson(int x, int size) {
         super(x, size);
         texture = new Texture("sick_person.png");
+        setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
+        super.setType(-1);
     }
 
     public Texture getTexture() {
