@@ -29,7 +29,7 @@ public class PauseState extends State {
         quitBtn = new Sprite(new Texture("quitBtn.png"));
 
         playBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        // TODO: insert game paused textbox
+        // TODO: insert "game paused" textbox
         resBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         resBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-2*playBtn.getHeight());
         settingBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
