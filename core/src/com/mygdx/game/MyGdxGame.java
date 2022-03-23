@@ -9,6 +9,7 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.states.GameStateManager;
 
+import com.mygdx.game.states.PauseState;
 import com.mygdx.game.states.SingleplayerState;
 
 import com.mygdx.game.states.MenuState;
