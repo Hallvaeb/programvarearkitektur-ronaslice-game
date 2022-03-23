@@ -48,15 +48,17 @@ public class PauseState extends State {
     @Override
     public void handleInput() {
         if (Gdx.input.isTouched()) {
-            /*if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.pop();
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.push(new SettingState(gsm));
+                //gsm.push(new SettingState(gsm));
+                System.out.println("settingState not implemented");
             }
             if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.push(new HelpState(gsm));
-            }*/
+                //gsm.push(new HelpState(gsm));
+                System.out.println("helpState not implemented");
+            }
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 // HER ER GSM STACKEN [PAUSESTATE, SINGLEPLAYERSTATE]
                 gsm.set(new MenuState(gsm));
