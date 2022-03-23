@@ -3,6 +3,7 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
@@ -25,6 +26,7 @@ public class SingleplayerState extends State implements PlayState  {
     private SickPerson sick_person;
 
     private Texture health = new Texture("health.png");
+    private Sprite pause = new Sprite(new Texture("pause.png"));
     private Player player;
     private BitmapFont font;
 
@@ -41,6 +43,10 @@ public class SingleplayerState extends State implements PlayState  {
         cov_omikron = new COV_omikron(100, 60);
         sick_person = new SickPerson(300, 80);
 
+        //Pause (Fikse hardkodet verdier)
+        pause.setSize(50, 50);
+        pause.setPosition(MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60);
+
         // Slice posisjon til player
         touchPoint = new Vector3();
 
@@ -50,14 +56,20 @@ public class SingleplayerState extends State implements PlayState  {
 
     @Override
     protected void handleInput() {
+
         if(Gdx.input.isTouched()) {
+            touchPoint.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
+            if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                gsm.push(new PauseState(gsm));
+            }
+
             // Slice fra bruker.
             for (UFO ufo : ufos) {
 
-                touchPoint.set(Gdx.input.getX(),Gdx.input.getY(),0);
+
                 System.out.println(touchPoint);
 
-                if(ufo.getBoundingRectangle().contains(touchPoint.x, MyGdxGame.HEIGHT-touchPoint.y))
+                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y))
                 {
                     if (ufo.sliced() == -1) {
                         // GAME OVER (slicet en pasient)
@@ -93,7 +105,8 @@ public class SingleplayerState extends State implements PlayState  {
             // Gjøre disse piksel-verdiene ikke hardkodet.
             sb.draw(health, 10+i*60, MyGdxGame.HEIGHT-60, 50, 50);
         }
-        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH-230, MyGdxGame.HEIGHT-20);
+        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/2 -130, MyGdxGame.HEIGHT-120);
+        sb.draw(pause, MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60, 50, 50);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
