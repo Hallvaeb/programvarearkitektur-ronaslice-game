@@ -89,5 +89,10 @@ public class PauseState extends State {
     @Override
     public void dispose() {
         img.dispose();
+        playBtn.getTexture().dispose();
+        resBtn.getTexture().dispose();
+        settingBtn.getTexture().dispose();
+        helpBtn.getTexture().dispose();
+        quitBtn.getTexture().dispose();
     }
 }
