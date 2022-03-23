@@ -60,10 +60,11 @@ public class PauseState extends State {
                 System.out.println("helpState not implemented");
             }
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                // HER ER GSM STACKEN [PAUSESTATE, SINGLEPLAYERSTATE]
+                // GSM-STACK: [PAUSESTATE, SINGLEPLAYERSTATE]
+                gsm.pop();
+                // GSM-STACK: [SINGLEPLAYERSTATE]
                 gsm.set(new MenuState(gsm));
-                // ETTER SET ER DEN [MENUSTATE, SINGLEPLAYERSTATE]....
-                // Skal teste å sette menustate, deretter pop()...
+                // ETTER SET ER DEN [MENUSTATE]
             }
         }
     }
@@ -88,5 +89,10 @@ public class PauseState extends State {
     @Override
     public void dispose() {
         img.dispose();
+        playBtn.getTexture().dispose();
+        resBtn.getTexture().dispose();
+        settingBtn.getTexture().dispose();
+        helpBtn.getTexture().dispose();
+        quitBtn.getTexture().dispose();
     }
 }
