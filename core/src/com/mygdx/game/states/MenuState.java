@@ -48,6 +48,9 @@ public class MenuState extends State {
         if (Gdx.input.isTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SingleplayerState(gsm));
+                gsm.set(new SingleplayerState(gsm));
+                gsm.push(new SingleplayerState(gsm));
+                gsm.pop();
             }
             /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
