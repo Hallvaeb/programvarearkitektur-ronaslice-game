@@ -1,9 +1,11 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.FireBaseInterface;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.sprites.COV_omikron;
@@ -20,21 +22,33 @@ public class SingleplayerState extends State implements PlayState  {
     private COV_delta cov_delta;
     private COV_omikron cov_omikron;
     private SickPerson sick_person;
+    Preferences prefs = Gdx.app.getPreferences("myprefs");
+    private int count;
 
     public SingleplayerState(GameStateManager gsm){
         super(gsm);
         cov_delta = new COV_delta(200, 60);
         cov_omikron = new COV_omikron(100, 60);
         sick_person = new SickPerson(300, 80);
-
         ufos = new Array<>();
         ufos.add(cov_delta, cov_omikron, sick_person);
+        ////
+        if(!prefs.contains("ID")) {
+            prefs.putInteger("ID", 0);
+        }
+        else {
+            count = prefs.getInteger("ID");
+            count++;
+            prefs.putInteger("ID", count);
+        }
+        prefs.flush();
     }
 
     @Override
     protected void handleInput() {
         if(Gdx.input.justTouched()) {
-            // Slice fra bruker.
+            MyGdxGame.get_FBIC().SetValueInDB(prefs.getInteger("ID")+"", "test");
+            //System.out.println(prefs.getInteger("ID"));
         }
     }
 
