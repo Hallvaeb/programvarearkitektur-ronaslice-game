@@ -11,6 +11,7 @@ import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.sprites.COV_omikron;
 import com.mygdx.game.sprites.Player;
 import com.mygdx.game.sprites.SickPerson;
+import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
 
 public class SingleplayerState extends State implements PlayState  {
@@ -23,6 +24,7 @@ public class SingleplayerState extends State implements PlayState  {
     private COV_delta cov_delta;
     private COV_omikron cov_omikron;
     private SickPerson sick_person;
+    private Syringe syringe;
 
     private Texture health = new Texture("health.png");
     private Player player;
@@ -40,12 +42,13 @@ public class SingleplayerState extends State implements PlayState  {
         cov_delta = new COV_delta(200, 60);
         cov_omikron = new COV_omikron(100, 60);
         sick_person = new SickPerson(300, 80);
+        syringe = Syringe.getInstance();
 
         // Slice posisjon til player
         touchPoint = new Vector3();
 
         ufos = new Array<>();
-        ufos.add(cov_delta, cov_omikron, sick_person);
+        ufos.add(cov_delta, cov_omikron, sick_person, syringe);
     }
 
     @Override
@@ -65,6 +68,9 @@ public class SingleplayerState extends State implements PlayState  {
                     }
                     else if (ufo.sliced() == 1) {
                         player.increaseScore(1);
+                    }
+                    else if (ufo.sliced() == 2) {
+                        player.gainLife();
                     }
                     System.out.println("au");
                 }
@@ -97,6 +103,7 @@ public class SingleplayerState extends State implements PlayState  {
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
+        sb.draw(syringe.getTexture(), syringe.getPosition().x,syringe.getPosition().y, syringe.getSize(), syringe.getSize());
         sb.end();
 
     }
