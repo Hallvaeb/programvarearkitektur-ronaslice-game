@@ -23,9 +23,6 @@ public abstract class UFO {
     }
 
     public void update(float dt, Player player) {
-
-
-
         velocity.scl(dt);
         if (position.y > 0) {
             velocity.add(0, GRAVITY, 0);
@@ -39,7 +36,7 @@ public abstract class UFO {
             position.y = MyGdxGame.HEIGHT;
             //Miste et liv her hvis et virus har kommet i bunn av skjermen.
             if (type == 1) {
-                player.looseLife();
+                player.loseLife();
             }
         }
         bounds = new Rectangle(position.x, position.y, size, size);
@@ -47,8 +44,14 @@ public abstract class UFO {
 
     }
 
+    /**
+     * Sliced repositions the viruses.
+     * @return
+     */
     public int sliced() {
-        position.y = MyGdxGame.HEIGHT;
+        position.y = MyGdxGame.HEIGHT + (int) (Math.random() * MyGdxGame.HEIGHT);
+        System.out.println(getBoundingRectangle().width);
+        position.x = getBoundingRectangle().width + (int) (Math.random() * (MyGdxGame.WIDTH - getBoundingRectangle().width));
         return type;
     }
 

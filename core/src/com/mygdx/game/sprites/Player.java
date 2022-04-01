@@ -14,7 +14,7 @@ public class Player {
         return livesLeft;
     }
 
-    public void looseLife() {
+    public void loseLife() {
         if (livesLeft > 0) {
             livesLeft--;
         }
