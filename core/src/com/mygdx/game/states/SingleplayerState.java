@@ -30,6 +30,8 @@ public class SingleplayerState extends State implements PlayState  {
     private Player player;
     private BitmapFont font;
 
+    private float time_passed = 0;
+
     private Vector3 touchPoint;
 
 
@@ -75,6 +77,10 @@ public class SingleplayerState extends State implements PlayState  {
                         // GAME OVER (slicet en pasient)
                         System.out.println("GAME OVER");
                     }
+                    if (ufo instanceof SickPerson) {
+                        ufo.sliced();
+                        System.out.println("GAME OVER");
+                    }
                     else if (ufo.sliced() == 1) {
                         player.increaseScore(1);
                     }
@@ -88,6 +94,7 @@ public class SingleplayerState extends State implements PlayState  {
     @Override
     public void update(float dt) {
         handleInput();
+        time_passed += dt;
         for (UFO ufo : ufos) {
             ufo.update(dt, player);
         }
