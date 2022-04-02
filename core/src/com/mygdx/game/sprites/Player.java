@@ -20,7 +20,7 @@ public class Player {
         }
     }
     public void gainLife() {
-        if (livesLeft > 0 && livesLeft < 4) {
+        if (livesLeft > 0 && livesLeft < 3) {
             livesLeft++;
         }
     }
