@@ -14,34 +14,8 @@ Diagrammer:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/v
 
 KOK: https://github.com/yosraemad/FruitNinja 
 
-Hei Hallvard
-
-hello! jeg fikk lov
-Mo er en sopp
-
-Hello! Jeg prøver også U
-mats er kul
-hallaaa
 
 
-Try try try
-mats er
-hallaaa kristofer
-hallaaa toffen
-Hallvard tester.
-
-Ulrik tester igjen
-
-mats123
- 
-
-ulrik123
-matsengangtil
-hei på deg din gamle sei
-
-mats tester gang 1000
-
-
-skal vi dele inn oppgaver?
-
-dette er til multiplayer
+Notater(TODO):
+UFO: her har vi en "public abstract class UFO" med metoder som kan benyttes av alle underklassene, eller overskrives.
+State: "public abstract class State", men her er alle metoder abstrakte, og funksjonalitet som alle statene bruker er fortsatt fordelt.. men så er de kanskje aldri like?
