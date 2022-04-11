@@ -4,15 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
-    private Vector2 touch;
     private Sprite playBtn;
     private Sprite multiBtn;
     private Sprite scoreBtn;
@@ -48,6 +42,9 @@ public class MenuState extends State {
         if (Gdx.input.isTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SingleplayerState(gsm));
+                gsm.set(new SingleplayerState(gsm));
+                gsm.push(new SingleplayerState(gsm));
+                gsm.pop();
             }
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new ScoreState(gsm));
