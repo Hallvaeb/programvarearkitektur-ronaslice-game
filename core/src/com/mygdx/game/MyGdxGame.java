@@ -17,8 +17,6 @@ import com.mygdx.game.states.MenuState;
 
 public class MyGdxGame extends ApplicationAdapter {
 
-	public final static int WIDTH = 480;
-	public final static int HEIGHT = 800;
 	public final static String TITLE = "RonaSlice";
 	private GameStateManager gsm;
 
@@ -29,15 +27,9 @@ public class MyGdxGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-
-
-
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		gsm.push(new MenuState(gsm));
-
-
-
 	}
 
 	@Override

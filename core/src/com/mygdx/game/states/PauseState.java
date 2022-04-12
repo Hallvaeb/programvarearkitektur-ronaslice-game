@@ -82,7 +82,7 @@ public class PauseState extends State {
         sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(helpBtn, helpBtn.getX(), helpBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        font.draw(sb, GAMEPAUSED, (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2), Gdx.graphics.getHeight()-MARGIN);
+        font.draw(sb, GAMEPAUSED, (Gdx.graphics.getWidth()/2f)  - (font.getRegion().getRegionWidth()/2), Gdx.graphics.getHeight()-MARGIN);
         sb.end();
     }
 
