@@ -19,6 +19,11 @@ public class Player {
             livesLeft--;
         }
     }
+    public void gainLife() {
+        if (livesLeft > 0 && livesLeft < 3) {
+            livesLeft++;
+        }
+    }
 
     public float getScore() {
         return score;

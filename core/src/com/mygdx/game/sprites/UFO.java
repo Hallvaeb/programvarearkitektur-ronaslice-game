@@ -1,6 +1,5 @@
 package com.mygdx.game.sprites;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.MyGdxGame;
@@ -46,7 +45,7 @@ public abstract class UFO {
 
     /**
      * Sliced repositions the viruses.
-     * @return
+     * @return type
      */
     public int sliced() {
         position.y = MyGdxGame.HEIGHT + (int) (Math.random() * MyGdxGame.HEIGHT);
@@ -63,7 +62,8 @@ public abstract class UFO {
         return size;
     }
 
-    public Rectangle getBoundingRectangle(){ return bounds;};
+    public Rectangle getBoundingRectangle(){ return bounds;}
+
     public void setBoundingRectangle(Rectangle bounds) {
         this.bounds = bounds;
     }
