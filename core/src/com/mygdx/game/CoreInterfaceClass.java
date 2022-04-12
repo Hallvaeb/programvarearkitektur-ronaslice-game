@@ -1,5 +1,7 @@
 package com.mygdx.game;
 
+import java.util.List;
+
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
@@ -7,18 +9,25 @@ public class CoreInterfaceClass implements FireBaseInterface{
 
     }
 
-    @Override
-    public void FirstFireBaseTest() {
 
+    @Override
+    public List<String> GetTopNames() {
+        return null;
     }
 
-    @java.lang.Override
+    @Override
+    public List<Float> GetTopScores() {
+        return null;
+    }
+
+
+    @Override
     public void SetOnValueChangedListener() {
 
     }
 
-    @java.lang.Override
-    public void SetValueInDB(String target, String value) {
+    @Override
+    public void SetValueInDB(String target, float value) {
 
     }
 }
