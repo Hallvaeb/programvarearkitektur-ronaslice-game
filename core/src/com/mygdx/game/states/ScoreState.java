@@ -72,11 +72,13 @@ public class ScoreState extends State{
         sb.draw(img,0, 0);
         sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         titleFont.draw(sb, "Highscore! ", (MyGdxGame.WIDTH/2)-100, MyGdxGame.HEIGHT-50);
-        nameTitleFont.draw(sb, "NAME", 90, MyGdxGame.HEIGHT-150);
-        scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-110, MyGdxGame.HEIGHT-150);
-        for (int i = 0; i < scores.size(); i++) {
-            nameFont.draw(sb, ""+names.get(i), 100, MyGdxGame.HEIGHT-200-(i*50));
-            scoreFont.draw(sb, ""+scores.get(i), MyGdxGame.WIDTH-100, MyGdxGame.HEIGHT-200-(i*50));
+        nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
+        scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
+        if (scores != null) {
+            for (int i = 0; i < scores.size(); i++) {
+                nameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
+                scoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+            }
         }
         sb.end();
     }
