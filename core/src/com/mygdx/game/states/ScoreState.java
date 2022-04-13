@@ -54,9 +54,8 @@ public class ScoreState extends State{
     protected void handleInput() {
         if (Gdx.input.isTouched()) {
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                // GSM-STACK: [SCORESTATE]
+                MyGdxGame.sound.play();
                 gsm.set(new MenuState(gsm));
-                // ETTER SET ER DEN [MENUSTATE]
             }
         }
     }

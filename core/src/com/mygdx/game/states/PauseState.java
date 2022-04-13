@@ -5,6 +5,7 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.MyGdxGame;
 
 public class PauseState extends State {
     private Texture bg;
@@ -47,15 +48,19 @@ public class PauseState extends State {
     public void handleInput() {
         if (Gdx.input.isTouched()) {
             if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.pop();
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.push(new SettingState(gsm));
             }
             if (tutorialBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.push(new TutorialState(gsm));
             }
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.pop();
                 gsm.set(new MenuState(gsm));
             }

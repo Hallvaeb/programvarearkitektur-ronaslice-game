@@ -66,6 +66,7 @@ public class SingleplayerState extends State implements PlayState  {
         if(Gdx.input.isTouched()) {
             touchPoint.set(Gdx.input.getX(),Gdx.graphics.getHeight() - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                MyGdxGame.sound.play();
                 gsm.push(new PauseState(gsm));
             }
 
