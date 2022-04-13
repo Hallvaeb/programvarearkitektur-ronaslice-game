@@ -113,7 +113,7 @@ public class SingleplayerState extends State implements PlayState  {
             // Gjøre disse piksel-verdiene ikke hardkodet.
             sb.draw(health, 10+i*60, Gdx.graphics.getHeight()-60, 50, 50);
         }
-        font.draw(sb, "Score: " + player.getScore(), Gdx.graphics.getWidth()/2 -130, Gdx.graphics.getHeight()-120);
+        font.draw(sb, "Score: " + player.getScore(), (float) Gdx.graphics.getWidth()/2 -130, Gdx.graphics.getHeight()-120);
         sb.draw(pause, Gdx.graphics.getWidth()-60,Gdx.graphics.getHeight()-60, 50, 50);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
