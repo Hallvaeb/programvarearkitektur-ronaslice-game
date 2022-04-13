@@ -47,24 +47,24 @@ public class MenuState extends State {
         MyGdxGame.get_FBIC().SomeFunction();
         if (Gdx.input.isTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.set(new SingleplayerState(gsm));
             }
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.set(new ScoreState(gsm));
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.push(new SettingState(gsm));
             }
             if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
                 gsm.push(new TutorialState(gsm));
             }
             /*
             if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
-            }
-            if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new SettingState(gsm));
-
             }
             */
         }
