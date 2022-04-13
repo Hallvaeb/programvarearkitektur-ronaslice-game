@@ -1,5 +1,7 @@
 package com.mygdx.game.sprites;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.MyGdxGame;
@@ -14,7 +16,7 @@ public abstract class UFO {
 
     public UFO (int x, int size) {
         // Fikse startposisjon. Dette skal bli randomisert.
-        position = new Vector3(x, MyGdxGame.HEIGHT, 0);
+        position = new Vector3(x, Gdx.graphics.getHeight(), 0);
         velocity = new Vector3(0, 0 , 0);
         this.size = size;
         bounds = null;
@@ -32,7 +34,7 @@ public abstract class UFO {
 
         //Denne må endres, UFOer skal falle lenger.
         if (position.y < 0) {
-            position.y = MyGdxGame.HEIGHT;
+            position.y = Gdx.graphics.getHeight();
             //Miste et liv her hvis et virus har kommet i bunn av skjermen.
             if (type == 1) {
                 player.loseLife();
@@ -48,9 +50,9 @@ public abstract class UFO {
      * @return type
      */
     public int sliced() {
-        position.y = MyGdxGame.HEIGHT + (int) (Math.random() * MyGdxGame.HEIGHT);
+        position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
         System.out.println(getBoundingRectangle().width);
-        position.x = getBoundingRectangle().width + (int) (Math.random() * (MyGdxGame.WIDTH - getBoundingRectangle().width));
+        position.x = getBoundingRectangle().width + (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
         return type;
     }
 

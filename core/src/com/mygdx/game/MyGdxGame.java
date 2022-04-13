@@ -7,20 +7,16 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.states.GameStateManager;
-
 import com.mygdx.game.states.MenuState;
 
 
 public class MyGdxGame extends ApplicationAdapter {
 
-	public final static int WIDTH = 480;
-	public final static int HEIGHT = 800;
 	public final static String TITLE = "RonaSlice";
 	private static int count = 0;
 	private static FireBaseInterface _FBIC;
 	public int ID;
 	private GameStateManager gsm;
-
 	private SpriteBatch batch;
 
 	private Texture img;
@@ -64,9 +60,7 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void render () {
-
 		ScreenUtils.clear(1, 0, 0, 1);
-
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
 	}
