@@ -47,7 +47,7 @@ public abstract class UFO {
 
     /**
      * Sliced repositions the viruses.
-     * @return
+     * @return type
      */
     public int sliced() {
         position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
@@ -64,7 +64,8 @@ public abstract class UFO {
         return size;
     }
 
-    public Rectangle getBoundingRectangle(){ return bounds;};
+    public Rectangle getBoundingRectangle(){ return bounds;}
+
     public void setBoundingRectangle(Rectangle bounds) {
         this.bounds = bounds;
     }

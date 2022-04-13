@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.mygdx.game.FireBaseInterface;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.sprites.COV_omikron;

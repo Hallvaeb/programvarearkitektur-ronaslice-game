@@ -6,6 +6,9 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
+import java.util.List;
+
+import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
     private Sprite playBtn;
@@ -24,6 +27,7 @@ public class MenuState extends State {
         scoreBtn = new Sprite(new Texture("highScoreButton.png"));
         settingBtn = new Sprite(new Texture("settingsButton.png"));
         helpBtn = new Sprite(new Texture("tutorialButton.png"));
+        //cam.setToOrtho(false, MyGdxGame.WIDTH/2, MyGdxGame.HEIGHT/2);
 
         playBtn.setSize(Gdx.graphics.getWidth()/4, Gdx.graphics.getWidth()/4);
         playBtn.setPosition(Gdx.graphics.getWidth()/2-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-margin)-playBtn.getHeight());
@@ -40,15 +44,10 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
+        MyGdxGame.get_FBIC().SomeFunction();
         if (Gdx.input.isTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SingleplayerState(gsm));
-                gsm.set(new SingleplayerState(gsm));
-                gsm.push(new SingleplayerState(gsm));
-                gsm.pop();
-            }
-            /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new MultiplayerState(gsm));
             }
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new ScoreState(gsm));
@@ -56,11 +55,21 @@ public class MenuState extends State {
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SettingState(gsm));
             }
+            /*
+            if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                gsm.set(new MultiplayerState(gsm));
+            }
+            if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                gsm.set(new SettingState(gsm));
+
+            }
             if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new HelpState(gsm));
-            }*/
+            }
+            */
         }
     }
+
 
     @Override
     public void update(float dt) {
