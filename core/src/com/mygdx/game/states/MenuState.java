@@ -53,7 +53,7 @@ public class MenuState extends State {
                 gsm.set(new ScoreState(gsm));
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new SettingState(gsm));
+                gsm.push(new SettingState(gsm));
             }
             if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.push(new TutorialState(gsm));

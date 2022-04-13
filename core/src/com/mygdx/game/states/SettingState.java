@@ -88,8 +88,7 @@ public class SettingState extends State{
         if (Gdx.input.isTouched()) {
             if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
-                gsm.set(new MenuState(gsm));
-                this.dispose();
+                gsm.pop();
             }
             if (volumeMusicSlider.isDragging()){
                 MyGdxGame.setVolume(volumeMusicSlider.getValue());
@@ -132,6 +131,12 @@ public class SettingState extends State{
 
     @Override
     public void dispose() {
-
+        img.dispose();
+        returnBtn.getTexture().dispose();
+        settings.getTexture().dispose();
+        soundText.getTexture().dispose();
+        musicText.getTexture().dispose();
+        uiSkin.dispose();
+        stage.dispose();
     }
 }
