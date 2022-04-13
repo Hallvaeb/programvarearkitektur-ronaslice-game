@@ -2,15 +2,11 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.states.GameStateManager;
-
-import com.mygdx.game.states.SingleplayerState;
-
 import com.mygdx.game.states.MenuState;
 
 
@@ -24,7 +20,10 @@ public class MyGdxGame extends ApplicationAdapter {
 	private SpriteBatch batch;
 
 	private Texture img;
-	
+	private static Music music;
+	public static Music sound;
+
+
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
@@ -34,7 +33,13 @@ public class MyGdxGame extends ApplicationAdapter {
 		gsm = new GameStateManager();
 		Gdx.gl.glClearColor(1, 0, 0, 1);
 		gsm.push(new MenuState(gsm));
+		music = Gdx.audio.newMusic(Gdx.files.internal("music.wav"));
+		sound = Gdx.audio.newMusic(Gdx.files.internal("soundclick.wav"));
 
+		sound.setVolume(0.5f);
+		music.setVolume(0.5f);
+		music.setLooping(true);
+		music.play();
 
 
 	}
@@ -47,10 +52,27 @@ public class MyGdxGame extends ApplicationAdapter {
 		gsm.update(Gdx.graphics.getDeltaTime());
 		gsm.render(batch);
 	}
+
+	public static void setVolume(float number){
+		music.setVolume(number);
+	}
+
+	public static void setSoundVolume(float number){
+		sound.setVolume(number);
+	}
+
+	public static float returnVolume(){
+		return music.getVolume();
+	}
+	public static float returnSoundVolume(){
+		return sound.getVolume();
+	}
 	
 	@Override
 	public void dispose () {
 		batch.dispose();
 		img.dispose();
+		music.dispose();
+		sound.dispose();
 	}
 }

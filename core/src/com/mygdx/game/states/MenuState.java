@@ -52,15 +52,15 @@ public class MenuState extends State {
             /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
             }*/
-           /* if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new ScoreState(gsm));
-            }
+//           if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+//                gsm.set(new ScoreState(gsm));
+//            }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SettingState(gsm));
             }
-            if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new HelpState(gsm));
-            }*/
+//            if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+//                gsm.set(new HelpState(gsm));
+//            }
         }
     }
 
