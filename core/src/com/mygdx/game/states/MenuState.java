@@ -55,6 +55,9 @@ public class MenuState extends State {
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SettingState(gsm));
             }
+            if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                gsm.push(new TutorialState(gsm));
+            }
             /*
             if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
@@ -62,9 +65,6 @@ public class MenuState extends State {
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SettingState(gsm));
 
-            }
-            if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                gsm.set(new HelpState(gsm));
             }
             */
         }
