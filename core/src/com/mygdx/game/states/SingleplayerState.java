@@ -70,19 +70,15 @@ public class SingleplayerState extends State implements PlayState  {
 
             // Slice fra bruker.
             for (UFO ufo : ufos) {
-
-
-                System.out.println(touchPoint);
-
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y))
                 {
                     if (ufo.sliced() == -1) {
                         // GAME OVER (slicet en pasient)
-                        System.out.println("GAME OVER");
+                        System.out.println("GAME OVER == -1");
                     }
                     if (ufo instanceof SickPerson) {
                         ufo.sliced();
-                        System.out.println("GAME OVER");
+                        System.out.println("GAME OVER instanceof SickPerson");
                     }
                     else if (ufo.sliced() == 1) {
                         player.increaseScore(1);
@@ -125,7 +121,6 @@ public class SingleplayerState extends State implements PlayState  {
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
         sb.draw(syringe.getTexture(), syringe.getPosition().x,syringe.getPosition().y, syringe.getSize(), syringe.getSize());
         sb.end();
-
     }
 
     @Override
