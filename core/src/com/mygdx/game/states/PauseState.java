@@ -5,14 +5,13 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.MyGdxGame;
 
 public class PauseState extends State {
     private Texture bg;
     private Sprite playBtn;
     private Sprite resBtn;
     private Sprite settingBtn;
-    private Sprite helpBtn;
+    private Sprite tutorialBtn;
     private Sprite quitBtn;
     private static final int MARGIN = 80;
     private BitmapFont font;
@@ -25,17 +24,16 @@ public class PauseState extends State {
         playBtn = new Sprite(new Texture("playbtn.png"));
         resBtn = new Sprite(new Texture("resBtn.png"));
         settingBtn = new Sprite(new Texture("settingsButton.png"));
-        helpBtn = new Sprite(new Texture("tutorialButton.png"));
+        tutorialBtn = new Sprite(new Texture("tutorialButton.png"));
         quitBtn = new Sprite(new Texture("quitBtn.png"));
 
         playBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        // TODO: insert "game paused" textbox
         resBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         resBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-2*playBtn.getHeight());
         settingBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         settingBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-3*playBtn.getHeight());
-        helpBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        helpBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-4*playBtn.getHeight());
+        tutorialBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
+        tutorialBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-4*playBtn.getHeight());
         quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         quitBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-5*playBtn.getHeight());
 
@@ -52,19 +50,14 @@ public class PauseState extends State {
                 gsm.pop();
             }
             if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                //gsm.push(new SettingState(gsm));
-                System.out.println("settingState not implemented");
+                gsm.push(new SettingState(gsm));
             }
-            if (helpBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                //gsm.push(new HelpState(gsm));
-                System.out.println("helpState not implemented");
+            if (tutorialBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                gsm.push(new TutorialState(gsm));
             }
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                // GSM-STACK: [PAUSESTATE, SINGLEPLAYERSTATE]
                 gsm.pop();
-                // GSM-STACK: [SINGLEPLAYERSTATE]
                 gsm.set(new MenuState(gsm));
-                // ETTER SET ER DEN [MENUSTATE]
             }
         }
     }
@@ -80,7 +73,7 @@ public class PauseState extends State {
         sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(resBtn, resBtn.getX(), resBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        sb.draw(helpBtn, helpBtn.getX(), helpBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
+        sb.draw(tutorialBtn, tutorialBtn.getX(), tutorialBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         font.draw(sb, GAMEPAUSED, (Gdx.graphics.getWidth()/2f)  - (font.getRegion().getRegionWidth()/2), Gdx.graphics.getHeight()-MARGIN);
         sb.end();
@@ -92,7 +85,7 @@ public class PauseState extends State {
         playBtn.getTexture().dispose();
         resBtn.getTexture().dispose();
         settingBtn.getTexture().dispose();
-        helpBtn.getTexture().dispose();
+        tutorialBtn.getTexture().dispose();
         quitBtn.getTexture().dispose();
     }
 }
