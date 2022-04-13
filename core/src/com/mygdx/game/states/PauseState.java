@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
 public class PauseState extends State {
-    private Texture img;
+    private Texture bg;
     private Sprite playBtn;
     private Sprite resBtn;
     private Sprite settingBtn;
@@ -20,7 +20,7 @@ public class PauseState extends State {
 
     public PauseState(GameStateManager gsm) {
         super(gsm);
-        img = new Texture("bg_bare_himmel.png");
+        bg = new Texture("bg_bare_himmel.png");
         // PLAYBTN USED FOR SCALING AND POSITIONING THE OTHER BUTTONS
         playBtn = new Sprite(new Texture("playbtn.png"));
         resBtn = new Sprite(new Texture("resBtn.png"));
@@ -77,7 +77,7 @@ public class PauseState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(img,0, 0);
+        sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(resBtn, resBtn.getX(), resBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         sb.draw(helpBtn, helpBtn.getX(), helpBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
@@ -88,7 +88,7 @@ public class PauseState extends State {
 
     @Override
     public void dispose() {
-        img.dispose();
+        bg.dispose();
         playBtn.getTexture().dispose();
         resBtn.getTexture().dispose();
         settingBtn.getTexture().dispose();

@@ -72,21 +72,19 @@ public class SingleplayerState extends State implements PlayState  {
             for (UFO ufo : ufos) {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y))
                 {
-                    if (ufo.sliced() == -1) {
-                        // GAME OVER (slicet en pasient)
-                        System.out.println("GAME OVER == -1");
-                    }
                     if (ufo instanceof SickPerson) {
                         ufo.sliced();
-                        System.out.println("GAME OVER instanceof SickPerson");
+                        System.out.println("GAME OVER");
+                        // TODO: Implement game over functionality
                     }
                     else if (ufo.sliced() == 1) {
+                        // One of the viruses are sliced
                         player.increaseScore(1);
                     }
-                    else if (ufo.sliced() == 2) {
+                    else if (ufo instanceof Syringe) {
+                        ufo.sliced();
                         player.gainLife();
                     }
-                    System.out.println("au");
                 }
 
             }
