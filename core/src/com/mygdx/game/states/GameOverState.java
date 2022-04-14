@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -27,8 +28,19 @@ public class GameOverState extends State {
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
 
-        player.setName(JOptionPane.showInputDialog("Enter name:"));
-        System.out.println(player.getName());
+        Input.TextInputListener textListener = new Input.TextInputListener() {
+            @Override
+            public void input(String input) {
+                System.out.println(input);
+            }
+
+            @Override
+            public void canceled() {
+                System.out.println("Aborted");
+            }
+        };
+        Gdx.input.getTextInput(textListener, "Enter name: ", player.getName(), "");
+        //MyGdxGame.get_FBIC().SetValueInDB(player.getName(), player.getScore());
     }
 
     @Override
