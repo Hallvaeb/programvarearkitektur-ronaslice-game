@@ -4,6 +4,7 @@ public class Player {
 
     private int livesLeft;
     private float score;
+    private String name;
 
     public Player(){
         livesLeft = 3;
@@ -23,6 +24,14 @@ public class Player {
         if (livesLeft > 0 && livesLeft < 3) {
             livesLeft++;
         }
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public float getScore() {
