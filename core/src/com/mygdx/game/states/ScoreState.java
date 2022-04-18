@@ -52,6 +52,8 @@ public class ScoreState extends State{
 
     @Override
     protected void handleInput() {
+        scores = MyGdxGame.get_FBIC().GetTopScores();
+        names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
