@@ -2,13 +2,14 @@ package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.ui.Dialog;
+
 import java.util.List;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Player;
 
@@ -25,9 +26,12 @@ public class GameOverState extends State {
     private BitmapFont nameFont;
     private BitmapFont nameTitleFont;
     private BitmapFont scoreTitleFont;
+    private BitmapFont newNameFont;
+    private BitmapFont newScoreFont;
     private Sprite quitBtn;
 
-    private float timer=1;
+    private float bool;
+
 
 
     private Player player;
@@ -35,6 +39,7 @@ public class GameOverState extends State {
     protected GameOverState(GameStateManager gsm, final Player player) {
         super(gsm);
         this.player = player;
+        bool = 0;
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         // FOR THE "GAME OVER" TEXT
@@ -43,6 +48,8 @@ public class GameOverState extends State {
         scoreFont = new BitmapFont();
         nameTitleFont = new BitmapFont();
         scoreTitleFont = new BitmapFont();
+        newNameFont = new BitmapFont();
+        newScoreFont = new BitmapFont();
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
 
@@ -54,7 +61,7 @@ public class GameOverState extends State {
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
             public void input(String input) {
-                timer = 0;
+                bool = 1;
                 if(player.getScore() > MyGdxGame.get_FBIC().GetTopScores().get(9)){
                     MyGdxGame.get_FBIC().SetValueInDB(input, player.getScore());
 
@@ -95,13 +102,25 @@ public class GameOverState extends State {
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // -80 må fikses, samme med MARGIN i pauseState.
         font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2), Gdx.graphics.getHeight()-80);
-        if (timer ==0){
+        if (bool == 1){
+            int bool2 = 0;
             nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
             scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
             if (scores != null) {
                 for (int i = 0; i < scores.size(); i++) {
-                    nameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
-                    scoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+                    if (((float) scores.get(i) == player.getScore()) && bool2 == 0){
+                        newNameFont.setColor(Color.RED);
+                        newScoreFont.setColor(Color.RED);
+                        newNameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
+                        newScoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+                        bool2 = 1;
+                    }
+                    else {
+                        nameFont.setColor(Color.WHITE);
+                        scoreFont.setColor(Color.WHITE);
+                        nameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
+                        scoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+                    }
                 }
             }
         }
