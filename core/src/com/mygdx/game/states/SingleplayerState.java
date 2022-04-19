@@ -79,6 +79,7 @@ public class SingleplayerState extends State implements PlayState  {
                 {
                     if (ufo.sliced() == -1) {
                         // GAME OVER (slicet en pasient)
+                        gsm.push(new GameOverState(gsm, player));
                         System.out.println("GAME OVER");
                     }
                     if (ufo instanceof SickPerson) {
