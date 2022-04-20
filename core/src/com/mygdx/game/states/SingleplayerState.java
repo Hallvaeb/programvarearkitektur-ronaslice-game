@@ -20,24 +20,22 @@ import com.mygdx.game.sprites.UFO;
 public class SingleplayerState extends State implements PlayState {
 
 
-    private Array<UFO> ufos;
+    private final Array<UFO> ufos;
 
 
-    private Texture bg = new Texture("background.png");
-    private COV_delta cov_delta;
-    private COV_omikron cov_omikron;
-    private COV_alpha cov_alpha;
-    private SickPerson sick_person;
-    private Syringe syringe;
+    private final Texture bg = new Texture("background.png");
+    private final COV_delta cov_delta;
+    private final COV_omikron cov_omikron;
+    private final COV_alpha cov_alpha;
+    private final SickPerson sick_person;
+    private final Syringe syringe;
 
-    private Texture health = new Texture("syringe.png");
-    private Sprite pause = new Sprite(new Texture("pause.png"));
-    private Player player;
-    private BitmapFont font;
+    private final Texture health = new Texture("syringe.png");
+    private final Sprite pause = new Sprite(new Texture("pause.png"));
+    private final Player player;
+    private final BitmapFont font;
 
-    private float time_passed = 0;
-
-    private Vector3 touchPoint;
+    private final Vector3 touchPoint;
 
 
     public SingleplayerState(GameStateManager gsm){
@@ -70,9 +68,13 @@ public class SingleplayerState extends State implements PlayState {
         }
     }
 
+    private void gameOver() {
+        Syringe.getInstance().reset();
+        gsm.push(new GameOverState(gsm, player));
+    }
+
     @Override
     protected void handleInput() {
-
         if(Gdx.input.isTouched()) {
             touchPoint.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
@@ -84,7 +86,7 @@ public class SingleplayerState extends State implements PlayState {
 
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
-                        gsm.push(new GameOverState(gsm, player));
+                        gameOver();
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -109,12 +111,11 @@ public class SingleplayerState extends State implements PlayState {
     @Override
     public void update(float dt) {
         handleInput();
-        time_passed += dt;
         for (UFO ufo : ufos) {
             ufo.update(dt, player);
         }
         if (player.getLivesLeft() == 0) {
-            gsm.push(new GameOverState(gsm, player));
+            gameOver();
         }
     }
 
@@ -126,7 +127,7 @@ public class SingleplayerState extends State implements PlayState {
             // Gjøre disse piksel-verdiene ikke hardkodet.
             sb.draw(health, 10+i*60, MyGdxGame.HEIGHT-60, 50, 50);
         }
-        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/2 -130, MyGdxGame.HEIGHT-120);
+        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/2f -130, MyGdxGame.HEIGHT-120);
         sb.draw(pause, MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60, 50, 50);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y, cov_alpha.getSize(), cov_alpha.getSize());
