@@ -37,7 +37,7 @@ public class SettingState extends State{
         uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
         volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
         volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
-        musicButton = new CheckBox("Turn off music",uiSkin);
+        musicButton = new CheckBox("   Turn off music",uiSkin);
         soundButton = new CheckBox("   Turn off sound",uiSkin);
 
         musicButton.setPosition(340,340);
