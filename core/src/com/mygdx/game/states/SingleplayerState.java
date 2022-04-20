@@ -16,9 +16,10 @@ import com.mygdx.game.sprites.SickPerson;
 import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
 
-public class SingleplayerState extends State implements PlayState  {
 
-    // Array med alle UFO-objekter.
+public class SingleplayerState extends State implements PlayState {
+
+
     private Array<UFO> ufos;
 
 
@@ -63,6 +64,12 @@ public class SingleplayerState extends State implements PlayState  {
         ufos.add(cov_alpha);
     }
 
+    public void setUFODifficulty(int difficulty) {
+        for (int i = 0; i < ufos.size; i++){
+            ufos.get(i).setDifficulty(difficulty);
+        }
+    }
+
     @Override
     protected void handleInput() {
 
@@ -75,13 +82,9 @@ public class SingleplayerState extends State implements PlayState  {
             // Slice fra bruker.
             for (UFO ufo : ufos) {
 
-                System.out.println(touchPoint);
-
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
-                        System.out.println("GAME OVER");
                         gsm.push(new GameOverState(gsm, player));
-                        System.out.println("Gsm has set, back in singleplayer...? OVER");
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -91,12 +94,14 @@ public class SingleplayerState extends State implements PlayState  {
                         }
                     }
                     else{
-                        // One of the viruses are reposition
-                        player.increaseScore(ufo.getPoints());
+                        // One of the viruses are sliced
+                        int difficulty = player.increaseScoreAndDifficulty(ufo.getPoints());
+                        if(difficulty != -1){
+                            setUFODifficulty(difficulty);
+                        }
                         ufo.reposition();
                     }
                 }
-
             }
         }
     }
@@ -109,8 +114,6 @@ public class SingleplayerState extends State implements PlayState  {
             ufo.update(dt, player);
         }
         if (player.getLivesLeft() == 0) {
-            // GAME OVER
-            System.out.println("GAME OVER");
             gsm.push(new GameOverState(gsm, player));
         }
     }
@@ -143,8 +146,9 @@ public class SingleplayerState extends State implements PlayState  {
         bg.dispose();
         font.dispose();
         for (UFO ufo:ufos){
-            ufo.dispose();
+            if (!(ufo instanceof Syringe)){
+                ufo.dispose();
+            }
         }
     }
-
 }
