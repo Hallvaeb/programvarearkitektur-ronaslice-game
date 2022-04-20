@@ -86,6 +86,10 @@ public class TutorialState extends State{
         returnBtn.getTexture().dispose();
         fontHeader.dispose();
         fontInfo.dispose();
+        delta.getTexture().dispose();
+        omikron.getTexture().dispose();
+        alpha.getTexture().dispose();
+        sick_person.getTexture().dispose();
         System.out.println("Tutorial disposed.");
     }
 }
