@@ -3,7 +3,6 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.states.GameStateManager;
@@ -12,21 +11,15 @@ import com.mygdx.game.states.MenuState;
 
 public class MyGdxGame extends ApplicationAdapter {
 
+
 	public final static int WIDTH = 480;
 	public final static int HEIGHT = 800;
 	public final static String TITLE = "RonaSlice";
-	private static int count = 0;
 	private static FireBaseInterface _FBIC;
-	public int ID;
 	private GameStateManager gsm;
 	private SpriteBatch batch;
-
-	private Texture img;
 	private static Music music;
 	public static Music sound;
-
-
-
 
 	//FireBaseInterface _FBIC;
 
@@ -34,7 +27,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 		_FBIC = FBIC;
 	}
-
 
 	@Override
 	public void create () {
@@ -84,8 +76,6 @@ public class MyGdxGame extends ApplicationAdapter {
 
 	@Override
 	public void dispose () {
-		img.dispose();
-
 		music.dispose();
 		sound.dispose();
 		batch.dispose();
