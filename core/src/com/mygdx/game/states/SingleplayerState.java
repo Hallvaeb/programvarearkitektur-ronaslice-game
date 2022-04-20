@@ -79,7 +79,7 @@ public class SingleplayerState extends State implements PlayState {
                 gsm.push(new PauseState(gsm));
             }
 
-            // Slice fra bruker.
+            // Slice fra bruker
             for (UFO ufo : ufos) {
 
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
