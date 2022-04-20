@@ -4,18 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Vector2;
+import java.util.List;
 
 import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
-    private static final int MARGIN = 80;
-
     private Sprite playBtn;
     private Sprite multiBtn;
     private Sprite scoreBtn;
     private Sprite settingBtn;
     private Sprite helpBtn;
     private Texture background;
+    private int MARGIN = 80;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -48,6 +50,10 @@ public class MenuState extends State {
                 MyGdxGame.sound.play();
                 gsm.set(new SinglePlayerState(gsm));
             }
+            if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
+                gsm.set(new MultiplayerState(gsm));
+            }
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.set(new ScoreState(gsm));
@@ -76,6 +82,7 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
         sb.begin();
         sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(playBtn, playBtn.getX(), playBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);

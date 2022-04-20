@@ -47,7 +47,7 @@ public class Player {
     * @return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
      **/
     public int increaseScoreAndDifficulty(double score) {
-        increaseScore(score);
+        this.score += score;
         int newDifficulty = getDifficulty();
         if(currentDifficulty != newDifficulty){
             currentDifficulty = newDifficulty;
@@ -56,10 +56,6 @@ public class Player {
         else{
             return -1;
         }
-    }
-
-    public void increaseScore(double score) {
-        this.score += score;
     }
 
     private int getDifficulty() {
