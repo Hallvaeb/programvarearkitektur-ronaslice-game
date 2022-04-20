@@ -9,8 +9,8 @@ import com.badlogic.gdx.math.Rectangle;
 public class COV_omikron extends UFO {
     private Texture texture;
 
-    public COV_omikron(int x, int size) {
-        super(x, size);
+    public COV_omikron(int size) {
+        super(size);
         texture = new Texture("cov_omikron_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));

@@ -8,8 +8,8 @@ public class COV_delta extends UFO {
     private Texture texture;
 
 
-    public COV_delta(int x, int size) {
-        super(x, size);
+    public COV_delta(int size) {
+        super(size);
         texture = new Texture("cov_delta_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         super.setPoints(1);
