@@ -17,32 +17,25 @@ import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
 
 
-public class SingleplayerState extends State implements PlayState {
+public class SinglePlayerState extends State implements PlayState {
+    private Array<UFO> ufos;
+    private Texture bg = new Texture("background.png");
+    private COV_delta cov_delta;
+    private COV_omikron cov_omikron;
+    private COV_alpha cov_alpha;
+    private SickPerson sick_person;
+    private Syringe syringe;
+    private Texture health = new Texture("syringe.png");
+    private Sprite pause = new Sprite(new Texture("pause.png"));
+    private Player player;
+    private BitmapFont font;
+    private Vector3 touchPoint;
 
-
-    private final Array<UFO> ufos;
-
-
-    private final Texture bg = new Texture("background.png");
-    private final COV_delta cov_delta;
-    private final COV_omikron cov_omikron;
-    private final COV_alpha cov_alpha;
-    private final SickPerson sick_person;
-    private final Syringe syringe;
-
-    private final Texture health = new Texture("syringe.png");
-    private final Sprite pause = new Sprite(new Texture("pause.png"));
-    private final Player player;
-    private final BitmapFont font;
-
-    private final Vector3 touchPoint;
-
-
-    public SingleplayerState(GameStateManager gsm){
+    public SinglePlayerState(GameStateManager gsm){
         super(gsm);
         player = new Player();
         font = new BitmapFont();
-        font.getData().setScale(3, 3);
+        font.getData().setScale(Gdx.graphics.getHeight()/400f);
 
         cov_delta = new COV_delta(80);
         cov_omikron = new COV_omikron(55);
@@ -54,7 +47,6 @@ public class SingleplayerState extends State implements PlayState {
         pause.setSize(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
         pause.setPosition(Gdx.graphics.getWidth()-60,Gdx.graphics.getHeight()-60);
 
-        // Slice posisjon til player
         touchPoint = new Vector3();
 
         ufos = new Array<>();
@@ -81,7 +73,7 @@ public class SingleplayerState extends State implements PlayState {
                 gsm.push(new PauseState(gsm));
             }
 
-            // Slice fra bruker
+            // Slice from user
             for (UFO ufo : ufos) {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
@@ -134,18 +126,24 @@ public class SingleplayerState extends State implements PlayState {
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/20f,
+                0.85f*MyGdxGame.HEIGHT);
         for (int i = 0; i < player.getLivesLeft(); i++) {
-            // Gjøre disse piksel-verdiene ikke hardkodet.
-            sb.draw(health, 10+i*60, MyGdxGame.HEIGHT-60, 50, 50);
+            sb.draw(health, Gdx.graphics.getWidth()/48f+i*Gdx.graphics.getWidth()/8f,
+                    0.9f*Gdx.graphics.getHeight(), 50, 50);
         }
-        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/2f -130, MyGdxGame.HEIGHT-120);
-        sb.draw(pause, MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60, 50, 50);
-        sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
-        sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y, cov_alpha.getSize(), cov_alpha.getSize());
-        sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
-        sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
+        sb.draw(pause, pause.getX(),pause.getY(), pause.getWidth(), pause.getHeight());
+        sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y,
+                cov_delta.getSize(), cov_delta.getSize());
+        sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y,
+                cov_alpha.getSize(), cov_alpha.getSize());
+        sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y,
+                cov_omikron.getSize(), cov_omikron.getSize());
+        sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y,
+                sick_person.getSize(), sick_person.getSize());
         if (syringe.isSpawnable()) {
-            sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y, syringe.getSize(), syringe.getSize());
+            sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y,
+                    syringe.getSize(), syringe.getSize());
         }
         sb.end();
 

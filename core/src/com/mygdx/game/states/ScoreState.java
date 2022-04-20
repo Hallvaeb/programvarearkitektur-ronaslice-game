@@ -1,22 +1,17 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Container;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.mygdx.game.MyGdxGame;
-import java.util.LinkedList;
+
 import java.util.List;
 
 
 public class ScoreState extends State{
 
-    private static final int MARGIN = 80;
     private Texture img;
     private List scores;
     private List names;
@@ -72,7 +67,7 @@ public class ScoreState extends State{
         sb.begin();
         sb.draw(img,0, 0);
         sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        titleFont.draw(sb, "Highscore! ", (Gdx.graphics.getWidth()/2)-100, Gdx.graphics.getHeight()-50);
+        titleFont.draw(sb, "Highscore! ", (Gdx.graphics.getWidth()/2f)-100, Gdx.graphics.getHeight()-50);
         nameTitleFont.draw(sb, "NAME", 100, Gdx.graphics.getHeight()-150);
         scoreTitleFont.draw(sb, "SCORE", Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-150);
         if (scores != null) {

@@ -20,7 +20,7 @@ public class TutorialState extends State{
     private BitmapFont fontHeader = new BitmapFont();
     private BitmapFont fontInfo = new BitmapFont();
     private Sprite delta;
-    private Sprite omikron;
+    private Sprite omicron;
     private Sprite alpha;
     private Syringe syringe;
     private Sprite sick_person;
@@ -31,7 +31,7 @@ public class TutorialState extends State{
         bg = new Texture("bg_bare_himmel.png");
         returnBtn = new Sprite(new Texture("return.png"));
         delta = new Sprite(new Texture("cov_delta.png"));
-        omikron = new Sprite(new Texture("cov_omikron.png"));
+        omicron = new Sprite(new Texture("cov_omikron.png"));
         alpha = new Sprite(new Texture("cov_alpha.png"));
         sick_person = new Sprite(new Texture("sick_person.png"));
         syringe = Syringe.getInstance();
@@ -80,8 +80,8 @@ public class TutorialState extends State{
         fontInfo.draw(sb, "Delta, slice! " +
                 "\nGives 1 points. \nDeals 1 damage.", TEXT_X, 2*IMG_Y_FACTOR + IMG_DIM);
 
-        sb.draw(omikron, IMG_X,3*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
-        fontInfo.draw(sb, "Omikron, slice! " +
+        sb.draw(omicron, IMG_X,3*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Omicron, slice! " +
                 "\nGives 2 points. \nDeals 1 damage.", TEXT_X, 3*IMG_Y_FACTOR + IMG_DIM);
 
         sb.draw(alpha, IMG_X, 4*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
@@ -106,7 +106,7 @@ public class TutorialState extends State{
         fontHeader.dispose();
         fontInfo.dispose();
         delta.getTexture().dispose();
-        omikron.getTexture().dispose();
+        omicron.getTexture().dispose();
         alpha.getTexture().dispose();
         sick_person.getTexture().dispose();
         System.out.println("Tutorial disposed.");
