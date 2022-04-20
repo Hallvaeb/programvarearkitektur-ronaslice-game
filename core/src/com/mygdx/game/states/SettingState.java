@@ -37,8 +37,8 @@ public class SettingState extends State{
         uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
         volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
         volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
-        musicButton = new CheckBox("  Turn off music",uiSkin);
-        soundButton = new CheckBox("  Turn off sound",uiSkin);
+        musicButton = new CheckBox("Turn off music",uiSkin);
+        soundButton = new CheckBox("   Turn off sound",uiSkin);
 
         musicButton.setPosition(340,340);
         musicButton.setSize(20,20);
@@ -86,16 +86,26 @@ public class SettingState extends State{
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
+            System.out.println("Handling input...");
             if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
             }
+
+            // Music
             if (volumeMusicSlider.isDragging()){
+                musicButton.setChecked(false);
                 MyGdxGame.setVolume(volumeMusicSlider.getValue());
+                MyGdxGame.sound.play();
             }
+
+            // Sound
             if (volumeSoundSlider.isDragging()){
+                soundButton.setChecked(false);
                 MyGdxGame.setSoundVolume(volumeSoundSlider.getValue());
+                MyGdxGame.sound.play();
             }
+
         }
 
     }
@@ -104,11 +114,15 @@ public class SettingState extends State{
     public void update(float dt) {
         handleInput();
         if(musicButton.isChecked()){
-            volumeMusicSlider.setValue(0.0f);
+            MyGdxGame.setVolume(0.0f);
+        }
+        else{
             MyGdxGame.setVolume(volumeMusicSlider.getValue());
         }
         if(soundButton.isChecked()){
-            volumeSoundSlider.setValue(0.0f);
+            MyGdxGame.setSoundVolume(0.0f);
+        }
+        else{
             MyGdxGame.setSoundVolume(volumeSoundSlider.getValue());
         }
     }
