@@ -4,13 +4,15 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Syringe extends UFO {
+
+    boolean isSpawnable;
     // Privat konstruktor som forhindrer at det automatisk blir offentlig
     private Syringe() {
         // Startverdi første spawn
         super(150, 60);
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
         super.setType(2);
-
+        isSpawnable = false;
     }
 
     private static class SyringeHolder {
@@ -24,5 +26,13 @@ public class Syringe extends UFO {
 
     public Texture getTexture() {
         return SyringeHolder.texture;
+    }
+
+    public boolean isSpawnable() {
+        return isSpawnable;
+    }
+
+    public void setSpawnable(boolean isSpawnable) {
+        this.isSpawnable = isSpawnable;
     }
 }

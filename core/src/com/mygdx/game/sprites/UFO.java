@@ -13,6 +13,8 @@ public abstract class UFO {
     private int size;
     private Rectangle bounds;
     private int type;
+    private double points;
+    private Syringe syringe;
 
     public UFO (int x, int size) {
         // Fikse startposisjon. Dette skal bli randomisert.
@@ -21,6 +23,8 @@ public abstract class UFO {
         this.size = size;
         bounds = null;
         type = 0;
+        points = 0;
+        syringe = Syringe.getInstance();
     }
 
     public void update(float dt, Player player) {
@@ -37,7 +41,8 @@ public abstract class UFO {
             position.y = Gdx.graphics.getHeight();
             //Miste et liv her hvis et virus har kommet i bunn av skjermen.
             if (type == 1) {
-                player.loseLife();
+                player.looseLife();
+                syringe.setSpawnable(true);
             }
         }
         bounds = new Rectangle(position.x, position.y, size, size);
@@ -54,6 +59,14 @@ public abstract class UFO {
         System.out.println(getBoundingRectangle().width);
         position.x = getBoundingRectangle().width + (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
         return type;
+    }
+
+    public double getPoints() {
+        return points;
+    }
+
+    public void setPoints(double points) {
+        this.points = points;
     }
 
     public Vector3 getPosition() {
