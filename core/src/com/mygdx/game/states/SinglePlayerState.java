@@ -76,7 +76,6 @@ public class SinglePlayerState extends State implements PlayState {
             // Slice from user
             for (UFO ufo : ufos) {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
-                    MyGdxGame.sound.play();
                     if (ufo instanceof SickPerson) {
                         gameOver();
                         break;
