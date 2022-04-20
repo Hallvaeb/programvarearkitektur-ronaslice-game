@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.FireBaseInterface;
 import com.mygdx.game.MyGdxGame;
+import com.mygdx.game.sprites.COV_alpha;
 import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.sprites.COV_omikron;
 import com.mygdx.game.sprites.Player;
@@ -25,10 +26,11 @@ public class SingleplayerState extends State implements PlayState  {
     private Texture bg = new Texture("background.png");
     private COV_delta cov_delta;
     private COV_omikron cov_omikron;
+    private COV_alpha cov_alpha;
     private SickPerson sick_person;
     private Syringe syringe;
 
-    private Texture health = new Texture("health.png");
+    private Texture health = new Texture("syringe.png");
     private Sprite pause = new Sprite(new Texture("pause.png"));
     private Player player;
     private BitmapFont font;
@@ -46,6 +48,7 @@ public class SingleplayerState extends State implements PlayState  {
 
         cov_delta = new COV_delta(200, 60);
         cov_omikron = new COV_omikron(100, 60);
+        cov_alpha = new COV_alpha(50, 40);
         sick_person = new SickPerson(300, 80);
         syringe = Syringe.getInstance();
 
@@ -58,6 +61,7 @@ public class SingleplayerState extends State implements PlayState  {
 
         ufos = new Array<>();
         ufos.add(cov_delta, cov_omikron, sick_person, syringe);
+        ufos.add(cov_alpha);
     }
 
     @Override
@@ -88,11 +92,14 @@ public class SingleplayerState extends State implements PlayState  {
                     }
                     else if (ufo.sliced() == 1) {
                         // One of the viruses are sliced
-                        player.increaseScore(1);
+                        player.increaseScore(ufo.getPoints());
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.sliced();
                         player.gainLife();
+                        if (player.getLivesLeft() == 3) {
+                            syringe.setSpawnable(false);
+                        }
                     }
                     System.out.println("au");
                 }
@@ -125,9 +132,12 @@ public class SingleplayerState extends State implements PlayState  {
         font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/2 -130, MyGdxGame.HEIGHT-120);
         sb.draw(pause, MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60, 50, 50);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
+        sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y, cov_alpha.getSize(), cov_alpha.getSize());
         sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
-        sb.draw(syringe.getTexture(), syringe.getPosition().x,syringe.getPosition().y, syringe.getSize(), syringe.getSize());
+        if (syringe.isSpawnable()) {
+            sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y, syringe.getSize(), syringe.getSize());
+        }
         sb.end();
 
     }

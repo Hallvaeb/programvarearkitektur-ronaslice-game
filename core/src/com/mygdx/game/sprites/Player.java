@@ -15,7 +15,7 @@ public class Player {
         return livesLeft;
     }
 
-    public void loseLife() {
+    public void looseLife() {
         if (livesLeft > 0) {
             livesLeft--;
         }
@@ -38,7 +38,7 @@ public class Player {
         return score;
     }
 
-    public void increaseScore(float score) {
+    public void increaseScore(double score) {
         this.score += score;
     }
 

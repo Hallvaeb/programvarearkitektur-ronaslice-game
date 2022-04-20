@@ -38,9 +38,11 @@ public class TutorialState extends State{
 
     @Override
     public void handleInput() {
-        if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-            MyGdxGame.sound.play();
-            gsm.pop();
+        if (Gdx.input.isTouched()) {
+            if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+                MyGdxGame.sound.play();
+                gsm.pop();
+            }
         }
     }
 
