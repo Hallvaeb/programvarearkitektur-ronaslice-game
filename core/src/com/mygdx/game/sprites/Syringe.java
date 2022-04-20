@@ -11,7 +11,6 @@ public class Syringe extends UFO {
         // Startverdi første spawn
         super(150, 60);
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
-        super.setType(2);
         isSpawnable = false;
     }
 
@@ -34,5 +33,9 @@ public class Syringe extends UFO {
 
     public void setSpawnable(boolean isSpawnable) {
         this.isSpawnable = isSpawnable;
+    }
+
+    public void dispose() {
+        getTexture().dispose();
     }
 }

@@ -7,7 +7,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
-import com.mygdx.game.FireBaseInterface;
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.COV_alpha;
 import com.mygdx.game.sprites.COV_delta;
@@ -79,29 +78,23 @@ public class SingleplayerState extends State implements PlayState  {
 
                 System.out.println(touchPoint);
 
-                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y))
-                {
-                    if (ufo.sliced() == -1) {
-                        // GAME OVER (slicet en pasient)
-                        gsm.push(new GameOverState(gsm, player));
-                        System.out.println("GAME OVER");
-                    }
+                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
-                        ufo.sliced();
+                        gsm.set(new GameOverState(gsm, player));
                         System.out.println("GAME OVER");
-                    }
-                    else if (ufo.sliced() == 1) {
-                        // One of the viruses are sliced
-                        player.increaseScore(ufo.getPoints());
                     }
                     else if (ufo instanceof Syringe) {
-                        ufo.sliced();
+                        ufo.reposition();
                         player.gainLife();
                         if (player.getLivesLeft() == 3) {
                             syringe.setSpawnable(false);
                         }
                     }
-                    System.out.println("au");
+                    else{
+                        // One of the viruses are reposition
+                        player.increaseScore(ufo.getPoints());
+                        ufo.reposition();
+                    }
                 }
 
             }
@@ -145,7 +138,13 @@ public class SingleplayerState extends State implements PlayState  {
 
     @Override
     public void dispose() {
-
+        pause.getTexture().dispose();
+        health.dispose();
+        bg.dispose();
+        font.dispose();
+        for (UFO ufo:ufos){
+            ufo.dispose();
+        }
     }
 
 }

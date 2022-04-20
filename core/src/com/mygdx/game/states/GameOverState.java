@@ -53,7 +53,6 @@ public class GameOverState extends State {
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
 
-        // TODO: mekke "back"-button
         quitBtn = new Sprite(new Texture("quitBtn.png"));
         quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 10);
@@ -132,6 +131,14 @@ public class GameOverState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        font.dispose();
+        scoreFont.dispose();
+        nameFont.dispose();
+        nameTitleFont.dispose();
+        scoreTitleFont.dispose();
+        newNameFont.dispose();
+        newScoreFont.dispose();
+        quitBtn.getTexture().dispose();
     }
 }

@@ -1,10 +1,8 @@
 package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.MyGdxGame;
 
 public abstract class UFO {
     private static final int GRAVITY = -2;
@@ -12,7 +10,6 @@ public abstract class UFO {
     private Vector3 velocity;
     private int size;
     private Rectangle bounds;
-    private int type;
     private double points;
     private Syringe syringe;
 
@@ -22,7 +19,6 @@ public abstract class UFO {
         velocity = new Vector3(0, 0 , 0);
         this.size = size;
         bounds = null;
-        type = 0;
         points = 0;
         syringe = Syringe.getInstance();
     }
@@ -40,8 +36,8 @@ public abstract class UFO {
         if (position.y < 0) {
             position.y = Gdx.graphics.getHeight();
             //Miste et liv her hvis et virus har kommet i bunn av skjermen.
-            if (type == 1) {
-                player.looseLife();
+            if (!(this instanceof SickPerson || this instanceof Syringe)) {
+                player.loseLife();
                 syringe.setSpawnable(true);
             }
         }
@@ -52,13 +48,10 @@ public abstract class UFO {
 
     /**
      * Sliced repositions the viruses.
-     * @return type
      */
-    public int sliced() {
+    public void reposition() {
         position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
-        System.out.println(getBoundingRectangle().width);
         position.x = getBoundingRectangle().width + (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
-        return type;
     }
 
     public double getPoints() {
@@ -83,7 +76,5 @@ public abstract class UFO {
         this.bounds = bounds;
     }
 
-    public void setType(int type) {
-        this.type = type;
-    }
+    public abstract void dispose();
 }

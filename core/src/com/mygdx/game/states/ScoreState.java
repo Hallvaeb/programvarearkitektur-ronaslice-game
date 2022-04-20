@@ -86,6 +86,12 @@ public class ScoreState extends State{
 
     @Override
     public void dispose() {
-
+        img.dispose();
+        scoreFont.dispose();
+        nameFont.dispose();
+        titleFont.dispose();
+        nameTitleFont.dispose();
+        scoreTitleFont.dispose();
+        quitBtn.getTexture().dispose();
     }
 }

@@ -14,7 +14,7 @@ public class TutorialState extends State{
     private static final int MARGIN = 80;
     private BitmapFont fontHeader = new BitmapFont();
     private BitmapFont fontInfo = new BitmapFont();
-    private String textInfo = "Hit the viruses and the syringes, while avoiding Ulrik!";
+    private String textInfo = "Hit the viruses and the syringes, while avoiding the sick person!";
     private final float fontInfoX;
 
     public TutorialState(GameStateManager gsm) {
