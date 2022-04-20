@@ -48,7 +48,7 @@ public class SingleplayerState extends State implements PlayState  {
         cov_delta = new COV_delta(200, 60);
         cov_omikron = new COV_omikron(100, 60);
         cov_alpha = new COV_alpha(50, 40);
-        sick_person = new SickPerson(300, 80);
+        sick_person = new SickPerson(300, 70);
         syringe = Syringe.getInstance();
 
         //Pause (Fikse hardkodet verdier)
