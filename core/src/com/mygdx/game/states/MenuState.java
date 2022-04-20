@@ -49,9 +49,11 @@ public class MenuState extends State {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new SingleplayerState(gsm));
             }
-            /*if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+
+            if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new MultiplayerState(gsm));
             }
+            /*
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.set(new ScoreState(gsm));
             }
