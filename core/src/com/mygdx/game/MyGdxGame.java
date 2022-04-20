@@ -42,7 +42,7 @@ public class MyGdxGame extends ApplicationAdapter {
 		music = Gdx.audio.newMusic(Gdx.files.internal("music.wav"));
 		sound = Gdx.audio.newMusic(Gdx.files.internal("soundclick.wav"));
 
-		sound.setVolume(0.5f);
+		sound.setVolume(1.0f);
 		music.setVolume(0.5f);
 		music.setLooping(true);
 		music.play();
