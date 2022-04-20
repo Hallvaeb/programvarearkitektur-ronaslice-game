@@ -14,7 +14,7 @@ public class COV_omikron extends UFO {
         texture = new Texture("cov_omikron_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
-        super.setPoints(3);
+        super.setPoints(2);
     }
 
     /*public Texture getTexture() {
