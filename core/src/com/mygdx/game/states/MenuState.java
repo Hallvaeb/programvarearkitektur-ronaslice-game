@@ -17,7 +17,7 @@ public class MenuState extends State {
     private Sprite settingBtn;
     private Sprite helpBtn;
     private Texture background;
-    private int margin = 80;
+    private int MARGIN = 80;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -48,7 +48,7 @@ public class MenuState extends State {
         if (Gdx.input.justTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
-                gsm.set(new SingleplayerState(gsm));
+                gsm.set(new SinglePlayerState(gsm));
             }
             if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
@@ -82,6 +82,7 @@ public class MenuState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
         sb.begin();
         sb.draw(background, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(playBtn, playBtn.getX(), playBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);

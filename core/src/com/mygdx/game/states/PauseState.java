@@ -1,6 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -17,10 +18,13 @@ public class PauseState extends State {
     private static final int MARGIN = 80;
     private BitmapFont font;
     private static final CharSequence GAMEPAUSED = "GAME PAUSED";
+    private OrthographicCamera cam;
 
     public PauseState(GameStateManager gsm) {
         super(gsm);
         bg = new Texture("bg_bare_himmel.png");
+        cam = new OrthographicCamera();
+        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // PLAYBTN USED FOR SCALING AND POSITIONING THE OTHER BUTTONS
         playBtn = new Sprite(new Texture("playbtn.png"));
         resBtn = new Sprite(new Texture("resBtn.png"));
@@ -74,6 +78,8 @@ public class PauseState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        sb.setProjectionMatrix(cam.combined);
+        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
         sb.begin();
         sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         sb.draw(resBtn, resBtn.getX(), resBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
