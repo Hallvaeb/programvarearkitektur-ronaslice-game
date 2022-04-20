@@ -91,8 +91,10 @@ public class GameOverState extends State {
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // -80 må fikses, samme med MARGIN i pauseState.
         font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-80);
+        if (bool==false)
+            font.draw(sb, "Your score: " + player.getScore(), (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-150);
         if (bool == true){
-            boolean bool2 = false;
+            boolean bool2 = true;
             nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
             scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
             if (scores != null) {
