@@ -9,7 +9,7 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Syringe;
 
 public class TutorialState extends State{
-    private static final int MARGIN = 50;
+    private static final int MARGIN = Gdx.graphics.getWidth()/8;
     private static final int IMG_DIM = 70;
     private static final int IMG_X = Gdx.graphics.getWidth()/10; //480x800: = 50
     private static final int TEXT_X = IMG_X + IMG_DIM + 10;

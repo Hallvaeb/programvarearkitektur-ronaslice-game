@@ -23,13 +23,13 @@ public class GameOverState extends State {
     private BitmapFont newNameFont;
     private BitmapFont newScoreFont;
     private Sprite quitBtn;
-    private float bool;
+    private boolean bool;
     private Player player;
 
     protected GameOverState(GameStateManager gsm, final Player player) {
         super(gsm);
         this.player = player;
-        bool = 0;
+        bool = false;
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         // FOR THE "GAME OVER" TEXT
@@ -51,7 +51,7 @@ public class GameOverState extends State {
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
             public void input(String input) {
-                bool = 1;
+                bool = true;
                 if(player.getScore() > MyGdxGame.get_FBIC().GetTopScores().get(9)){
                     MyGdxGame.get_FBIC().SetValueInDB(input, player.getScore());
 
@@ -91,18 +91,20 @@ public class GameOverState extends State {
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // -80 må fikses, samme med MARGIN i pauseState.
         font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-80);
-        if (bool == 1){
-            int bool2 = 0;
+        if (bool==false)
+            font.draw(sb, "Your score: " + player.getScore(), (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-150);
+        if (bool == true){
+            boolean bool2 = true;
             nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
             scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
             if (scores != null) {
                 for (int i = 0; i < scores.size(); i++) {
-                    if (( scores.get(i) == player.getScore()) && bool2 == 0){
+                    if (( scores.get(i) == player.getScore()) && bool2 == true){
                         newNameFont.setColor(Color.RED);
                         newScoreFont.setColor(Color.RED);
                         newNameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
                         newScoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
-                        bool2 = 1;
+                        bool2 = false;
                     }
                     else {
                         nameFont.setColor(Color.WHITE);
