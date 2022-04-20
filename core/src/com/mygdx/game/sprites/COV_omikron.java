@@ -17,12 +17,6 @@ public class COV_omikron extends UFO {
         super.setPoints(2);
     }
 
-    /*public Texture getTexture() {
-        return texture;
-    }
-
-     */
-
     public TextureRegion getTexture(){
         return super.getTextureAnimation().getFrame();
     }

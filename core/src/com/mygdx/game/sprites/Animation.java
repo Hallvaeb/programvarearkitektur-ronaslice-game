@@ -12,7 +12,7 @@ public class Animation {
 
 
     public Animation(TextureRegion region, int frameCount, float cycleTime){
-        frames = new Array<TextureRegion>();
+        frames = new Array<>();
         TextureRegion temp;
         int frameWidth = region.getRegionWidth() / frameCount;
         for(int i = 0; i < frameCount; i++){

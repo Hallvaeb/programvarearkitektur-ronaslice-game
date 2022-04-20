@@ -7,20 +7,14 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-
 import java.util.List;
-
 import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Player;
 
-import javax.swing.JOptionPane;
-
-
 public class GameOverState extends State {
-
     private Texture bg;
-    private List scores;
-    private List names;
+    private List<Float> scores;
+    private List<String> names;
     private BitmapFont font;
     private BitmapFont scoreFont;
     private BitmapFont nameFont;
@@ -29,11 +23,7 @@ public class GameOverState extends State {
     private BitmapFont newNameFont;
     private BitmapFont newScoreFont;
     private Sprite quitBtn;
-
     private float bool;
-
-
-
     private Player player;
 
     protected GameOverState(GameStateManager gsm, final Player player) {
@@ -84,10 +74,8 @@ public class GameOverState extends State {
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
-                // GSM-STACK: [SCORESTATE]
                 gsm.pop();
                 gsm.set(new MenuState(gsm));
-                // ETTER SET ER DEN [MENUSTATE]
             }
         }
     }
@@ -102,14 +90,14 @@ public class GameOverState extends State {
         sb.begin();
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // -80 må fikses, samme med MARGIN i pauseState.
-        font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2), Gdx.graphics.getHeight()-80);
+        font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-80);
         if (bool == 1){
             int bool2 = 0;
             nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
             scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
             if (scores != null) {
                 for (int i = 0; i < scores.size(); i++) {
-                    if (((float) scores.get(i) == player.getScore()) && bool2 == 0){
+                    if (( scores.get(i) == player.getScore()) && bool2 == 0){
                         newNameFont.setColor(Color.RED);
                         newScoreFont.setColor(Color.RED);
                         newNameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
