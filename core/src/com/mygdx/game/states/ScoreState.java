@@ -42,7 +42,7 @@ public class ScoreState extends State{
         titleFont.getData().setScale(3, 3);
 
         // TODO: mekke "back"-button
-        quitBtn = new Sprite(new Texture("quitBtn.png"));
+        quitBtn = new Sprite(new Texture("return.png"));
         quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 10);
 

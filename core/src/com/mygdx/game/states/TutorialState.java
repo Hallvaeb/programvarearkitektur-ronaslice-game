@@ -68,5 +68,6 @@ public class TutorialState extends State{
         returnBtn.getTexture().dispose();
         fontHeader.dispose();
         fontInfo.dispose();
+        System.out.println("Tutorial disposed.");
     }
 }

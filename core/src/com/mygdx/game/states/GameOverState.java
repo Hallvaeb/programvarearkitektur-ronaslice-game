@@ -85,6 +85,7 @@ public class GameOverState extends State {
         if (Gdx.input.isTouched()) {
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 // GSM-STACK: [SCORESTATE]
+                gsm.pop();
                 gsm.set(new MenuState(gsm));
                 // ETTER SET ER DEN [MENUSTATE]
             }

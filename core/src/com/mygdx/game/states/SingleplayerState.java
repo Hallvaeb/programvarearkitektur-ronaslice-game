@@ -75,13 +75,13 @@ public class SingleplayerState extends State implements PlayState  {
             // Slice fra bruker.
             for (UFO ufo : ufos) {
 
-
                 System.out.println(touchPoint);
 
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
-                        gsm.set(new GameOverState(gsm, player));
                         System.out.println("GAME OVER");
+                        gsm.push(new GameOverState(gsm, player));
+                        System.out.println("Gsm has set, back in singleplayer...? OVER");
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
