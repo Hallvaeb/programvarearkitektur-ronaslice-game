@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 public class GameOverState extends State {
 
-    private Texture bg = new Texture("background.png");
+    private Texture bg;
     private List scores;
     private List names;
     private BitmapFont font;
@@ -53,9 +53,10 @@ public class GameOverState extends State {
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
 
-        quitBtn = new Sprite(new Texture("quitBtn.png"));
-        quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 10);
+        bg = new Texture("bg_bare_himmel.png");
+        quitBtn = new Sprite(new Texture("return.png"));
+        quitBtn.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
+        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 5);
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
@@ -123,7 +124,7 @@ public class GameOverState extends State {
                 }
             }
         }
-        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
+        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         sb.end();
     }
 
