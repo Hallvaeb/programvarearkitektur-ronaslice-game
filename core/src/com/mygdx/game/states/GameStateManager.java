@@ -10,7 +10,6 @@ public class GameStateManager {
     private Stack<State> states;
 
     public GameStateManager(){
-
         states = new Stack<State>();
     }
 
@@ -20,13 +19,13 @@ public class GameStateManager {
     }
 
     public void pop(){
-        states.pop();
+        states.pop().dispose();
         System.out.println("state is POPPED, states now is: "+ Arrays.toString(states.toArray()));
 
     }
 
     public void set(State state){
-        states.pop();
+        states.pop().dispose();
         states.push(state);
         System.out.println("state is SET, states now is: "+ Arrays.toString(states.toArray()));
     }

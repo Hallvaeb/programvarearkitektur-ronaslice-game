@@ -10,7 +10,6 @@ public class SickPerson extends UFO {
         super(x, size);
         texture = new Texture("sick_person.png");
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
-        super.setType(-1);
     }
 
     public Texture getTexture() {
@@ -18,6 +17,6 @@ public class SickPerson extends UFO {
     }
 
     public void dispose() {
-        // Se om denne skal i den abstracte klassen eller ikke. Kan hende de samme variablene skal disposes.
+        texture.dispose();
     }
 }

@@ -11,7 +11,6 @@ public class COV_delta extends UFO {
         super(x, size);
         texture = new Texture("cov_delta.png");
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
-        super.setType(1);
         super.setPoints(2);
     }
 
@@ -20,6 +19,6 @@ public class COV_delta extends UFO {
     }
 
     public void dispose() {
-        // Se om denne skal i den abstracte klassen eller ikke. Kan hende de samme variablene skal disposes.
+        texture.dispose();
     }
 }

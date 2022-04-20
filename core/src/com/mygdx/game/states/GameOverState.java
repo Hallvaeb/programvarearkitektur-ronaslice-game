@@ -18,7 +18,7 @@ import javax.swing.JOptionPane;
 
 public class GameOverState extends State {
 
-    private Texture bg = new Texture("background.png");
+    private Texture bg;
     private List scores;
     private List names;
     private BitmapFont font;
@@ -53,10 +53,10 @@ public class GameOverState extends State {
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
 
-        // TODO: mekke "back"-button
-        quitBtn = new Sprite(new Texture("quitBtn.png"));
-        quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 10);
+        bg = new Texture("bg_bare_himmel.png");
+        quitBtn = new Sprite(new Texture("return.png"));
+        quitBtn.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
+        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 5);
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
@@ -85,6 +85,7 @@ public class GameOverState extends State {
         if (Gdx.input.isTouched()) {
             if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 // GSM-STACK: [SCORESTATE]
+                gsm.pop();
                 gsm.set(new MenuState(gsm));
                 // ETTER SET ER DEN [MENUSTATE]
             }
@@ -124,7 +125,7 @@ public class GameOverState extends State {
                 }
             }
         }
-        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
+        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         sb.end();
     }
 
@@ -132,6 +133,14 @@ public class GameOverState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        font.dispose();
+        scoreFont.dispose();
+        nameFont.dispose();
+        nameTitleFont.dispose();
+        scoreTitleFont.dispose();
+        newNameFont.dispose();
+        newScoreFont.dispose();
+        quitBtn.getTexture().dispose();
     }
 }

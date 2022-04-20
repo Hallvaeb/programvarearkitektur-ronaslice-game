@@ -14,7 +14,6 @@ public class COV_omikron extends UFO {
         texture = new Texture("cov_omikron_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
-        super.setType(1);
         super.setPoints(3);
     }
 
@@ -29,6 +28,6 @@ public class COV_omikron extends UFO {
     }
 
     public void dispose() {
-        // Se om denne skal i den abstracte klassen eller ikke. Kan hende de samme variablene skal disposes.
+        texture.dispose();
     }
 }

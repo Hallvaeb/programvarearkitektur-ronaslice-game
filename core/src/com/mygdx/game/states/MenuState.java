@@ -45,7 +45,7 @@ public class MenuState extends State {
     @Override
     public void handleInput() {
         MyGdxGame.get_FBIC().SomeFunction();
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.justTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.set(new SingleplayerState(gsm));

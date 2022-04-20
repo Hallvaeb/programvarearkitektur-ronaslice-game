@@ -46,7 +46,7 @@ public class PauseState extends State {
 
     @Override
     public void handleInput() {
-        if (Gdx.input.isTouched()) {
+        if (Gdx.input.justTouched()) {
             if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
