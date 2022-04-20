@@ -83,7 +83,6 @@ public class SettingState extends State{
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            System.out.println("Handling input...");
             if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();

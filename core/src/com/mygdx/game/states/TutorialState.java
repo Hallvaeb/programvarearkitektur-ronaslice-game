@@ -109,6 +109,5 @@ public class TutorialState extends State{
         omicron.getTexture().dispose();
         alpha.getTexture().dispose();
         sick_person.getTexture().dispose();
-        System.out.println("Tutorial disposed.");
     }
 }
