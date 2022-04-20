@@ -1,6 +1,7 @@
 package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 // Denne klassen skal implementere et UFO-grensesnitt eller extende en abstract klasse
@@ -10,14 +11,21 @@ public class COV_omikron extends UFO {
 
     public COV_omikron(int x, int size) {
         super(x, size);
-        texture = new Texture("cov_omikron.png");
+        texture = new Texture("cov_omikron_sheet.png");
+        setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
         super.setType(1);
         super.setPoints(3);
     }
 
-    public Texture getTexture() {
+    /*public Texture getTexture() {
         return texture;
+    }
+
+     */
+
+    public TextureRegion getTexture(){
+        return super.getTextureAnimation().getFrame();
     }
 
     public void dispose() {
