@@ -14,7 +14,7 @@ public abstract class UFO {
     private double points;
     private Syringe syringe;
     private float difficulty;
-
+    private Animation textureAnimation;
 
     public UFO (int x, int size) {
         // Fikse startposisjon. Dette skal bli randomisert.
@@ -22,12 +22,16 @@ public abstract class UFO {
         velocity = new Vector3(0, 0 , 0);
         this.size = size;
         bounds = null;
+        textureAnimation = null;
         points = 0;
         syringe = Syringe.getInstance();
         difficulty = 0;
     }
 
     public void update(float dt, Player player) {
+        if(textureAnimation != null) {
+            textureAnimation.update(dt);
+        }
         velocity.scl(dt);
         if (position.y > 0) {
             velocity.add(0, (GRAVITY+difficulty), 0);
@@ -74,8 +78,16 @@ public abstract class UFO {
 
     public Rectangle getBoundingRectangle(){ return bounds;}
 
+    public Animation getTextureAnimation() {
+        return textureAnimation;
+    }
+
     public void setBoundingRectangle(Rectangle bounds) {
         this.bounds = bounds;
+    }
+
+    public void setTextureAnimation(Animation textureAnimation) {
+        this.textureAnimation = textureAnimation;
     }
 
     public abstract void dispose();
@@ -84,3 +96,4 @@ public abstract class UFO {
         this.difficulty = difficulty*(-DIFFICULTYINCREASIONFACTOR);
     };
 }
+

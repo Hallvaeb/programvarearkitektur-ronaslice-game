@@ -2,6 +2,7 @@ package com.mygdx.game.sprites;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Syringe extends UFO {
@@ -18,6 +19,7 @@ public class Syringe extends UFO {
     private static class SyringeHolder {
         private static Syringe instance = new Syringe();
         private static Texture texture = new Texture("syringe.png");
+
     }
 
     public static Syringe getInstance() {
@@ -37,6 +39,6 @@ public class Syringe extends UFO {
     }
 
     public void dispose() {
-        getTexture().dispose();
+        //getTexture().dispose();
     }
 }
