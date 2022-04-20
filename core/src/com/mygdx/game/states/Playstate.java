@@ -6,4 +6,5 @@ interface PlayState {
     public void update(float dt);
     public void render(SpriteBatch sb);
     public void dispose();
+    public abstract void setUFODifficulty(int difficulty);
 }

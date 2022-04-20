@@ -9,7 +9,7 @@ public class Syringe extends UFO {
     // Privat konstruktor som forhindrer at det automatisk blir offentlig
     private Syringe() {
         // Startverdi første spawn
-        super(150, 60);
+        super(60);
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
         isSpawnable = false;
     }
@@ -17,6 +17,15 @@ public class Syringe extends UFO {
     private static class SyringeHolder {
         private static Syringe instance = new Syringe();
         private static Texture texture = new Texture("syringe.png");
+
+    }
+
+    /**
+     * Sets difficulty to 0 and isSpawnable to false.
+     */
+    public void reset(){
+        setDifficulty(0);
+        setSpawnable(false);
     }
 
     public static Syringe getInstance() {
@@ -32,10 +41,11 @@ public class Syringe extends UFO {
     }
 
     public void setSpawnable(boolean isSpawnable) {
+        reposition();
         this.isSpawnable = isSpawnable;
     }
 
     public void dispose() {
-        getTexture().dispose();
+        //getTexture().dispose();
     }
 }

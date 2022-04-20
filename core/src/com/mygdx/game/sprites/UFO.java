@@ -6,52 +6,57 @@ import com.badlogic.gdx.math.Vector3;
 
 public abstract class UFO {
     private static final int GRAVITY = -2;
-    private Vector3 position;
-    private Vector3 velocity;
-    private int size;
-    private Rectangle bounds;
+    private static final float DIFFICULTY_INCREASE_FACTOR = 1;
+    private final Vector3 position;
+    private final Vector3 velocity;
+    private final int size;
+    private Rectangle rect;
     private double points;
-    private Syringe syringe;
+    private float difficulty;
+    private Animation textureAnimation;
 
-    public UFO (int x, int size) {
-        // Fikse startposisjon. Dette skal bli randomisert.
-        position = new Vector3(x, Gdx.graphics.getHeight(), 0);
-        velocity = new Vector3(0, 0 , 0);
+    public UFO (int size) {
+        position = new Vector3(0,0, 0);
         this.size = size;
-        bounds = null;
+        rect = new Rectangle(position.x, position.y, size, size);
+        reposition();
+        velocity = new Vector3(0, 0 , 0);
+        textureAnimation = null;
         points = 0;
-        syringe = Syringe.getInstance();
+        difficulty = 0;
     }
 
     public void update(float dt, Player player) {
+        if(textureAnimation != null) {
+            textureAnimation.update(dt);
+        }
         velocity.scl(dt);
         if (position.y > 0) {
-            velocity.add(0, GRAVITY, 0);
+            velocity.add(0, (GRAVITY+difficulty), 0);
         }
-
         position.add(0, velocity.y, 0);
-
-
-        //Denne må endres, UFOer skal falle lenger.
         if (position.y < 0) {
-            position.y = Gdx.graphics.getHeight();
-            //Miste et liv her hvis et virus har kommet i bunn av skjermen.
+            reposition();
             if (!(this instanceof SickPerson || this instanceof Syringe)) {
                 player.loseLife();
-                syringe.setSpawnable(true);
+                Syringe.getInstance().setSpawnable(true);
             }
         }
-        bounds = new Rectangle(position.x, position.y, size, size);
-        //System.out.println(bounds);
-
+        rect = rect.set(position.x, position.y, size, size);
     }
 
-    /**
-     * Sliced repositions the viruses.
-     */
     public void reposition() {
-        position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
-        position.x = getBoundingRectangle().width + (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
+        if(this instanceof Syringe){
+            // Syringes drops more rarely based on difficulty
+            position.y = Gdx.graphics.getHeight() +
+                    (int) (Math.random() * Gdx.graphics.getHeight()) +
+                    difficulty*5;
+        }
+        else{
+            position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
+        }
+        position.x = (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
+        rect = rect.set(position.x, position.y, size, size);
     }
 
     public double getPoints() {
@@ -70,11 +75,24 @@ public abstract class UFO {
         return size;
     }
 
-    public Rectangle getBoundingRectangle(){ return bounds;}
+    public Rectangle getBoundingRectangle(){ return rect;}
 
-    public void setBoundingRectangle(Rectangle bounds) {
-        this.bounds = bounds;
+    public Animation getTextureAnimation() {
+        return textureAnimation;
+    }
+
+    public void setBoundingRectangle(Rectangle rect) {
+        this.rect = rect;
+    }
+
+    public void setTextureAnimation(Animation textureAnimation) {
+        this.textureAnimation = textureAnimation;
     }
 
     public abstract void dispose();
+
+    public void setDifficulty(int difficulty){
+        this.difficulty = difficulty*(-DIFFICULTY_INCREASE_FACTOR);
+    }
 }
+

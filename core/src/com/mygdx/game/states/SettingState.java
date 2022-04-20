@@ -4,13 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.CheckBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Slider;
-import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.mygdx.game.MyGdxGame;
 
 public class SettingState extends State{
@@ -37,8 +34,8 @@ public class SettingState extends State{
         uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
         volumeMusicSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
         volumeSoundSlider = new Slider( 0f, 1f, 0.1f,false, uiSkin );
-        musicButton = new CheckBox("  Turn off music",uiSkin);
-        soundButton = new CheckBox("  Turn off sound",uiSkin);
+        musicButton = new CheckBox("   Turn off music",uiSkin);
+        soundButton = new CheckBox("   Turn off sound",uiSkin);
 
         musicButton.setPosition(340,340);
         musicButton.setSize(20,20);
@@ -46,17 +43,17 @@ public class SettingState extends State{
         soundButton.setPosition(340,430);
         soundButton.setSize(20,20);
 
-        settings.setSize(Gdx.graphics.getWidth()/3, Gdx.graphics.getWidth()/3);
-        settings.setPosition(Gdx.graphics.getWidth()/2 - settings.getWidth()/2,Gdx.graphics.getHeight()/2 +200);
+        settings.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
+        settings.setPosition(Gdx.graphics.getWidth()/2f - settings.getWidth()/2,Gdx.graphics.getHeight()/2f +200);
 
-        returnBtn.setSize(Gdx.graphics.getWidth()/3, Gdx.graphics.getWidth()/3);
+        returnBtn.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         returnBtn.setPosition(50, 50);
 
-        soundText.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getWidth()/3);
-        soundText.setPosition(Gdx.graphics.getWidth()/2 - soundText.getWidth(), Gdx.graphics.getHeight()/2);
+        soundText.setSize(Gdx.graphics.getWidth()/3f,Gdx.graphics.getWidth()/3f);
+        soundText.setPosition(Gdx.graphics.getWidth()/2f - soundText.getWidth(), Gdx.graphics.getHeight()/2f);
 
-        musicText.setSize(Gdx.graphics.getWidth()/3,Gdx.graphics.getWidth()/3);
-        musicText.setPosition(Gdx.graphics.getWidth()/2 - musicText.getWidth(), Gdx.graphics.getHeight()/2 -100);
+        musicText.setSize(Gdx.graphics.getWidth()/3f,Gdx.graphics.getWidth()/3f);
+        musicText.setPosition(Gdx.graphics.getWidth()/2f - musicText.getWidth(), Gdx.graphics.getHeight()/2f -100);
 
 
         stage = new Stage();
@@ -73,8 +70,8 @@ public class SettingState extends State{
         else{
             volumeSoundSlider.setValue(MyGdxGame.returnSoundVolume());
         }
-        volumeSoundSlider.setPosition(270,Gdx.graphics.getHeight()/2 +70);
-        volumeMusicSlider.setPosition( 270,Gdx.graphics.getHeight()/2-25);
+        volumeSoundSlider.setPosition(270,Gdx.graphics.getHeight()/2f +70);
+        volumeMusicSlider.setPosition( 270,Gdx.graphics.getHeight()/2f-25);
 
         stage.addActor(volumeMusicSlider);
         stage.addActor(volumeSoundSlider);
@@ -86,16 +83,26 @@ public class SettingState extends State{
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
+            System.out.println("Handling input...");
             if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
             }
+
+            // Music
             if (volumeMusicSlider.isDragging()){
+                musicButton.setChecked(false);
                 MyGdxGame.setVolume(volumeMusicSlider.getValue());
+                MyGdxGame.sound.play();
             }
+
+            // Sound
             if (volumeSoundSlider.isDragging()){
+                soundButton.setChecked(false);
                 MyGdxGame.setSoundVolume(volumeSoundSlider.getValue());
+                MyGdxGame.sound.play();
             }
+
         }
 
     }
@@ -104,11 +111,15 @@ public class SettingState extends State{
     public void update(float dt) {
         handleInput();
         if(musicButton.isChecked()){
-            volumeMusicSlider.setValue(0.0f);
+            MyGdxGame.setVolume(0.0f);
+        }
+        else{
             MyGdxGame.setVolume(volumeMusicSlider.getValue());
         }
         if(soundButton.isChecked()){
-            volumeSoundSlider.setValue(0.0f);
+            MyGdxGame.setSoundVolume(0.0f);
+        }
+        else{
             MyGdxGame.setSoundVolume(volumeSoundSlider.getValue());
         }
     }
@@ -117,14 +128,14 @@ public class SettingState extends State{
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(img,0, 0);
-        sb.draw(settings, settings.getX(), settings.getY(), Gdx.graphics.getWidth()/3 ,Gdx.graphics.getWidth()/3);
-        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), Gdx.graphics.getWidth()/3, Gdx.graphics.getWidth()/3);
+        sb.draw(settings, settings.getX(), settings.getY(), Gdx.graphics.getWidth()/3f ,Gdx.graphics.getWidth()/3f);
+        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         volumeMusicSlider.draw(sb,100);
         volumeSoundSlider.draw(sb,100);
         musicButton.draw(sb,100);
         soundButton.draw(sb,100);
-        sb.draw(soundText, soundText.getX(), soundText.getY(), Gdx.graphics.getWidth()/3, Gdx.graphics.getWidth()/3 );
-        sb.draw(musicText, musicText.getX(), musicText.getY(), Gdx.graphics.getWidth()/3, Gdx.graphics.getWidth()/3 );
+        sb.draw(soundText, soundText.getX(), soundText.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f );
+        sb.draw(musicText, musicText.getX(), musicText.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f );
         sb.end();
 
     }
