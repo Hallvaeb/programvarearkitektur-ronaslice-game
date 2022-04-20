@@ -43,6 +43,7 @@ public class Syringe extends UFO {
     }
 
     public void setSpawnable(boolean isSpawnable) {
+        reposition();
         this.isSpawnable = isSpawnable;
     }
 

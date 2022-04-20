@@ -50,9 +50,9 @@ public class SingleplayerState extends State implements PlayState {
         sick_person = new SickPerson(300, 70);
         syringe = Syringe.getInstance();
 
-        //Pause (Fikse hardkodet verdier)
-        pause.setSize(50, 50);
-        pause.setPosition(MyGdxGame.WIDTH-60,MyGdxGame.HEIGHT-60);
+        //Pause
+        pause.setSize(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
+        pause.setPosition(Gdx.graphics.getWidth()-60,Gdx.graphics.getHeight()-60);
 
         // Slice posisjon til player
         touchPoint = new Vector3();
@@ -85,23 +85,22 @@ public class SingleplayerState extends State implements PlayState {
             for (UFO ufo : ufos) {
 
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                    ufo.reposition();
                     if (ufo instanceof SickPerson) {
                         gameOver();
                     }
                     else if (ufo instanceof Syringe) {
-                        ufo.reposition();
                         player.gainLife();
                         if (player.getLivesLeft() == 3) {
                             syringe.setSpawnable(false);
                         }
                     }
                     else{
-                        // One of the viruses are sliced
+                        // One of the viruses are sliced, should difficulty increase?
                         int difficulty = player.increaseScoreAndDifficulty(ufo.getPoints());
                         if(difficulty != -1){
                             setUFODifficulty(difficulty);
                         }
-                        ufo.reposition();
                     }
                 }
             }

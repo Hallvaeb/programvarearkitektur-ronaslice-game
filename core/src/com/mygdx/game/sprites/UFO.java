@@ -6,25 +6,23 @@ import com.badlogic.gdx.math.Vector3;
 
 public abstract class UFO {
     private static final int GRAVITY = -2;
-    private static final float DIFFICULTYINCREASIONFACTOR = 1;
+    private static final float DIFFICULTY_INCREASE_FACTOR = 1;
     private Vector3 position;
     private Vector3 velocity;
     private int size;
-    private Rectangle bounds;
+    private Rectangle rect;
     private double points;
-    private Syringe syringe;
     private float difficulty;
     private Animation textureAnimation;
 
     public UFO (int x, int size) {
-        // Fikse startposisjon. Dette skal bli randomisert.
-        position = new Vector3(x, Gdx.graphics.getHeight(), 0);
+        position = new Vector3(0,0, 0);
+        rect = new Rectangle(position.x, position.y, size, size);
+        reposition();
         velocity = new Vector3(0, 0 , 0);
         this.size = size;
-        bounds = null;
         textureAnimation = null;
         points = 0;
-        syringe = Syringe.getInstance();
         difficulty = 0;
     }
 
@@ -38,13 +36,13 @@ public abstract class UFO {
         }
         position.add(0, velocity.y, 0);
         if (position.y < 0) {
-            position.y = Gdx.graphics.getHeight();
+            reposition();
             if (!(this instanceof SickPerson || this instanceof Syringe)) {
                 player.loseLife();
-                syringe.setSpawnable(true);
+                Syringe.getInstance().setSpawnable(true);
             }
         }
-        bounds = new Rectangle(position.x, position.y, size, size);
+        rect = rect.set(position.x, position.y, size, size);
     }
 
     public void reposition() {
@@ -76,14 +74,14 @@ public abstract class UFO {
         return size;
     }
 
-    public Rectangle getBoundingRectangle(){ return bounds;}
+    public Rectangle getBoundingRectangle(){ return rect;}
 
     public Animation getTextureAnimation() {
         return textureAnimation;
     }
 
-    public void setBoundingRectangle(Rectangle bounds) {
-        this.bounds = bounds;
+    public void setBoundingRectangle(Rectangle rect) {
+        this.rect = rect;
     }
 
     public void setTextureAnimation(Animation textureAnimation) {
@@ -93,7 +91,7 @@ public abstract class UFO {
     public abstract void dispose();
 
     public void setDifficulty(int difficulty){
-        this.difficulty = difficulty*(-DIFFICULTYINCREASIONFACTOR);
-    };
+        this.difficulty = difficulty*(-DIFFICULTY_INCREASE_FACTOR);
+    }
 }
 
