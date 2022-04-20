@@ -118,6 +118,7 @@ public class SingleplayerState extends State implements PlayState  {
         if (player.getLivesLeft() == 0) {
             // GAME OVER
             System.out.println("GAME OVER");
+            gsm.push(new GameOverState(gsm, player));
         }
     }
 
