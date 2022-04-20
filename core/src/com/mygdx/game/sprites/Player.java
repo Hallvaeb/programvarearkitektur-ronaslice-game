@@ -44,7 +44,7 @@ public class Player {
     }
 
     /**
-    * @Return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
+    * @return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
      **/
     public int increaseScoreAndDifficulty(double score) {
         increaseScore(score);

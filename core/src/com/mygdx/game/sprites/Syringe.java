@@ -22,6 +22,14 @@ public class Syringe extends UFO {
 
     }
 
+    /**
+     * Sets difficulty to 0 and isSpawnable to false.
+     */
+    public void reset(){
+        setDifficulty(0);
+        setSpawnable(false);
+    }
+
     public static Syringe getInstance() {
         return SyringeHolder.instance;
     }
