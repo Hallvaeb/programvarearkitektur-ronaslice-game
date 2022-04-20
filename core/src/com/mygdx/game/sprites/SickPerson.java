@@ -11,7 +11,6 @@ public class SickPerson extends UFO {
         super(x, size);
         texture = new Texture("sick_person_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
-        setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
     }
 
     public TextureRegion getTexture(){
