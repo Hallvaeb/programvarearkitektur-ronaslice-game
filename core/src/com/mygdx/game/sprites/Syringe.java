@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Rectangle;
+import com.mygdx.game.states.SingleplayerState;
 
 public class Syringe extends UFO {
 
@@ -11,7 +12,7 @@ public class Syringe extends UFO {
     // Privat konstruktor som forhindrer at det automatisk blir offentlig
     private Syringe() {
         // Startverdi første spawn
-        super(150, 60);
+        super(60);
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
         isSpawnable = false;
     }

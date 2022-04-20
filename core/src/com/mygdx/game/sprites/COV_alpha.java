@@ -9,8 +9,8 @@ public class COV_alpha extends UFO {
 
     private Texture texture;
 
-    public COV_alpha(int x, int size) {
-        super(x, size);
+    public COV_alpha(int size) {
+        super(size);
         texture = new Texture("cov_alpha_sheet.png");
         setTextureAnimation(new Animation(new TextureRegion(texture), 10, 1f));
         setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));

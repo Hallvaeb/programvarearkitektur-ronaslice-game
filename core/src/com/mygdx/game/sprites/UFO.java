@@ -7,20 +7,20 @@ import com.badlogic.gdx.math.Vector3;
 public abstract class UFO {
     private static final int GRAVITY = -2;
     private static final float DIFFICULTY_INCREASE_FACTOR = 1;
-    private Vector3 position;
-    private Vector3 velocity;
-    private int size;
+    private final Vector3 position;
+    private final Vector3 velocity;
+    private final int size;
     private Rectangle rect;
     private double points;
     private float difficulty;
     private Animation textureAnimation;
 
-    public UFO (int x, int size) {
+    public UFO (int size) {
         position = new Vector3(0,0, 0);
+        this.size = size;
         rect = new Rectangle(position.x, position.y, size, size);
         reposition();
         velocity = new Vector3(0, 0 , 0);
-        this.size = size;
         textureAnimation = null;
         points = 0;
         difficulty = 0;
@@ -56,6 +56,7 @@ public abstract class UFO {
             position.y = Gdx.graphics.getHeight() + (int) (Math.random() * Gdx.graphics.getHeight());
         }
         position.x = (int) (Math.random() * (Gdx.graphics.getWidth() - getBoundingRectangle().width));
+        rect = rect.set(position.x, position.y, size, size);
     }
 
     public double getPoints() {

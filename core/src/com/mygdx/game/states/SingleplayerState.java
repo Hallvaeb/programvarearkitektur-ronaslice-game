@@ -44,10 +44,10 @@ public class SingleplayerState extends State implements PlayState {
         font = new BitmapFont();
         font.getData().setScale(3, 3);
 
-        cov_delta = new COV_delta(200, 80);
-        cov_omikron = new COV_omikron(100, 55);
-        cov_alpha = new COV_alpha(50, 35);
-        sick_person = new SickPerson(300, 70);
+        cov_delta = new COV_delta(80);
+        cov_omikron = new COV_omikron(55);
+        cov_alpha = new COV_alpha(35);
+        sick_person = new SickPerson(70);
         syringe = Syringe.getInstance();
 
         //Pause
@@ -83,13 +83,14 @@ public class SingleplayerState extends State implements PlayState {
 
             // Slice fra bruker
             for (UFO ufo : ufos) {
-
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
-                    ufo.reposition();
                     if (ufo instanceof SickPerson) {
                         gameOver();
+                        break;
                     }
-                    else if (ufo instanceof Syringe) {
+                    repositionReduceCollisions(ufo);
+
+                    if (ufo instanceof Syringe) {
                         player.gainLife();
                         if (player.getLivesLeft() == 3) {
                             syringe.setSpawnable(false);
@@ -103,6 +104,17 @@ public class SingleplayerState extends State implements PlayState {
                         }
                     }
                 }
+            }
+        }
+    }
+
+    public void repositionReduceCollisions(UFO ufo1) {
+        ufo1.reposition();
+        for (int i = 0; i < ufos.size; i++){
+            UFO ufo2 = ufos.get(i);
+            if(!(ufo1 == ufo2) && ufo1.getBoundingRectangle().contains(ufo2.getBoundingRectangle())){
+                ufo1.reposition();
+                repositionReduceCollisions(ufo1);
             }
         }
     }
