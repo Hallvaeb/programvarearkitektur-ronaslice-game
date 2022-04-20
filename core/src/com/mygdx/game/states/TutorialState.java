@@ -3,22 +3,22 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.GlyphLayout;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.COV_delta;
 import com.mygdx.game.sprites.Syringe;
-import com.mygdx.game.sprites.UFO;
 
 public class TutorialState extends State{
+    private static final int MARGIN = 50;
+    private static final int IMG_DIM = 70;
+    private static final int IMG_X = Gdx.graphics.getWidth()/10; //480x800: = 50
+    private static final int TEXT_X = IMG_X + IMG_DIM + 10;
+    private static final int IMG_Y_FACTOR = Gdx.graphics.getHeight()/8; //480x800: = 100
+
     private Texture bg;
     private Sprite returnBtn;
-    private static final int MARGIN = 50;
     private BitmapFont fontHeader = new BitmapFont();
     private BitmapFont fontInfo = new BitmapFont();
-    private String textInfo = "Slice the viruses and the syringes, while avoiding the sick person!";
-    private final float fontInfoX;
     private Sprite delta;
     private Sprite omikron;
     private Sprite alpha;
@@ -36,24 +36,25 @@ public class TutorialState extends State{
         sick_person = new Sprite(new Texture("sick_person.png"));
         syringe = Syringe.getInstance();
 
-        returnBtn.setSize((float) Gdx.graphics.getWidth()/3, (float) Gdx.graphics.getWidth()/3);
-        returnBtn.setPosition(50, 50);
+        returnBtn.setSize((float) Gdx.graphics.getWidth()/3,
+                (float) Gdx.graphics.getWidth()/3);
+        returnBtn.setPosition(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
 
         fontHeader.setColor(0,0,0,1);
-        fontHeader.getData().setScale(2.5f);
+        fontHeader.getData().setScale(Gdx.graphics.getHeight()/320f);
 
         fontInfo.setColor(0,0,0,1);
-        fontInfo.getData().setScale(1.8f);
+        fontInfo.getData().setScale(Gdx.graphics.getHeight()/535f);
 
-        final GlyphLayout layoutInfo = new GlyphLayout(fontInfo, textInfo);
-        // Forsøkt sentrert med (Gdx.graphics.getWidth() - layoutInfo.width)/2; //
-        fontInfoX = (Gdx.graphics.getWidth())/2;
+
+
     }
 
     @Override
     public void handleInput() {
         if (Gdx.input.isTouched()) {
-            if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
             }
@@ -69,14 +70,32 @@ public class TutorialState extends State{
     public void render(SpriteBatch sb) {
         sb.begin();
         sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
-        //fontInfo.draw(sb, textInfo, fontInfoX, Gdx.graphics.getHeight()-(2*MARGIN), Gdx.graphics.getWidth()- (Gdx.graphics.getWidth()/2f)  - (fontHeader.getRegion().getRegionWidth()/2f), 1, true);
-        fontHeader.draw(sb, "TUTORIAL", (Gdx.graphics.getWidth()/2f)  - (fontHeader.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-MARGIN);
-        sb.draw(delta,50,200, 70, 70);
-        sb.draw(omikron,50,300, 70, 70);
-        sb.draw(alpha,50,400, 70, 70);
-        sb.draw(syringe.getTexture(),50,500, 70, 70);
-        sb.draw(sick_person,50,600, 70, 70);
+        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), Gdx.graphics.getWidth()/3f,
+                Gdx.graphics.getWidth()/3f);
+
+        fontHeader.draw(sb, "TUTORIAL", (Gdx.graphics.getWidth()/2f) - 1.75f*MARGIN,
+                Gdx.graphics.getHeight()-MARGIN);
+
+        sb.draw(delta, IMG_X,2*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Delta, slice! " +
+                "\nGives 1 points. \nDeals 1 damage.", TEXT_X, 2*IMG_Y_FACTOR + IMG_DIM);
+
+        sb.draw(omikron, IMG_X,3*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Omikron, slice! " +
+                "\nGives 2 points. \nDeals 1 damage.", TEXT_X, 3*IMG_Y_FACTOR + IMG_DIM);
+
+        sb.draw(alpha, IMG_X, 4*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Alpha, slice! " +
+                "\nGives 3 points. \nDeals 1 damage.", TEXT_X, 4*IMG_Y_FACTOR + IMG_DIM);
+
+        sb.draw(syringe.getTexture(), IMG_X,5*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Syringe! " +
+                "\nSlice this for an extra life!", TEXT_X, 5*IMG_Y_FACTOR + IMG_DIM);
+
+        sb.draw(sick_person,IMG_X,6*IMG_Y_FACTOR, IMG_DIM, IMG_DIM);
+        fontInfo.draw(sb, "Sick person 'Ulrik'!" +
+                        "\nLet him fall to the hospital. " +
+                        "\nGAME OVER if you slice!", TEXT_X, 6*IMG_Y_FACTOR + IMG_DIM);
         sb.end();
     }
 
