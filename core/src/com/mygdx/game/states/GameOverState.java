@@ -23,7 +23,7 @@ public class GameOverState extends State {
     private static final float SPACING = Gdx.graphics.getHeight()/16f;
 
     private Player player;
-    private Texture bg = new Texture("bg_bare_himmel.png");;
+    private Texture bg = new Texture("bg_sky.png");;
     private List<Float> scores;
     private List<String> names;
     private BitmapFont font = new BitmapFont();;

@@ -35,7 +35,7 @@ public class MultiPlayerGameOverState extends State {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, WIDTH, HEIGHT);
 
-        bg = new Texture("bg_bare_himmel.png");
+        bg = new Texture("bg_sky.png");
         winnerFont = new BitmapFont();
         winnerFont.setColor(0,0,0,1);
         winnerFont.getData().setScale(HEIGHT/200);

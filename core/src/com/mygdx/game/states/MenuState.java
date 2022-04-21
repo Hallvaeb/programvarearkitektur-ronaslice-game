@@ -22,7 +22,7 @@ public class MenuState extends State {
     private Sprite scoreBtn = new Sprite(new Texture("highScoreButton.png"));
     private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
     private Sprite helpBtn = new Sprite(new Texture("tutorialButton.png"));
-    private Texture background = new Texture("bg_bare_himmel.png");;
+    private Texture background = new Texture("bg_sky.png");;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);

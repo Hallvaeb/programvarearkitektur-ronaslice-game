@@ -17,7 +17,7 @@ public class PauseState extends State {
     private int X_TITLE;
 
     private BitmapFont font = new BitmapFont();
-    private Texture bg = new Texture("bg_bare_himmel.png");
+    private Texture bg = new Texture("bg_sky.png");
     private Sprite resBtn = new Sprite(new Texture("resBtn.png"));
     private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
     private Sprite tutorialBtn = new Sprite(new Texture("tutorialButton.png"));

@@ -4,8 +4,9 @@ import com.mygdx.game.FireBaseInterface;
 import java.util.List;
 
 public class DesktopInterfaceClass implements FireBaseInterface {
+
     @Override
-    public void SomeFunction() {
+    public void SetTop10Lists() {
 
     }
 
@@ -19,10 +20,6 @@ public class DesktopInterfaceClass implements FireBaseInterface {
         return null;
     }
 
-    @Override
-    public void SetOnValueChangedListener() {
-
-    }
 
     @Override
     public void SetValueInDB(String target, float value) {
