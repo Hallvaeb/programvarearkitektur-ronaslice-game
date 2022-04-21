@@ -89,7 +89,6 @@ public class SinglePlayerState extends State implements PlayState {
                         }
                     }
                     else{
-                        // One of the viruses are sliced, should difficulty increase?
                         int difficulty = player.increaseScoreAndDifficulty(ufo.getPoints());
                         if(difficulty != -1){
                             setUFODifficulty(difficulty);
