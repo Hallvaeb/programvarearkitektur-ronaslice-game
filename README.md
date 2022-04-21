@@ -1,8 +1,6 @@
 # TDT4240_progark_prosjekt
 
-![image](https://user-images.githubusercontent.com/77838167/164458290-7015ef15-fdad-420b-a80a-a55bb4695ff7.png)
-
-
+explain structure and how to compile/run project here
 
 
 
