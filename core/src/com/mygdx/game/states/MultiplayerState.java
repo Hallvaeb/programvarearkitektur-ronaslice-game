@@ -137,7 +137,6 @@ public class MultiplayerState extends State implements PlayState {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < HEIGHT/2) {
                     /** Slicing the sick patient */
                     if (ufo instanceof SickPerson) {
-                        System.out.println("GAME OVER");
                         gameOver(player2);
                         break;
                     }
@@ -156,7 +155,6 @@ public class MultiplayerState extends State implements PlayState {
                     else{
                         int difficulty = player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        System.out.println(difficulty);
                         if(difficulty != -1 && difficulty != currentDifficulty){
                             setUFODifficulty(difficulty);
                         }
@@ -169,7 +167,6 @@ public class MultiplayerState extends State implements PlayState {
             for (UFO ufo : ufos2) {
                 if(ufo.getBoundingRectangle().contains(WIDTH - touchPoint.x, HEIGHT - touchPoint.y) && touchPoint.y > HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
-                        System.out.println("GAME OVER");
                         gameOver(player1);
                         break;
                     }
@@ -203,7 +200,6 @@ public class MultiplayerState extends State implements PlayState {
         }
         if (player1.getLivesLeft() == 0) {
             // GAME OVER
-            System.out.println("GAME OVER");
             gameOver(player2);
         }
         for (UFO ufo : ufos2) {
@@ -211,7 +207,6 @@ public class MultiplayerState extends State implements PlayState {
         }
         if (player2.getLivesLeft() == 0) {
             // GAME OVER
-            System.out.println("GAME OVER");
             gameOver(player1);
         }
 

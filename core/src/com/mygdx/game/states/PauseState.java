@@ -18,10 +18,10 @@ public class PauseState extends State {
 
     private BitmapFont font = new BitmapFont();
     private Texture bg = new Texture("bg_sky.png");
-    private Sprite resBtn = new Sprite(new Texture("resBtn.png"));
-    private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
-    private Sprite tutorialBtn = new Sprite(new Texture("tutorialButton.png"));
-    private Sprite quitBtn = new Sprite(new Texture("quitBtn.png"));
+    private Sprite resBtn = new Sprite(new Texture("resume_btn.png"));
+    private Sprite settingBtn = new Sprite(new Texture("settings_btn.png"));
+    private Sprite tutorialBtn = new Sprite(new Texture("tutorial_btn.png"));
+    private Sprite quitBtn = new Sprite(new Texture("quit_btn.png"));
     private OrthographicCamera cam = new OrthographicCamera();
 
     /**

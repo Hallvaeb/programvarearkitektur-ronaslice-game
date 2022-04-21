@@ -15,7 +15,7 @@ public class SettingState extends State{
     private static final int HEIGHT = Gdx.graphics.getHeight();
     private Texture img = new Texture( "bg_sky.png");
     private Sprite returnBtn = new Sprite(new Texture("return.png"));
-    private Sprite settingsBtn = new Sprite(new Texture("settingsButton.png"));
+    private Sprite settingsBtn = new Sprite(new Texture("settings_btn.png"));
     private Sprite soundText = new Sprite((new Texture("sound.png")));
     private Sprite musicText = new Sprite((new Texture("music.png")));
     private Skin uiSkin = new Skin(Gdx.files.internal("uiskin.json"));
