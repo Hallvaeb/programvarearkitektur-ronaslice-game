@@ -9,61 +9,62 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
 public class PauseState extends State {
-    private Texture bg;
-    private Sprite playBtn;
-    private Sprite resBtn;
-    private Sprite settingBtn;
-    private Sprite tutorialBtn;
-    private Sprite quitBtn;
-    private static final int MARGIN = 80;
-    private BitmapFont font;
-    private static final CharSequence GAMEPAUSED = "GAME PAUSED";
-    private OrthographicCamera cam;
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
+    private static final int BUTTON_SIZE = WIDTH/4;
+    private static final int X_BUTTON = (WIDTH - BUTTON_SIZE)/2;
+    private static final float Y_TITLE = 0.9f*HEIGHT;
+    private int X_TITLE;
 
+    private BitmapFont font = new BitmapFont();
+    private Texture bg = new Texture("bg_bare_himmel.png");
+    private Sprite resBtn = new Sprite(new Texture("resBtn.png"));
+    private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
+    private Sprite tutorialBtn = new Sprite(new Texture("tutorialButton.png"));
+    private Sprite quitBtn = new Sprite(new Texture("quitBtn.png"));
+    private OrthographicCamera cam = new OrthographicCamera();
+
+    /**
+     * Gives the options to resume, go to settings, tutorial, or quit the current game.
+     * @param gsm GameStateManager controlling the states of the application
+     */
     public PauseState(GameStateManager gsm) {
         super(gsm);
-        bg = new Texture("bg_bare_himmel.png");
-        cam = new OrthographicCamera();
-        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        // PLAYBTN USED FOR SCALING AND POSITIONING THE OTHER BUTTONS
-        playBtn = new Sprite(new Texture("playbtn.png"));
-        resBtn = new Sprite(new Texture("resBtn.png"));
-        settingBtn = new Sprite(new Texture("settingsButton.png"));
-        tutorialBtn = new Sprite(new Texture("tutorialButton.png"));
-        quitBtn = new Sprite(new Texture("quitBtn.png"));
-
-        playBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        resBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        resBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-2*playBtn.getHeight());
-        settingBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        settingBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-3*playBtn.getHeight());
-        tutorialBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        tutorialBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-4*playBtn.getHeight());
-        quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()-MARGIN)-5*playBtn.getHeight());
-
-        // FOR THE "GAME PAUSED" TEXT
-        font = new BitmapFont();
+        cam.setToOrtho(false, WIDTH, HEIGHT);
+        resBtn.setPosition(X_BUTTON, Y_TITLE -2* BUTTON_SIZE);
+        resBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
+        settingBtn.setPosition(X_BUTTON, Y_TITLE -3* BUTTON_SIZE);
+        settingBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
+        tutorialBtn.setPosition(X_BUTTON, Y_TITLE -4* BUTTON_SIZE);
+        tutorialBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
+        quitBtn.setPosition(X_BUTTON, Y_TITLE -5* BUTTON_SIZE);
+        quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         font.setColor(0,0,0,1);
-        font.getData().setScale(2.5f);
+        font.getData().setScale(Gdx.graphics.getHeight()/320f);
+        X_TITLE = (WIDTH - font.getRegion().getRegionWidth())/2;
+
     }
 
     @Override
     public void handleInput() {
         if (Gdx.input.justTouched()) {
-            if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (resBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
             }
-            if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (settingBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.push(new SettingState(gsm));
             }
-            if (tutorialBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (tutorialBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.push(new TutorialState(gsm));
             }
-            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.pop();
                 gsm.set(new MenuState(gsm));
@@ -79,21 +80,21 @@ public class PauseState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
-        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
+        Gdx.gl.glViewport(0,0, WIDTH, HEIGHT);
+
         sb.begin();
-        sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        sb.draw(resBtn, resBtn.getX(), resBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        sb.draw(tutorialBtn, tutorialBtn.getX(), tutorialBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        font.draw(sb, GAMEPAUSED, (Gdx.graphics.getWidth()/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-MARGIN);
+        sb.draw(bg,0, 0, WIDTH, HEIGHT);
+        sb.draw(resBtn, resBtn.getX(), resBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
+        sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
+        sb.draw(tutorialBtn, tutorialBtn.getX(), tutorialBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
+        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
+        font.draw(sb, "GAME PAUSED", X_TITLE, Y_TITLE);
         sb.end();
     }
 
     @Override
     public void dispose() {
         bg.dispose();
-        playBtn.getTexture().dispose();
         resBtn.getTexture().dispose();
         settingBtn.getTexture().dispose();
         tutorialBtn.getTexture().dispose();

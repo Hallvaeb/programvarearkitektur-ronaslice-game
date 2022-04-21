@@ -31,6 +31,7 @@ public class MultiPlayerGameOverState extends State {
         super(gsm);
         this.winner = winner;
 
+        /** Switching from split-screen back to normal  */
         cam = new OrthographicCamera();
         cam.setToOrtho(false, WIDTH, HEIGHT);
 
@@ -67,6 +68,7 @@ public class MultiPlayerGameOverState extends State {
 
     @Override
     public void render(SpriteBatch sb) {
+        /** Setting normal screen */
         sb.setProjectionMatrix(cam.combined);
         Gdx.gl.glViewport(0,0, WIDTH, HEIGHT);
         sb.begin();

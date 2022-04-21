@@ -136,7 +136,7 @@ public abstract class UFO {
     }
 
     /**
-     * Abstract dispose method.
+     * Abstract method to dispose all textures.
      */
     public abstract void dispose();
 

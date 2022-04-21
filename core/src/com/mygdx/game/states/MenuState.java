@@ -17,24 +17,15 @@ public class MenuState extends State {
     private static final float btnSize = WIDTH/4;
     private static final float btnMarginX = (WIDTH/2)-(btnSize/2);
     private static final float btnMarginY = HEIGHT-MARGIN;
-    private Sprite playBtn;
-    private Sprite multiBtn;
-    private Sprite scoreBtn;
-    private Sprite settingBtn;
-    private Sprite helpBtn;
-    private Texture background;
-
+    private Sprite playBtn = new Sprite(new Texture("newGameButton.png"));
+    private Sprite multiBtn = new Sprite(new Texture("multiplayerButton.png"));
+    private Sprite scoreBtn = new Sprite(new Texture("highScoreButton.png"));
+    private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
+    private Sprite helpBtn = new Sprite(new Texture("tutorialButton.png"));
+    private Texture background = new Texture("bg_bare_himmel.png");;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        background = new Texture("bg_bare_himmel.png");
-        playBtn = new Sprite(new Texture("newGameButton.png"));
-        multiBtn = new Sprite(new Texture("multiplayerButton.png"));
-        scoreBtn = new Sprite(new Texture("highScoreButton.png"));
-        settingBtn = new Sprite(new Texture("settingsButton.png"));
-        helpBtn = new Sprite(new Texture("tutorialButton.png"));
-        //cam.setToOrtho(false, MyGdxGame.WIDTH/2, MyGdxGame.HEIGHT/2);
-
         playBtn.setSize(btnSize, btnSize);
         playBtn.setPosition(btnMarginX, btnMarginY-btnSize);
         multiBtn.setSize(btnSize, btnSize);
@@ -50,7 +41,8 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
-        MyGdxGame.get_FBIC().SomeFunction();
+        /** Method for updating nameList and scoreList with the data from Firebase */
+        MyGdxGame.get_FBIC().SetTop10Lists();
         if (Gdx.input.justTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();

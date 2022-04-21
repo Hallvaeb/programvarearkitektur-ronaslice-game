@@ -3,14 +3,13 @@ package com.mygdx.game.states;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 
+/** Abstract class for all states and declaration/initialization of GameStateManager */
 public abstract class State {
-    protected Vector2 mouse;
     protected GameStateManager gsm;
 
 
     protected State(GameStateManager gsm){
         this.gsm = gsm;
-        mouse = new Vector2();
     }
 
     protected abstract void handleInput();

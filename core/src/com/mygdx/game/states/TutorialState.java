@@ -14,40 +14,34 @@ public class TutorialState extends State{
     private static final int IMG_X = Gdx.graphics.getWidth()/10; //480x800: = 50
     private static final int TEXT_X = IMG_X + IMG_DIM + 10;
     private static final int IMG_Y_FACTOR = Gdx.graphics.getHeight()/8; //480x800: = 100
+    private static final int BUTTON_SIZE = Gdx.graphics.getWidth()/4;
 
-    private Texture bg;
-    private Sprite returnBtn;
+    private Texture bg = new Texture("bg_bare_himmel.png");
+    private Sprite returnBtn = new Sprite(new Texture("return.png"));
     private BitmapFont fontHeader = new BitmapFont();
     private BitmapFont fontInfo = new BitmapFont();
-    private Sprite delta;
-    private Sprite omicron;
-    private Sprite alpha;
-    private Syringe syringe;
-    private Sprite sick_person;
+    private Sprite delta = new Sprite(new Texture("cov_delta.png"));
+    private Sprite omicron = new Sprite(new Texture("cov_omikron.png"));
+    private Sprite alpha = new Sprite(new Texture("cov_alpha.png"));
+    private Syringe syringe = Syringe.getInstance();
+    private Sprite sick_person = new Sprite(new Texture("sick_person.png"));
 
 
+    /**
+     * Gives the user an understanding of each UFO in the game.
+     *
+     * The text in the tutorial can be edited in the render() method.
+     *
+     * @param gsm GameStateManager controlling the states of the application
+     */
     public TutorialState(GameStateManager gsm) {
         super(gsm);
-        bg = new Texture("bg_bare_himmel.png");
-        returnBtn = new Sprite(new Texture("return.png"));
-        delta = new Sprite(new Texture("cov_delta.png"));
-        omicron = new Sprite(new Texture("cov_omikron.png"));
-        alpha = new Sprite(new Texture("cov_alpha.png"));
-        sick_person = new Sprite(new Texture("sick_person.png"));
-        syringe = Syringe.getInstance();
-
-        returnBtn.setSize((float) Gdx.graphics.getWidth()/3,
-                (float) Gdx.graphics.getWidth()/3);
+        returnBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         returnBtn.setPosition(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
-
         fontHeader.setColor(0,0,0,1);
         fontHeader.getData().setScale(Gdx.graphics.getHeight()/320f);
-
         fontInfo.setColor(0,0,0,1);
         fontInfo.getData().setScale(Gdx.graphics.getHeight()/535f);
-
-
-
     }
 
     @Override
