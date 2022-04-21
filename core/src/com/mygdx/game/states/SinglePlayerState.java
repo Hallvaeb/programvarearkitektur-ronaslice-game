@@ -143,7 +143,7 @@ public class SinglePlayerState extends State implements PlayState {
                 sick_person.getSize(), sick_person.getSize());
         if (syringe.isSpawnable()) {
             sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y,
-                    syringe.getSize(), syringe.getSize());
+                    HEIGHT/16, HEIGHT/16);
         }
         sb.end();
     }
