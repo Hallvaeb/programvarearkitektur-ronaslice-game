@@ -16,8 +16,8 @@ public abstract class UFO {
     private Animation textureAnimation;
 
     /**
-     * Constructor for a UFO. Sets position, bounding rectangle, velocity
-     * @param size
+     * Constructor for a UFO. Sets position, bounding rectangle, velocity.
+     * @param size The size of the UFO.
      */
     public UFO (int size) {
         position = new Vector3(0,0, 0);
@@ -30,6 +30,12 @@ public abstract class UFO {
         difficulty = 0;
     }
 
+    /**
+     * Update method that updates the animation frame, adds gravity and difficulty, and
+     * utilizes the loseLife method.
+     * @param dt Delta time.
+     * @param player Player instance.
+     */
     public void update(float dt, Player player) {
         if(textureAnimation != null) {
             textureAnimation.update(dt);
@@ -43,12 +49,16 @@ public abstract class UFO {
             reposition();
             if (!(this instanceof SickPerson || this instanceof Syringe)) {
                 player.loseLife();
+                // Starts dropping syringes if max health is not achieved.
                 Syringe.getInstance().setSpawnable(true);
             }
         }
         rect = rect.set(position.x, position.y, size, size);
     }
 
+    /**
+     * Moves UFOs to top of screen after it is sliced by the player og hits the bottom.
+     */
     public void reposition() {
         if(this instanceof Syringe){
             // Syringes drops more rarely based on difficulty
@@ -63,47 +73,72 @@ public abstract class UFO {
         rect = rect.set(position.x, position.y, size, size);
     }
 
+    /**
+     * A getter for reward for slicing a virus (UFO).
+     * @return Amount of points.
+     */
     public double getPoints() {
         return points;
     }
 
+    /**
+     * Sets the points achieved for slicing a UFO.
+     * @param points Amount of points.
+     */
     public void setPoints(double points) {
         this.points = points;
     }
 
     /**
-     *
-     * @return get position of the UFO.
+     * A getter for the UFO position.
+     * @return Vector3 position.
      */
     public Vector3 getPosition() {
         return position;
     }
 
+    /**
+     * A getter for the UFO size
+     * @return The size of the UFO in pixels.
+     */
     public int getSize() {
         return size;
     }
 
+    /**
+     * A getter for the bounding rectangle for the UFO.
+     * @return The bounding rectangle.
+     */
     public Rectangle getBoundingRectangle(){ return rect;}
 
+    /**
+     * A getter for the texture animation.
+     * @return Animation texture.
+     */
     public Animation getTextureAnimation() {
         return textureAnimation;
     }
 
-    public void setBoundingRectangle(Rectangle rect) {
-        this.rect = rect;
-    }
-
+    /**
+     * Sets the texture animation.
+     * @param textureAnimation Animation object.
+     */
     public void setTextureAnimation(Animation textureAnimation) {
         this.textureAnimation = textureAnimation;
     }
 
     /**
-     * disposes all textures.
+     * Sets the difficulty.
+     * @param difficulty int value representing the difficulty.
      */
-    public abstract void dispose();
-
     public void setDifficulty(int difficulty){
         this.difficulty = difficulty*(-DIFFICULTY_INCREASE_FACTOR);
     }
+
+    /**
+     * Abstract method to dispose all textures.
+     */
+    public abstract void dispose();
+
 }
 

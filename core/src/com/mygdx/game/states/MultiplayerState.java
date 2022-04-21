@@ -122,9 +122,11 @@ public class MultiplayerState extends State implements PlayState {
             touchPoint.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
             touchPoint2.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                MyGdxGame.sound.play();
                 gsm.push(new PauseState(gsm));
             }
             if (pause2.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                MyGdxGame.sound.play();
                 gsm.push(new PauseState(gsm));
             }
 

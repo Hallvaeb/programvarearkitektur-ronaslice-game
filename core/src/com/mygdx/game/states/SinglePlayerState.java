@@ -60,7 +60,7 @@ public class SinglePlayerState extends State implements PlayState {
     }
 
     public void gameOver(Player player) {
-        Syringe.getInstance().reset();
+        syringe.reset();
         gsm.push(new GameOverState(gsm, player));
     }
 
@@ -69,6 +69,7 @@ public class SinglePlayerState extends State implements PlayState {
         if(Gdx.input.isTouched()) {
             touchPoint.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                MyGdxGame.sound.play();
                 gsm.push(new PauseState(gsm));
             }
 
@@ -129,7 +130,7 @@ public class SinglePlayerState extends State implements PlayState {
                 0.85f*HEIGHT);
         for (int i = 0; i < player.getLivesLeft(); i++) {
             sb.draw(health, WIDTH/48f+i*WIDTH/8f,
-                    0.9f*HEIGHT, HEIGHT/16, HEIGHT/16);
+                    0.9f*HEIGHT, syringe.getSize(), syringe.getSize());
         }
         sb.draw(pause, pause.getX(),pause.getY(), pause.getWidth(), pause.getHeight());
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y,
