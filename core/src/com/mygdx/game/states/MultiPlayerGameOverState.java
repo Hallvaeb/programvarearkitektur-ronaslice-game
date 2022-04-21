@@ -38,7 +38,7 @@ public class MultiPlayerGameOverState extends State {
         winnerFont = new BitmapFont();
         winnerFont.setColor(0,0,0,1);
         winnerFont.getData().setScale(HEIGHT/200);
-        playAgainBtn = new Sprite(new Texture("multiplayerButton.png"));
+        playAgainBtn = new Sprite(new Texture("playAgainBtn.png"));
         playAgainBtn.setSize(btnSize, btnSize);
         playAgainBtn.setPosition(btnMarginX, btnMarginY);
         returnBtn = new Sprite(new Texture("return.png"));

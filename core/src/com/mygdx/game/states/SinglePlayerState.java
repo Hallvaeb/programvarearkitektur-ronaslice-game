@@ -45,7 +45,7 @@ public class SinglePlayerState extends State implements PlayState {
 
         //Pause
         pause.setSize(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
-        pause.setPosition(Gdx.graphics.getWidth()-60,Gdx.graphics.getHeight()-60);
+        pause.setPosition(Gdx.graphics.getWidth()/1.14f,Gdx.graphics.getHeight()/1.08f);
 
         touchPoint = new Vector3();
 
@@ -70,6 +70,7 @@ public class SinglePlayerState extends State implements PlayState {
         if(Gdx.input.isTouched()) {
             touchPoint.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                MyGdxGame.sound.play();
                 gsm.push(new PauseState(gsm));
             }
 
