@@ -33,7 +33,11 @@ public class AndroidInterfaceClass implements FireBaseInterface{
     }
 
     @Override
-    public void SomeFunction() {
+    public void SetTop10Lists() {
+        /**
+         * Getting names and score from the 10 users with highest score.
+         * Initializing "nameList" and "scoreList".
+         */
         Query query = myRef.child("users").orderByChild("score").limitToLast(10);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -61,6 +65,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
 
     }
 
+    /** Getters for top 10 names and scores */
     @Override
     public List<String> GetTopNames() {
         return nameList;
@@ -71,27 +76,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
         return scoreList;
     }
 
-    @Override
-    public void SetOnValueChangedListener() {
-        myRef.child("users").addValueEventListener(new ValueEventListener() {
-            // Read from the database
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot item_snapshot:dataSnapshot.getChildren()) {
-
-                    Log.d("item id ",item_snapshot.child("name").getValue().toString());
-                    //Log.d("item desc",item_snapshot.child("item_desc").getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-    }
-
+    /** Setting new user with name and score in the Firebase database */
     @Override
     public void SetValueInDB(String target, float value) {
         String ID = myRef.child("users").push().getKey();
