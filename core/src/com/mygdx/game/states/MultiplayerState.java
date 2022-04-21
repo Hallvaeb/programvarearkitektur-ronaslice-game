@@ -65,7 +65,9 @@ public class MultiplayerState extends State implements PlayState {
         playerTwoViewport.setScreenY(MyGdxGame.HEIGHT/2);
 
         player1 = new Player();
+        player1.setName("Player 1");
         player2 = new Player();
+        player2.setName("Player 2");
         font = new BitmapFont();
         font.getData().setScale(3, 3);
 
@@ -115,9 +117,11 @@ public class MultiplayerState extends State implements PlayState {
 
             // User 1
             for (UFO ufo : ufos1) {
-                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
+                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < MyGdxGame.HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
+                        gameOver(player2);
+                        break;
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -140,9 +144,11 @@ public class MultiplayerState extends State implements PlayState {
 
             // User 2
             for (UFO ufo : ufos2) {
-                if(ufo.getBoundingRectangle().contains(MyGdxGame.WIDTH - touchPoint2.x, MyGdxGame.HEIGHT - touchPoint2.y)) {
+                if(ufo.getBoundingRectangle().contains(MyGdxGame.WIDTH - touchPoint.x, MyGdxGame.HEIGHT - touchPoint.y) && touchPoint.y > MyGdxGame.HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
+                        gameOver(player1);
+                        break;
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -175,6 +181,7 @@ public class MultiplayerState extends State implements PlayState {
         if (player1.getLivesLeft() == 0) {
             // GAME OVER
             System.out.println("GAME OVER");
+            gameOver(player2);
         }
         for (UFO ufo : ufos2) {
             ufo.update(dt, player2);
@@ -182,6 +189,7 @@ public class MultiplayerState extends State implements PlayState {
         if (player2.getLivesLeft() == 0) {
             // GAME OVER
             System.out.println("GAME OVER");
+            gameOver(player1);
         }
 
     }
@@ -249,15 +257,24 @@ public class MultiplayerState extends State implements PlayState {
         for (UFO ufo:ufos1){
             ufo.dispose();
         }
+        for (UFO ufo:ufos2){
+            ufo.dispose();
+        }
     }
 
     @Override
     public void setUFODifficulty(int difficulty) {
-        for (int i = 0; i < ufos1.size; i++){
-            ufos1.get(i).setDifficulty(difficulty);
+        for (UFO ufo : ufos1) {
+            ufo.setDifficulty(difficulty);
         }
-        for (int i = 0; i < ufos2.size; i++){
-            ufos2.get(i).setDifficulty(difficulty);
+        for (UFO ufo : ufos2) {
+            ufo.setDifficulty(difficulty);
         }
+    }
+
+    @Override
+    public void gameOver(Player player) {
+        Syringe.getInstance().reset();
+        gsm.push(new MultiPlayerGameOverState(gsm, player));
     }
 }
