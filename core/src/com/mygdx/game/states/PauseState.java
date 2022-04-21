@@ -40,7 +40,7 @@ public class PauseState extends State {
         quitBtn.setPosition(X_BUTTON, Y_TITLE -5* BUTTON_SIZE);
         quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         font.setColor(0,0,0,1);
-        font.getData().setScale(Gdx.graphics.getHeight()/320f);
+        font.getData().setScale(HEIGHT/320f);
         X_TITLE = (WIDTH - font.getRegion().getRegionWidth())/2;
 
     }
