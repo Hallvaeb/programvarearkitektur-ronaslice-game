@@ -2,13 +2,11 @@ package com.mygdx.game.states;
 
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Camera;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
@@ -40,6 +38,7 @@ public class MultiplayerState extends State implements PlayState {
     private Sprite pause2 = new Sprite(new Texture("pause.png"));
     private Player player1, player2;
     private BitmapFont font;
+    private int currentDifficulty;
 
     private float time_passed = 0;
 
@@ -114,16 +113,11 @@ public class MultiplayerState extends State implements PlayState {
                 gsm.push(new PauseState(gsm));
             }
 
-            // Slice fra bruker.
+            // User 1
             for (UFO ufo : ufos1) {
-
-                System.out.println(touchPoint);
-
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
-
-                        System.out.println("Gsm has set, back in singleplayer...? OVER");
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -133,22 +127,22 @@ public class MultiplayerState extends State implements PlayState {
                         }
                     }
                     else{
-                        // One of the viruses are reposition
-                        player1.increaseScoreAndDifficulty(ufo.getPoints());
+                        int difficulty = player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
+                        System.out.println(difficulty);
+                        if(difficulty != -1 && difficulty != currentDifficulty){
+                            setUFODifficulty(difficulty);
+                        }
                     }
                 }
 
             }
+
+            // User 2
             for (UFO ufo : ufos2) {
-
-                System.out.println(touchPoint2);
-
                 if(ufo.getBoundingRectangle().contains(MyGdxGame.WIDTH - touchPoint2.x, MyGdxGame.HEIGHT - touchPoint2.y)) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
-
-                        System.out.println("Gsm has set, back in singleplayer...? OVER");
                     }
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
@@ -159,8 +153,11 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     else{
                         // One of the viruses are reposition
-                        player2.increaseScoreAndDifficulty(ufo.getPoints());
+                        int difficulty = player2.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
+                        if(difficulty != -1 && difficulty != currentDifficulty){
+                            setUFODifficulty(difficulty);
+                        }
                     }
                 }
 
@@ -254,8 +251,13 @@ public class MultiplayerState extends State implements PlayState {
         }
     }
 
-    @java.lang.Override
+    @Override
     public void setUFODifficulty(int difficulty) {
-
+        for (int i = 0; i < ufos1.size; i++){
+            ufos1.get(i).setDifficulty(difficulty);
+        }
+        for (int i = 0; i < ufos2.size; i++){
+            ufos2.get(i).setDifficulty(difficulty);
+        }
     }
 }

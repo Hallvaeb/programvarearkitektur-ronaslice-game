@@ -44,7 +44,8 @@ public class Player {
     }
 
     /**
-    * @return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
+     * Increases score, checks for difficulty increase
+     * @return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
      **/
     public int increaseScoreAndDifficulty(double score) {
         this.score += score;
