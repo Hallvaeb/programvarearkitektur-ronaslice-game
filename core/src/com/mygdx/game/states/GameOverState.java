@@ -37,7 +37,7 @@ public class GameOverState extends State {
 
 
     /**
-     * Game over screen for single- and multiplayer.
+     * Game over screen for singleplayer.
      * @param gsm GameStateManager controlling the states of the application.
      * @param player Provides score of singleplayer, or who won in multiplayer.
      */
