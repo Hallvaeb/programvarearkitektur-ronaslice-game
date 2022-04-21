@@ -2,7 +2,7 @@
 
 Implementation document: https://docs.google.com/document/d/1jBnVcHUP_Hb9u4QUir3vwYQaqqF0Wt-BxIg5OgHqPrQ/edit_
 
-Revised Requirement doc: https://docs.google.com/document/d/1jBnVcHUP_Hb9u4QUir3vwYQaqqF0Wt-BxIg5OgHqPrQ/edit
+Revised Requirement doc: https://docs.google.com/document/d/13PWQWDiKjDEfKm4LUthJ8bh87NpBgKr6ONiFqN0u1pQ/edit?usp=sharing
 
 Revised Architecture Doc: https://docs.google.com/document/d/1Y0ZubPTq533rQiknSoR4TUVC8YPNiHN2CoA3Xx6wIMA/edit?usp=sharing
 
