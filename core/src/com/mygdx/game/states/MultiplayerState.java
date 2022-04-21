@@ -264,11 +264,11 @@ public class MultiplayerState extends State implements PlayState {
 
     @Override
     public void setUFODifficulty(int difficulty) {
-        for (UFO ufo : ufos1) {
-            ufo.setDifficulty(difficulty);
+        for (int i = 0; i < ufos1.size; i++){
+            ufos1.get(i).setDifficulty(difficulty);
         }
-        for (UFO ufo : ufos2) {
-            ufo.setDifficulty(difficulty);
+        for (int i = 0; i < ufos2.size; i++){
+            ufos2.get(i).setDifficulty(difficulty);
         }
     }
 
