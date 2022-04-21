@@ -12,6 +12,14 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Player;
 
 public class GameOverState extends State {
+    private static final int BUTTON_SIZE = Gdx.graphics.getWidth()/4;
+    private static final int X_BUTTON = (Gdx.graphics.getWidth()-BUTTON_SIZE)/2;
+    private static final float Y_BUTTON = 0.2f*Gdx.graphics.getHeight();
+    private static final float Y_TITLE = 0.9f*Gdx.graphics.getHeight();
+    private static final float X_NAMES = 0.2f*Gdx.graphics.getWidth();
+    private static final float X_SCORES = 1.5f*Gdx.graphics.getWidth();
+    private static final float Y_TEXT = 0.75f*Gdx.graphics.getHeight();
+
     private Player player;
     private Texture bg = new Texture("bg_bare_himmel.png");;
     private List<Float> scores;
@@ -25,11 +33,13 @@ public class GameOverState extends State {
     private BitmapFont newScoreFont = new BitmapFont();;
     private Sprite quitBtn = new Sprite(new Texture("return.png"));;
     private boolean writeHighscoreListBool = false;;
+    private int X_TITLE = (Gdx.graphics.getWidth() - font.getRegion().getRegionWidth())/2;
+
 
     /**
-     * Game over screen for single- and multiplayer
-     * @param gsm
-     * @param player
+     * Game over screen for single- and multiplayer.
+     * @param gsm GameStateManager controlling the states of the application.
+     * @param player Provides score of singleplayer, or who won in multiplayer.
      */
     protected GameOverState(GameStateManager gsm, final Player player) {
         super(gsm);
@@ -38,8 +48,6 @@ public class GameOverState extends State {
         names = MyGdxGame.get_FBIC().GetTopNames();
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
-        quitBtn.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
-        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 5);
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
@@ -63,7 +71,8 @@ public class GameOverState extends State {
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {
-            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(),
+                    Gdx.graphics.getHeight() - Gdx.input.getY())) {
                 gsm.pop();
                 gsm.set(new MenuState(gsm));
             }
@@ -78,34 +87,44 @@ public class GameOverState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        // -80 må fikses, samme med MARGIN i pauseState.
-        font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-80);
+        sb.draw(bg, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        font.draw(sb, "GAME OVER", X_TITLE, Y_TITLE);
+
+        /**
+         * Here we use writeHighscoreListBool to write highscores only after the user has
+         * given his/her name.
+         * writeOnlyOneScoreRedBool is used to make sure the players name becomes red,
+         * should he/she enter the highscore list.
+         */
         if (!writeHighscoreListBool)
-            font.draw(sb, "Your score: " + player.getScore(), (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-150);
+            font.draw(sb, "Your score: " + player.getScore(), X_TITLE, Y_TEXT);
         if (writeHighscoreListBool){
             boolean writeOnlyOneScoreRedBool = true;
-            nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
-            scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
+            nameTitleFont.draw(sb, "NAME", X_NAMES, Y_TEXT);
+            scoreTitleFont.draw(sb, "SCORE", X_SCORES, Y_TEXT);
             if (scores != null) {
                 for (int i = 0; i < scores.size(); i++) {
                     if (( scores.get(i) == player.getScore()) && writeOnlyOneScoreRedBool){
                         newNameFont.setColor(Color.RED);
                         newScoreFont.setColor(Color.RED);
-                        newNameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
-                        newScoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+                        newNameFont.draw(sb, "" + names.get(i),
+                                X_NAMES, Y_TEXT - (i * 50));
+                        newScoreFont.draw(sb, "" + scores.get(i),
+                                X_SCORES, Y_TEXT - (i * 50));
                         writeOnlyOneScoreRedBool = false;
                     }
                     else {
                         nameFont.setColor(Color.WHITE);
                         scoreFont.setColor(Color.WHITE);
-                        nameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
-                        scoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
+                        nameFont.draw(sb, "" + names.get(i),
+                                X_NAMES, Y_TEXT - (i * 50));
+                        scoreFont.draw(sb, "" + scores.get(i),
+                                X_SCORES, Y_TEXT - (i * 50));
                     }
                 }
             }
         }
-        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
+        sb.draw(quitBtn, X_BUTTON, Y_BUTTON, BUTTON_SIZE, BUTTON_SIZE);
         sb.end();
     }
 
