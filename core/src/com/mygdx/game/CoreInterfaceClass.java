@@ -6,9 +6,7 @@ import java.util.List;
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
-    public void SetTop10Lists() {
-
-    }
+    public void SetTop10Lists() { }
 
     @Override
     public List<String> GetTopNames() {
@@ -20,9 +18,6 @@ public class CoreInterfaceClass implements FireBaseInterface{
         return null;
     }
 
-
     @Override
-    public void SetValueInDB(String target, float value) {
-
-    }
+    public void SetValueInDB(String target, float value) { }
 }
