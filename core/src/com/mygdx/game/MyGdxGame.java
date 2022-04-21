@@ -10,10 +10,6 @@ import com.mygdx.game.states.MenuState;
 
 
 public class MyGdxGame extends ApplicationAdapter {
-
-
-	public final static int WIDTH = 480;
-	public final static int HEIGHT = 800;
 	public final static String TITLE = "RonaSlice";
 	private static FireBaseInterface _FBIC;
 	private GameStateManager gsm;
@@ -21,10 +17,7 @@ public class MyGdxGame extends ApplicationAdapter {
 	private static Music music;
 	public static Music sound;
 
-	//FireBaseInterface _FBIC;
-
 	public MyGdxGame(FireBaseInterface FBIC){
-
 		_FBIC = FBIC;
 	}
 
