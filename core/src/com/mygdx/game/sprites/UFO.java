@@ -15,6 +15,10 @@ public abstract class UFO {
     private float difficulty;
     private Animation textureAnimation;
 
+    /**
+     * Constructor for a UFO. Sets position, bounding rectangle, velocity
+     * @param size
+     */
     public UFO (int size) {
         position = new Vector3(0,0, 0);
         this.size = size;
