@@ -130,7 +130,7 @@ public class SinglePlayerState extends State implements PlayState {
                 0.85f*HEIGHT);
         for (int i = 0; i < player.getLivesLeft(); i++) {
             sb.draw(health, WIDTH/48f+i*WIDTH/8f,
-                    0.9f*HEIGHT, syringe.getSize(), syringe.getSize());
+                    0.9f*HEIGHT, HEIGHT/16, HEIGHT/16);
         }
         sb.draw(pause, pause.getX(),pause.getY(), pause.getWidth(), pause.getHeight());
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y,

@@ -32,21 +32,21 @@ public class SettingState extends State{
      */
     public SettingState(GameStateManager gsm){
         super(gsm);
-        musicButton.setPosition(340,340);
-        musicButton.setSize(20,20);
-        soundButton.setPosition(340,430);
-        soundButton.setSize(20,20);
+        musicButton.setPosition(HEIGHT/2.35f,HEIGHT/2.35f);
+        musicButton.setSize(HEIGHT/40f,HEIGHT/40f);
+        soundButton.setPosition(HEIGHT/2.35f,HEIGHT/1.86f);
+        soundButton.setSize(HEIGHT/40f,HEIGHT/40f);
         settingsBtn.setSize(WIDTH/3f, WIDTH/3f);
         settingsBtn.setPosition(WIDTH/2f - settingsBtn.getWidth()/2,
-                Gdx.graphics.getHeight()/2f +200);
+                HEIGHT/1.33f);
         returnBtn.setSize(WIDTH/3f, WIDTH/3f);
-        returnBtn.setPosition(50, 50);
+        returnBtn.setPosition(HEIGHT/16f, HEIGHT/16f);
         soundText.setSize(WIDTH/3f,WIDTH/3f);
         soundText.setPosition(WIDTH/2f - soundText.getWidth(),
-                Gdx.graphics.getHeight()/2f);
+                HEIGHT/2f);
         musicText.setSize(WIDTH/3f,WIDTH/3f);
         musicText.setPosition(WIDTH/2f - musicText.getWidth(),
-                Gdx.graphics.getHeight()/2f -100);
+                HEIGHT/2.67f);
 
         /**
          * Stage is used for the music settings.
@@ -64,8 +64,8 @@ public class SettingState extends State{
         else{
             volumeSoundSlider.setValue(MyGdxGame.returnSoundVolume());
         }
-        volumeSoundSlider.setPosition(270,Gdx.graphics.getHeight()/2f +70);
-        volumeMusicSlider.setPosition( 270,Gdx.graphics.getHeight()/2f-25);
+        volumeSoundSlider.setPosition(WIDTH/1.78f,HEIGHT/1.7f);
+        volumeMusicSlider.setPosition( WIDTH/1.78f,HEIGHT/2.13f);
         stage.addActor(volumeMusicSlider);
         stage.addActor(volumeSoundSlider);
         stage.addActor(musicButton);
