@@ -55,6 +55,6 @@ public class Syringe extends UFO {
     }
 
     public void dispose() {
-        //getTexture().dispose();
+
     }
 }

@@ -160,5 +160,8 @@ public class SinglePlayerState extends State implements PlayState {
                 ufo.dispose();
             }
         }
+        cov_delta_texture.dispose();
+        cov_alpha_texture.dispose();
+        cov_omicron_texture.dispose();
     }
 }

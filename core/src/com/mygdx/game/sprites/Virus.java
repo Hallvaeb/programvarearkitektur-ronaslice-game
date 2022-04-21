@@ -27,7 +27,7 @@ public class Virus extends UFO {
      * Dispose method.
      */
     public void dispose() {
-        //texture.dispose();
+
     }
 }
 

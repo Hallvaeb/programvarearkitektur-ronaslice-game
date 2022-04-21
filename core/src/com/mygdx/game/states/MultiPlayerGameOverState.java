@@ -81,6 +81,9 @@ public class MultiPlayerGameOverState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        winnerFont.dispose();
+        playAgainBtn.getTexture().dispose();
+        returnBtn.getTexture().dispose();
     }
 }
