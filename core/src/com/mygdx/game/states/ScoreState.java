@@ -40,6 +40,7 @@ public class ScoreState extends State{
     protected ScoreState(GameStateManager gsm) {
         super(gsm);
         img = new Texture("bg_bare_himmel.png");
+        /** Initializing the lists "names" and "scores" with Firebase getters */
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
 
@@ -55,8 +56,6 @@ public class ScoreState extends State{
         nameFont.getData().setScale(fontSize, fontSize);
         scoreFont.getData().setScale(fontSize, fontSize);
 
-
-        // TODO: mekke "back"-button
         quitBtn = new Sprite(new Texture("return.png"));
         quitBtn.setSize(btnSize, btnSize);
         quitBtn.setPosition(btnMarginX, btnMarginY);
@@ -67,6 +66,10 @@ public class ScoreState extends State{
 
     @Override
     protected void handleInput() {
+        /**
+         * Updating the lists "names" and "scores",
+         * since it might take som time before Firebase returns the data
+         */
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {

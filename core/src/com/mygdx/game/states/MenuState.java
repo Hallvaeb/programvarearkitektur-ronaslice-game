@@ -4,6 +4,9 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+
+import java.util.List;
+
 import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
@@ -38,7 +41,8 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
-        MyGdxGame.get_FBIC().SomeFunction();
+        /** Method for updating nameList and scoreList with the data from Firebase */
+        MyGdxGame.get_FBIC().SetTop10Lists();
         if (Gdx.input.justTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();

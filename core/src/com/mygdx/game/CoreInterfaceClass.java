@@ -2,13 +2,13 @@ package com.mygdx.game;
 
 import java.util.List;
 
+/** Empty class so we can access the imported libraries from Firebase in Android */
 public class CoreInterfaceClass implements FireBaseInterface{
 
     @Override
-    public void SomeFunction() {
+    public void SetTop10Lists() {
 
     }
-
 
     @Override
     public List<String> GetTopNames() {
@@ -20,11 +20,6 @@ public class CoreInterfaceClass implements FireBaseInterface{
         return null;
     }
 
-
-    @Override
-    public void SetOnValueChangedListener() {
-
-    }
 
     @Override
     public void SetValueInDB(String target, float value) {
