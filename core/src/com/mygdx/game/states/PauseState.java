@@ -9,12 +9,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
 
 public class PauseState extends State {
-    private static final int BUTTON_SIZE = Gdx.graphics.getWidth()/4;
-    private static final int X_BUTTON = (Gdx.graphics.getWidth() - BUTTON_SIZE)/2;
-    private static final float Y_TITLE = 0.9f*Gdx.graphics.getHeight();
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
+    private static final int BUTTON_SIZE = WIDTH/4;
+    private static final int X_BUTTON = (WIDTH - BUTTON_SIZE)/2;
+    private static final float Y_TITLE = 0.9f*HEIGHT;
+    private int X_TITLE;
 
     private BitmapFont font = new BitmapFont();
-    private int X_TITLE = (Gdx.graphics.getWidth() - font.getRegion().getRegionWidth())/2;
     private Texture bg = new Texture("bg_bare_himmel.png");
     private Sprite resBtn = new Sprite(new Texture("resBtn.png"));
     private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
@@ -28,7 +30,7 @@ public class PauseState extends State {
      */
     public PauseState(GameStateManager gsm) {
         super(gsm);
-        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        cam.setToOrtho(false, WIDTH, HEIGHT);
         resBtn.setPosition(X_BUTTON, Y_TITLE -2* BUTTON_SIZE);
         resBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         settingBtn.setPosition(X_BUTTON, Y_TITLE -3* BUTTON_SIZE);
@@ -38,7 +40,9 @@ public class PauseState extends State {
         quitBtn.setPosition(X_BUTTON, Y_TITLE -5* BUTTON_SIZE);
         quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         font.setColor(0,0,0,1);
-        font.getData().setScale(2.5f);
+        font.getData().setScale(Gdx.graphics.getHeight()/320f);
+        X_TITLE = (WIDTH - font.getRegion().getRegionWidth())/2;
+
     }
 
     @Override
@@ -76,10 +80,10 @@ public class PauseState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
-        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
+        Gdx.gl.glViewport(0,0, WIDTH, HEIGHT);
 
         sb.begin();
-        sb.draw(bg,0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        sb.draw(bg,0, 0, WIDTH, HEIGHT);
         sb.draw(resBtn, resBtn.getX(), resBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
         sb.draw(settingBtn, settingBtn.getX(), settingBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);
         sb.draw(tutorialBtn, tutorialBtn.getX(), tutorialBtn.getY(), BUTTON_SIZE, BUTTON_SIZE);

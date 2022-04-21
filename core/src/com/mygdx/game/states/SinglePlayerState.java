@@ -18,12 +18,14 @@ import com.mygdx.game.sprites.UFO;
 
 
 public class SinglePlayerState extends State implements PlayState {
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
     private Array<UFO> ufos;
     private Texture bg = new Texture("background.png");
-    private COV_delta cov_delta;
-    private COV_omikron cov_omikron;
-    private COV_alpha cov_alpha;
-    private SickPerson sick_person;
+    private COV_delta cov_delta = new COV_delta(HEIGHT/10);
+    private COV_omikron cov_omikron = new COV_omikron(HEIGHT/15);
+    private COV_alpha cov_alpha = new COV_alpha(HEIGHT/23);
+    private SickPerson sick_person = new SickPerson(HEIGHT/11);
     private Syringe syringe;
     private Texture health = new Texture("syringe.png");
     private Sprite pause = new Sprite(new Texture("pause.png"));
@@ -31,24 +33,21 @@ public class SinglePlayerState extends State implements PlayState {
     private BitmapFont font;
     private Vector3 touchPoint;
 
+    /**
+     * Operates during a single player game. Contains an Array (ufos) of the UFOs in the game.
+     * This class notifies all it's subscribers (ufos) each time the score reaches 10, 20, 30 etc.,
+     * making them all increase their difficulty (velocity).
+     * @param gsm GameStateManager controlling the states of the application.
+     */
     public SinglePlayerState(GameStateManager gsm){
         super(gsm);
         player = new Player();
         font = new BitmapFont();
-        font.getData().setScale(Gdx.graphics.getHeight()/400f);
-
-        cov_delta = new COV_delta(80);
-        cov_omikron = new COV_omikron(55);
-        cov_alpha = new COV_alpha(35);
-        sick_person = new SickPerson(70);
+        font.getData().setScale(HEIGHT/400f);
         syringe = Syringe.getInstance();
-
-        //Pause
-        pause.setSize(Gdx.graphics.getWidth()/10f, Gdx.graphics.getHeight()/16f);
-        pause.setPosition(Gdx.graphics.getWidth()-60,Gdx.graphics.getHeight()-60);
-
+        pause.setSize(WIDTH/10f, Gdx.graphics.getHeight()/16f);
+        pause.setPosition(WIDTH/1.15f,Gdx.graphics.getHeight()/1.08f);
         touchPoint = new Vector3();
-
         ufos = new Array<>();
         ufos.add(cov_delta, cov_omikron, sick_person, syringe);
         ufos.add(cov_alpha);
@@ -68,7 +67,7 @@ public class SinglePlayerState extends State implements PlayState {
     @Override
     protected void handleInput() {
         if(Gdx.input.isTouched()) {
-            touchPoint.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
+            touchPoint.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                 gsm.push(new PauseState(gsm));
             }
@@ -103,7 +102,8 @@ public class SinglePlayerState extends State implements PlayState {
         ufo1.reposition();
         for (int i = 0; i < ufos.size; i++){
             UFO ufo2 = ufos.get(i);
-            if(!(ufo1 == ufo2) && ufo1.getBoundingRectangle().contains(ufo2.getBoundingRectangle())){
+            if(!(ufo1 == ufo2) &&
+                    ufo1.getBoundingRectangle().contains(ufo2.getBoundingRectangle())){
                 ufo1.reposition();
                 repositionReduceCollisions(ufo1);
             }
@@ -124,12 +124,12 @@ public class SinglePlayerState extends State implements PlayState {
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        font.draw(sb, "Score: " + player.getScore(), MyGdxGame.WIDTH/20f,
-                0.85f*MyGdxGame.HEIGHT);
+        sb.draw(bg, 0, 0, WIDTH, HEIGHT);
+        font.draw(sb, "Score: " + player.getScore(), WIDTH/20f,
+                0.85f*HEIGHT);
         for (int i = 0; i < player.getLivesLeft(); i++) {
-            sb.draw(health, Gdx.graphics.getWidth()/48f+i*Gdx.graphics.getWidth()/8f,
-                    0.9f*Gdx.graphics.getHeight(), 50, 50);
+            sb.draw(health, WIDTH/48f+i*WIDTH/8f,
+                    0.9f*HEIGHT, HEIGHT/16, HEIGHT/16);
         }
         sb.draw(pause, pause.getX(),pause.getY(), pause.getWidth(), pause.getHeight());
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y,
@@ -145,7 +145,6 @@ public class SinglePlayerState extends State implements PlayState {
                     syringe.getSize(), syringe.getSize());
         }
         sb.end();
-
     }
 
     @Override
