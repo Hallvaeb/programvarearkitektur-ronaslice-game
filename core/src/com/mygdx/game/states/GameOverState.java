@@ -12,8 +12,8 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Player;
 
 public class GameOverState extends State {
-    private static final int BUTTON_SIZE = Gdx.graphics.getWidth()/4;
-    private static final int X_BUTTON = (Gdx.graphics.getWidth()-BUTTON_SIZE)/2;
+    private static final float BUTTON_SIZE = Gdx.graphics.getWidth()/4;
+    private static final float X_BUTTON = (Gdx.graphics.getWidth()-BUTTON_SIZE)/2;
     private static final float Y_BUTTON = 0.2f*Gdx.graphics.getHeight();
     private static final float Y_TITLE = 0.9f*Gdx.graphics.getHeight();
     private static final float X_NAMES = 0.2f*Gdx.graphics.getWidth();
@@ -48,6 +48,7 @@ public class GameOverState extends State {
         names = MyGdxGame.get_FBIC().GetTopNames();
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
+        quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
@@ -63,6 +64,7 @@ public class GameOverState extends State {
                 writeHighscoreListBool = true;
             }
         };
+
         Gdx.input.getTextInput(textListener, "Enter name: ", player.getName(), "");
     }
 

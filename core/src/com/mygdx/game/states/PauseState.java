@@ -30,9 +30,13 @@ public class PauseState extends State {
         super(gsm);
         cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         resBtn.setPosition(X_BUTTON, Y_TITLE -2* BUTTON_SIZE);
+        resBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         settingBtn.setPosition(X_BUTTON, Y_TITLE -3* BUTTON_SIZE);
+        settingBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         tutorialBtn.setPosition(X_BUTTON, Y_TITLE -4* BUTTON_SIZE);
+        tutorialBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         quitBtn.setPosition(X_BUTTON, Y_TITLE -5* BUTTON_SIZE);
+        quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
     }
