@@ -11,7 +11,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 import com.mygdx.game.sprites.SickPerson;
 import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;

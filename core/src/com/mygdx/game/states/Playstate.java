@@ -1,7 +1,7 @@
 package com.mygdx.game.states;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 
 /** Interface for SinglePlayerState and MultiplayerState */
 interface PlayState {

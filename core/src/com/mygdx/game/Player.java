@@ -1,4 +1,4 @@
-package com.mygdx.game.sprites;
+package com.mygdx.game;
 
 
 public class Player {

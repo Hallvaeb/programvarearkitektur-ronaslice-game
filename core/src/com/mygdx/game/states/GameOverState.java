@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import java.util.List;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 
 public class GameOverState extends State {
     private static final float WIDTH = Gdx.graphics.getWidth();
