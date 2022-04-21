@@ -6,17 +6,22 @@ import com.badlogic.gdx.math.Rectangle;
 public class Syringe extends UFO {
 
     boolean isSpawnable;
-    // Privat konstruktor som forhindrer at det automatisk blir offentlig
+
+    /**
+     * Private constructor to avoid unwanted instantiation.
+     */
     private Syringe() {
-        // Startverdi første spawn
+        // The syringe size.
         super(60);
-        setBoundingRectangle(new Rectangle(super.getPosition().x, super.getPosition().y, super.getSize(), super.getSize()));
         isSpawnable = false;
     }
 
+    /**
+     * Class with Syringe
+     */
     private static class SyringeHolder {
-        private static Syringe instance = new Syringe();
-        private static Texture texture = new Texture("syringe.png");
+        private static final Syringe instance = new Syringe();
+        private static final Texture texture = new Texture("syringe.png");
 
     }
 
@@ -28,6 +33,10 @@ public class Syringe extends UFO {
         setSpawnable(false);
     }
 
+    /**
+     * A singleton pattern approach to get the Syringe instance.
+     * @return A Syringe instance.
+     */
     public static Syringe getInstance() {
         return SyringeHolder.instance;
     }
