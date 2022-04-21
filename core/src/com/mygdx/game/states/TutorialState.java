@@ -16,12 +16,12 @@ public class TutorialState extends State{
     private static final int IMG_Y_FACTOR = Gdx.graphics.getHeight()/8; //480x800: = 100
     private static final int BUTTON_SIZE = Gdx.graphics.getWidth()/4;
 
-    private Texture bg = new Texture("bg_bare_himmel.png");
+    private Texture bg = new Texture("bg_sky.png");
     private Sprite returnBtn = new Sprite(new Texture("return.png"));
     private BitmapFont fontHeader = new BitmapFont();
     private BitmapFont fontInfo = new BitmapFont();
     private Sprite delta = new Sprite(new Texture("cov_delta.png"));
-    private Sprite omicron = new Sprite(new Texture("cov_omikron.png"));
+    private Sprite omicron = new Sprite(new Texture("cov_omicron.png"));
     private Sprite alpha = new Sprite(new Texture("cov_alpha.png"));
     private Syringe syringe = Syringe.getInstance();
     private Sprite sick_person = new Sprite(new Texture("sick_person.png"));

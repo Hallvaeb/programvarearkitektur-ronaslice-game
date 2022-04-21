@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 
 public class MultiPlayerGameOverState extends State {
 
@@ -35,11 +35,11 @@ public class MultiPlayerGameOverState extends State {
         cam = new OrthographicCamera();
         cam.setToOrtho(false, WIDTH, HEIGHT);
 
-        bg = new Texture("bg_bare_himmel.png");
+        bg = new Texture("bg_sky.png");
         winnerFont = new BitmapFont();
         winnerFont.setColor(0,0,0,1);
         winnerFont.getData().setScale(HEIGHT/200);
-        playAgainBtn = new Sprite(new Texture("playAgainBtn.png"));
+        playAgainBtn = new Sprite(new Texture("play_again_btn.png"));
         playAgainBtn.setSize(btnSize, btnSize);
         playAgainBtn.setPosition(btnMarginX, btnMarginY);
         returnBtn = new Sprite(new Texture("return.png"));
@@ -81,6 +81,9 @@ public class MultiPlayerGameOverState extends State {
 
     @Override
     public void dispose() {
-
+        bg.dispose();
+        winnerFont.dispose();
+        playAgainBtn.getTexture().dispose();
+        returnBtn.getTexture().dispose();
     }
 }

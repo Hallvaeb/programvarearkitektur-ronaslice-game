@@ -17,12 +17,12 @@ public class MenuState extends State {
     private static final float btnSize = WIDTH/4;
     private static final float btnMarginX = (WIDTH/2)-(btnSize/2);
     private static final float btnMarginY = HEIGHT-MARGIN;
-    private Sprite playBtn = new Sprite(new Texture("newGameButton.png"));
-    private Sprite multiBtn = new Sprite(new Texture("multiplayerButton.png"));
-    private Sprite scoreBtn = new Sprite(new Texture("highScoreButton.png"));
-    private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
-    private Sprite helpBtn = new Sprite(new Texture("tutorialButton.png"));
-    private Texture background = new Texture("bg_bare_himmel.png");;
+    private Sprite playBtn = new Sprite(new Texture("new_game_btn.png"));
+    private Sprite multiBtn = new Sprite(new Texture("multiplayer_btn.png"));
+    private Sprite scoreBtn = new Sprite(new Texture("highscore_btn.png"));
+    private Sprite settingBtn = new Sprite(new Texture("settings_btn.png"));
+    private Sprite helpBtn = new Sprite(new Texture("tutorial_btn.png"));
+    private Texture background = new Texture("bg_sky.png");;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
@@ -89,5 +89,10 @@ public class MenuState extends State {
     @Override
     public void dispose() {
         background.dispose();
+        playBtn.getTexture().dispose();
+        multiBtn.getTexture().dispose();
+        scoreBtn.getTexture().dispose();
+        settingBtn.getTexture().dispose();
+        helpBtn.getTexture().dispose();
     }
 }

@@ -8,13 +8,11 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.COV_alpha;
-import com.mygdx.game.sprites.COV_delta;
-import com.mygdx.game.sprites.COV_omikron;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 import com.mygdx.game.sprites.SickPerson;
 import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
+import com.mygdx.game.sprites.Virus;
 
 
 public class SinglePlayerState extends State implements PlayState {
@@ -22,9 +20,12 @@ public class SinglePlayerState extends State implements PlayState {
     private static final int HEIGHT = Gdx.graphics.getHeight();
     private Array<UFO> ufos;
     private Texture bg = new Texture("background.png");
-    private COV_delta cov_delta = new COV_delta(HEIGHT/10);
-    private COV_omikron cov_omikron = new COV_omikron(HEIGHT/15);
-    private COV_alpha cov_alpha = new COV_alpha(HEIGHT/23);
+    private Texture cov_delta_texture = new Texture("cov_delta_sheet.png");
+    private Texture cov_omicron_texture = new Texture("cov_omicron_sheet.png");
+    private Texture cov_alpha_texture = new Texture("cov_alpha_sheet.png");
+    private Virus cov_delta = new Virus(HEIGHT/10, 1, cov_delta_texture);
+    private Virus cov_omicron = new Virus(HEIGHT/15, 2, cov_omicron_texture);
+    private Virus cov_alpha = new Virus(HEIGHT/23, 3, cov_alpha_texture);
     private SickPerson sick_person = new SickPerson(HEIGHT/11);
     private Syringe syringe;
     private Texture health = new Texture("syringe.png");
@@ -49,7 +50,7 @@ public class SinglePlayerState extends State implements PlayState {
         pause.setPosition(WIDTH/1.15f,Gdx.graphics.getHeight()/1.08f);
         touchPoint = new Vector3();
         ufos = new Array<>();
-        ufos.add(cov_delta, cov_omikron, sick_person, syringe);
+        ufos.add(cov_delta, cov_omicron, sick_person, syringe);
         ufos.add(cov_alpha);
     }
 
@@ -137,8 +138,8 @@ public class SinglePlayerState extends State implements PlayState {
                 cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y,
                 cov_alpha.getSize(), cov_alpha.getSize());
-        sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y,
-                cov_omikron.getSize(), cov_omikron.getSize());
+        sb.draw(cov_omicron.getTexture(), cov_omicron.getPosition().x,cov_omicron.getPosition().y,
+                cov_omicron.getSize(), cov_omicron.getSize());
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y,
                 sick_person.getSize(), sick_person.getSize());
         if (syringe.isSpawnable()) {
@@ -159,5 +160,8 @@ public class SinglePlayerState extends State implements PlayState {
                 ufo.dispose();
             }
         }
+        cov_delta_texture.dispose();
+        cov_alpha_texture.dispose();
+        cov_omicron_texture.dispose();
     }
 }

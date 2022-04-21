@@ -51,4 +51,5 @@ public class Animation {
     public TextureRegion getFrame(){
         return frames.get(frame);
     }
+
 }

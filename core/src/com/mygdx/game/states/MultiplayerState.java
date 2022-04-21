@@ -11,19 +11,17 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.mygdx.game.MyGdxGame;
-import com.mygdx.game.sprites.COV_alpha;
-import com.mygdx.game.sprites.COV_delta;
-import com.mygdx.game.sprites.COV_omikron;
-import com.mygdx.game.sprites.Player;
+import com.mygdx.game.Player;
 import com.mygdx.game.sprites.SickPerson;
 import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
+import com.mygdx.game.sprites.Virus;
 
 public class MultiplayerState extends State implements PlayState {
     private static final int WIDTH = Gdx.graphics.getWidth();
     private static final int HEIGHT = Gdx.graphics.getHeight();
     private static final int deltaSize = WIDTH/6;
-    private static final int omikronSize = WIDTH/9;
+    private static final int omicronSize = WIDTH/9;
     private static final int alphaSize = WIDTH/14;
     private static final int personSize = WIDTH/7;
     private static final int pauseSize = WIDTH/10;
@@ -39,9 +37,12 @@ public class MultiplayerState extends State implements PlayState {
     private Array<UFO> ufos2; /** Array of ufos for screen 2 */
 
     private Texture bg1 = new Texture("background.png");
-    private COV_delta cov_delta, cov_delta2;
-    private COV_omikron cov_omikron, cov_omikron2;
-    private COV_alpha cov_alpha, cov_alpha2;
+    private Texture cov_delta_texture = new Texture("cov_delta_sheet.png");
+    private Texture cov_omicron_texture = new Texture("cov_omicron_sheet.png");
+    private Texture cov_alpha_texture = new Texture("cov_alpha_sheet.png");
+    private Virus cov_delta, cov_delta2;
+    private Virus cov_omicron, cov_omicron2;
+    private Virus cov_alpha, cov_alpha2;
     private SickPerson sick_person, sick_person2;
     private Syringe syringe;
 
@@ -86,15 +87,15 @@ public class MultiplayerState extends State implements PlayState {
         font = new BitmapFont();
         font.getData().setScale(fontSize, fontSize);
 
-        cov_delta = new COV_delta(deltaSize);
-        cov_omikron = new COV_omikron(omikronSize);
-        cov_alpha = new COV_alpha(alphaSize);
+        cov_delta = new Virus(deltaSize, 1, cov_delta_texture);
+        cov_omicron = new Virus(omicronSize, 2, cov_omicron_texture);
+        cov_alpha = new Virus(alphaSize, 3, cov_alpha_texture);
         sick_person = new SickPerson(personSize);
         syringe = Syringe.getInstance();
 
-        cov_delta2 = new COV_delta(deltaSize);
-        cov_omikron2 = new COV_omikron(omikronSize);
-        cov_alpha2 = new COV_alpha(alphaSize);
+        cov_delta2 = new Virus(deltaSize, 1, cov_delta_texture);
+        cov_omicron2 = new Virus(omicronSize, 2, cov_omicron_texture);
+        cov_alpha2 = new Virus(alphaSize, 3, cov_alpha_texture);
         sick_person2 = new SickPerson(personSize);
 
         pause.setSize(pauseSize, pauseSize);
@@ -108,11 +109,11 @@ public class MultiplayerState extends State implements PlayState {
 
         /** Adding the covid variants to the two lists of ufos */
         ufos1 = new Array<>();
-        ufos1.add(cov_delta, cov_omikron, sick_person, syringe);
+        ufos1.add(cov_delta, cov_omicron, sick_person, syringe);
         ufos1.add(cov_alpha);
 
         ufos2 = new Array<>();
-        ufos2.add(cov_delta2, cov_omikron2, sick_person2, syringe);
+        ufos2.add(cov_delta2, cov_omicron2, sick_person2, syringe);
         ufos2.add(cov_alpha2);
     }
 
@@ -136,7 +137,6 @@ public class MultiplayerState extends State implements PlayState {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < HEIGHT/2) {
                     /** Slicing the sick patient */
                     if (ufo instanceof SickPerson) {
-                        System.out.println("GAME OVER");
                         gameOver(player2);
                         break;
                     }
@@ -155,7 +155,6 @@ public class MultiplayerState extends State implements PlayState {
                     else{
                         int difficulty = player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        System.out.println(difficulty);
                         if(difficulty != -1 && difficulty != currentDifficulty){
                             setUFODifficulty(difficulty);
                         }
@@ -168,7 +167,6 @@ public class MultiplayerState extends State implements PlayState {
             for (UFO ufo : ufos2) {
                 if(ufo.getBoundingRectangle().contains(WIDTH - touchPoint.x, HEIGHT - touchPoint.y) && touchPoint.y > HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
-                        System.out.println("GAME OVER");
                         gameOver(player1);
                         break;
                     }
@@ -202,7 +200,6 @@ public class MultiplayerState extends State implements PlayState {
         }
         if (player1.getLivesLeft() == 0) {
             // GAME OVER
-            System.out.println("GAME OVER");
             gameOver(player2);
         }
         for (UFO ufo : ufos2) {
@@ -210,7 +207,6 @@ public class MultiplayerState extends State implements PlayState {
         }
         if (player2.getLivesLeft() == 0) {
             // GAME OVER
-            System.out.println("GAME OVER");
             gameOver(player1);
         }
 
@@ -229,7 +225,7 @@ public class MultiplayerState extends State implements PlayState {
         sb.draw(pause, pause1MarginX,pause1MarginY, pauseSize, pauseSize);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y, cov_alpha.getSize(), cov_alpha.getSize());
-        sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
+        sb.draw(cov_omicron.getTexture(), cov_omicron.getPosition().x,cov_omicron.getPosition().y, cov_omicron.getSize(), cov_omicron.getSize());
         sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y, sick_person.getSize(), sick_person.getSize());
         if (syringe.isSpawnable()) {
             sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y, syringe.getSize(), syringe.getSize());
@@ -247,7 +243,7 @@ public class MultiplayerState extends State implements PlayState {
         sb.draw(pause2, pause1MarginX, pause1MarginY, pauseSize, pauseSize);
         sb.draw(cov_delta2.getTexture(), cov_delta2.getPosition().x,cov_delta2.getPosition().y, cov_delta2.getSize(), cov_delta2.getSize());
         sb.draw(cov_alpha2.getTexture(), cov_alpha2.getPosition().x,cov_alpha2.getPosition().y, cov_alpha2.getSize(), cov_alpha2.getSize());
-        sb.draw(cov_omikron2.getTexture(), cov_omikron2.getPosition().x,cov_omikron2.getPosition().y, cov_omikron2.getSize(), cov_omikron2.getSize());
+        sb.draw(cov_omicron2.getTexture(), cov_omicron2.getPosition().x,cov_omicron2.getPosition().y, cov_omicron2.getSize(), cov_omicron2.getSize());
         sb.draw(sick_person2.getTexture(), sick_person2.getPosition().x,sick_person2.getPosition().y, sick_person2.getSize(), sick_person2.getSize());
         if (syringe.isSpawnable()) {
             sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y, syringe.getSize(), syringe.getSize());
