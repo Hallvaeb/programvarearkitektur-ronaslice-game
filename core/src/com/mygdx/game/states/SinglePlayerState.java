@@ -60,7 +60,7 @@ public class SinglePlayerState extends State implements PlayState {
         }
     }
 
-    private void gameOver() {
+    public void gameOver(Player player) {
         Syringe.getInstance().reset();
         gsm.push(new GameOverState(gsm, player));
     }
@@ -77,7 +77,7 @@ public class SinglePlayerState extends State implements PlayState {
             for (UFO ufo : ufos) {
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                     if (ufo instanceof SickPerson) {
-                        gameOver();
+                        gameOver(player);
                         break;
                     }
                     repositionReduceCollisions(ufo);
@@ -117,7 +117,7 @@ public class SinglePlayerState extends State implements PlayState {
             ufo.update(dt, player);
         }
         if (player.getLivesLeft() == 0) {
-            gameOver();
+            gameOver(player);
         }
     }
 
