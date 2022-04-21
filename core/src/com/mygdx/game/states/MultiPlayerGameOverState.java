@@ -11,6 +11,14 @@ import com.mygdx.game.sprites.Player;
 
 public class MultiPlayerGameOverState extends State {
 
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
+    private static final int btnSize = WIDTH/4;
+    private static final int btnMarginX = (WIDTH/2)-(btnSize/2);
+    private static final int btnMarginY = HEIGHT-(HEIGHT/10)-(2*btnSize);
+    private static final float textMarginX = (WIDTH/2f)-(WIDTH/3.1f);
+    private static final float textMarginY = HEIGHT-(HEIGHT/10);
+
     private Player winner;
     private Texture bg;
     private BitmapFont winnerFont;
@@ -24,28 +32,28 @@ public class MultiPlayerGameOverState extends State {
         this.winner = winner;
 
         cam = new OrthographicCamera();
-        cam.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        cam.setToOrtho(false, WIDTH, HEIGHT);
 
         bg = new Texture("bg_bare_himmel.png");
         winnerFont = new BitmapFont();
         winnerFont.setColor(0,0,0,1);
-        winnerFont.getData().setScale(4f);
+        winnerFont.getData().setScale(HEIGHT/200);
         playAgainBtn = new Sprite(new Texture("multiplayerButton.png"));
-        playAgainBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        playAgainBtn.setPosition(Gdx.graphics.getWidth()/2f-playAgainBtn.getWidth()/2, (Gdx.graphics.getHeight()- 80)-2*playAgainBtn.getHeight());
+        playAgainBtn.setSize(btnSize, btnSize);
+        playAgainBtn.setPosition(btnMarginX, btnMarginY);
         returnBtn = new Sprite(new Texture("return.png"));
-        returnBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        returnBtn.setPosition(Gdx.graphics.getWidth()/2f-returnBtn.getWidth()/2, playAgainBtn.getY()- playAgainBtn.getHeight()-10);
+        returnBtn.setSize(btnSize, btnSize);
+        returnBtn.setPosition(btnMarginX, btnMarginY - btnSize - (HEIGHT/80));
     }
 
     @Override
     protected void handleInput() {
         if (Gdx.input.justTouched()) {
-            if (playAgainBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (playAgainBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.set(new MultiplayerState(gsm));
             }
-            if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.set(new MenuState(gsm));
             }
@@ -60,12 +68,12 @@ public class MultiPlayerGameOverState extends State {
     @Override
     public void render(SpriteBatch sb) {
         sb.setProjectionMatrix(cam.combined);
-        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT);
+        Gdx.gl.glViewport(0,0, WIDTH, HEIGHT);
         sb.begin();
-        sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
-        sb.draw(playAgainBtn, playAgainBtn.getX(), playAgainBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        winnerFont.draw(sb, winner.getName()+" won!", (MyGdxGame.WIDTH/2f)-175, MyGdxGame.HEIGHT-80);
+        sb.draw(bg, 0, 0, WIDTH, HEIGHT);
+        sb.draw(playAgainBtn, playAgainBtn.getX(), playAgainBtn.getY(), WIDTH/4f, WIDTH/4f);
+        sb.draw(returnBtn, returnBtn.getX(), returnBtn.getY(), WIDTH/4f, WIDTH/4f);
+        winnerFont.draw(sb, winner.getName()+" won!", textMarginX, textMarginY);
         sb.end();
     }
 
