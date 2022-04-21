@@ -11,24 +11,16 @@ import java.util.List;
 import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
-    private Sprite playBtn;
-    private Sprite multiBtn;
-    private Sprite scoreBtn;
-    private Sprite settingBtn;
-    private Sprite helpBtn;
-    private Texture background;
+    private Sprite playBtn = new Sprite(new Texture("newGameButton.png"));
+    private Sprite multiBtn = new Sprite(new Texture("multiplayerButton.png"));
+    private Sprite scoreBtn = new Sprite(new Texture("highScoreButton.png"));
+    private Sprite settingBtn = new Sprite(new Texture("settingsButton.png"));
+    private Sprite helpBtn = new Sprite(new Texture("tutorialButton.png"));
+    private Texture background = new Texture("bg_bare_himmel.png");;
     private int MARGIN = 80;
 
     public MenuState(GameStateManager gsm) {
         super(gsm);
-        background = new Texture("bg_bare_himmel.png");
-        playBtn = new Sprite(new Texture("newGameButton.png"));
-        multiBtn = new Sprite(new Texture("multiplayerButton.png"));
-        scoreBtn = new Sprite(new Texture("highScoreButton.png"));
-        settingBtn = new Sprite(new Texture("settingsButton.png"));
-        helpBtn = new Sprite(new Texture("tutorialButton.png"));
-        //cam.setToOrtho(false, MyGdxGame.WIDTH/2, MyGdxGame.HEIGHT/2);
-
         playBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         playBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()- MARGIN)-playBtn.getHeight());
         multiBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
@@ -39,7 +31,6 @@ public class MenuState extends State {
         settingBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()- MARGIN)-4*playBtn.getHeight());
         helpBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
         helpBtn.setPosition(Gdx.graphics.getWidth()/2f-playBtn.getWidth()/2, (Gdx.graphics.getHeight()- MARGIN)-5*playBtn.getHeight());
-
     }
 
     @Override

@@ -12,60 +12,50 @@ import com.mygdx.game.MyGdxGame;
 import com.mygdx.game.sprites.Player;
 
 public class GameOverState extends State {
-    private Texture bg;
+    private Player player;
+    private Texture bg = new Texture("bg_bare_himmel.png");;
     private List<Float> scores;
     private List<String> names;
-    private BitmapFont font;
-    private BitmapFont scoreFont;
-    private BitmapFont nameFont;
-    private BitmapFont nameTitleFont;
-    private BitmapFont scoreTitleFont;
-    private BitmapFont newNameFont;
-    private BitmapFont newScoreFont;
-    private Sprite quitBtn;
-    private boolean bool;
-    private Player player;
+    private BitmapFont font = new BitmapFont();;
+    private BitmapFont scoreFont = new BitmapFont();;
+    private BitmapFont nameFont = new BitmapFont();;
+    private BitmapFont nameTitleFont = new BitmapFont();;
+    private BitmapFont scoreTitleFont = new BitmapFont();;
+    private BitmapFont newNameFont = new BitmapFont();;
+    private BitmapFont newScoreFont = new BitmapFont();;
+    private Sprite quitBtn = new Sprite(new Texture("return.png"));;
+    private boolean writeHighscoreListBool = false;;
 
+    /**
+     * Game over screen for single- and multiplayer
+     * @param gsm
+     * @param player
+     */
     protected GameOverState(GameStateManager gsm, final Player player) {
         super(gsm);
         this.player = player;
-        bool = false;
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
-        // FOR THE "GAME OVER" TEXT
-        font = new BitmapFont();
-        nameFont = new BitmapFont();
-        scoreFont = new BitmapFont();
-        nameTitleFont = new BitmapFont();
-        scoreTitleFont = new BitmapFont();
-        newNameFont = new BitmapFont();
-        newScoreFont = new BitmapFont();
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
-
-        bg = new Texture("bg_bare_himmel.png");
-        quitBtn = new Sprite(new Texture("return.png"));
         quitBtn.setSize(Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 5);
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
             public void input(String input) {
-                bool = true;
+                writeHighscoreListBool = true;
                 if(player.getScore() > MyGdxGame.get_FBIC().GetTopScores().get(9)){
                     MyGdxGame.get_FBIC().SetValueInDB(input, player.getScore());
-
                 }
-                System.out.println(input);
             }
 
             @Override
             public void canceled() {
-                System.out.println("Aborted");
+                writeHighscoreListBool = true;
             }
         };
         Gdx.input.getTextInput(textListener, "Enter name: ", player.getName(), "");
-        //MyGdxGame.get_FBIC().SetValueInDB(player.getName(), player.getScore());
     }
 
     @Override
@@ -91,20 +81,20 @@ public class GameOverState extends State {
         sb.draw(bg, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
         // -80 må fikses, samme med MARGIN i pauseState.
         font.draw(sb, "GAME OVER", (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-80);
-        if (bool==false)
+        if (!writeHighscoreListBool)
             font.draw(sb, "Your score: " + player.getScore(), (MyGdxGame.WIDTH/2f)  - (font.getRegion().getRegionWidth()/2f), Gdx.graphics.getHeight()-150);
-        if (bool == true){
-            boolean bool2 = true;
+        if (writeHighscoreListBool){
+            boolean writeOnlyOneScoreRedBool = true;
             nameTitleFont.draw(sb, "NAME", 100, MyGdxGame.HEIGHT-150);
             scoreTitleFont.draw(sb, "SCORE", MyGdxGame.WIDTH-150, MyGdxGame.HEIGHT-150);
             if (scores != null) {
                 for (int i = 0; i < scores.size(); i++) {
-                    if (( scores.get(i) == player.getScore()) && bool2 == true){
+                    if (( scores.get(i) == player.getScore()) && writeOnlyOneScoreRedBool){
                         newNameFont.setColor(Color.RED);
                         newScoreFont.setColor(Color.RED);
                         newNameFont.draw(sb, "" + names.get(i), 100, MyGdxGame.HEIGHT - 200 - (i * 50));
                         newScoreFont.draw(sb, "" + scores.get(i), MyGdxGame.WIDTH - 135, MyGdxGame.HEIGHT - 200 - (i * 50));
-                        bool2 = false;
+                        writeOnlyOneScoreRedBool = false;
                     }
                     else {
                         nameFont.setColor(Color.WHITE);
@@ -118,8 +108,6 @@ public class GameOverState extends State {
         sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/3f, Gdx.graphics.getWidth()/3f);
         sb.end();
     }
-
-
 
     @Override
     public void dispose() {

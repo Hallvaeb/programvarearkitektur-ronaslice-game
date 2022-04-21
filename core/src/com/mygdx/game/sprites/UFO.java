@@ -67,6 +67,10 @@ public abstract class UFO {
         this.points = points;
     }
 
+    /**
+     *
+     * @return get position of the UFO.
+     */
     public Vector3 getPosition() {
         return position;
     }
@@ -89,6 +93,9 @@ public abstract class UFO {
         this.textureAnimation = textureAnimation;
     }
 
+    /**
+     * disposes all textures.
+     */
     public abstract void dispose();
 
     public void setDifficulty(int difficulty){
