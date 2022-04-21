@@ -12,6 +12,20 @@ import java.util.List;
 
 public class ScoreState extends State{
 
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
+    private static final int btnSize = WIDTH/4;
+    private static final int btnMarginX = (WIDTH/2)-(btnSize/2);
+    private static final int btnMarginY = HEIGHT/80;
+    private static final int titleSize = WIDTH/160;
+    private static final int fontSize = WIDTH/480;
+    private static final int titleMarginX = (WIDTH/2)-(HEIGHT/9);
+    private static final int titleMarginY = HEIGHT-(HEIGHT/16);
+    private static final int nameMarginX = HEIGHT/8;
+    private static final float nameMarginY = HEIGHT-(WIDTH/3.2f);
+    private static final float scoreMarginX = WIDTH-(WIDTH/3.2f);
+    private static final float scoreMarginY = HEIGHT-(WIDTH/3.2f);
+
     private Texture img;
     private List scores;
     private List names;
@@ -34,12 +48,18 @@ public class ScoreState extends State{
         scoreTitleFont = new BitmapFont();
         nameFont = new BitmapFont();
         scoreFont = new BitmapFont();
-        titleFont.getData().setScale(3, 3);
+
+        titleFont.getData().setScale(titleSize, titleSize);
+        nameTitleFont.getData().setScale(fontSize, fontSize);
+        scoreTitleFont.getData().setScale(fontSize, fontSize);
+        nameFont.getData().setScale(fontSize, fontSize);
+        scoreFont.getData().setScale(fontSize, fontSize);
+
 
         // TODO: mekke "back"-button
         quitBtn = new Sprite(new Texture("return.png"));
-        quitBtn.setSize(Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        quitBtn.setPosition(Gdx.graphics.getWidth()/2f-quitBtn.getWidth()/2, 10);
+        quitBtn.setSize(btnSize, btnSize);
+        quitBtn.setPosition(btnMarginX, btnMarginY);
 
     }
 
@@ -50,7 +70,7 @@ public class ScoreState extends State{
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {
-            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), Gdx.graphics.getHeight() - Gdx.input.getY())) {
+            if (quitBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
                 gsm.set(new MenuState(gsm));
             }
@@ -65,15 +85,15 @@ public class ScoreState extends State{
     @Override
     public void render(SpriteBatch sb) {
         sb.begin();
-        sb.draw(img,0, 0);
-        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), Gdx.graphics.getWidth()/4f, Gdx.graphics.getWidth()/4f);
-        titleFont.draw(sb, "Highscore! ", (Gdx.graphics.getWidth()/2f)-100, Gdx.graphics.getHeight()-50);
-        nameTitleFont.draw(sb, "NAME", 100, Gdx.graphics.getHeight()-150);
-        scoreTitleFont.draw(sb, "SCORE", Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-150);
+        sb.draw(img,0, 0, WIDTH, HEIGHT);
+        sb.draw(quitBtn, quitBtn.getX(), quitBtn.getY(), btnSize, btnSize);
+        titleFont.draw(sb, "Highscore! ", titleMarginX, titleMarginY);
+        nameTitleFont.draw(sb, "NAME", nameMarginX, nameMarginY);
+        scoreTitleFont.draw(sb, "SCORE", scoreMarginX, scoreMarginY);
         if (scores != null) {
             for (int i = 0; i < scores.size(); i++) {
-                nameFont.draw(sb, "" + names.get(i), 100, Gdx.graphics.getHeight() - 200 - (i * 50));
-                scoreFont.draw(sb, "" + scores.get(i), Gdx.graphics.getWidth() - 135, Gdx.graphics.getHeight() - 200 - (i * 50));
+                nameFont.draw(sb, "" + names.get(i), nameMarginX, HEIGHT-(HEIGHT/4f)-(i * (HEIGHT/16f)));
+                scoreFont.draw(sb, "" + scores.get(i), WIDTH-(WIDTH/3.56f), HEIGHT-(HEIGHT/4f)-(i * (HEIGHT/16f)));
             }
         }
         sb.end();

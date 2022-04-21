@@ -20,6 +20,19 @@ import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
 
 public class MultiplayerState extends State implements PlayState {
+    private static final int WIDTH = Gdx.graphics.getWidth();
+    private static final int HEIGHT = Gdx.graphics.getHeight();
+    private static final int deltaSize = WIDTH/6;
+    private static final int omikronSize = WIDTH/9;
+    private static final int alphaSize = WIDTH/14;
+    private static final int personSize = WIDTH/7;
+    private static final int pauseSize = WIDTH/10;
+    private static final int fontSize = WIDTH/160;
+    private static final float pause1MarginX = WIDTH-(WIDTH/8);
+    private static final float pause1MarginY = (HEIGHT/2)-(pauseSize);
+    private static final float pause2MarginX = (WIDTH - pause1MarginX - pauseSize);
+    private static final float pause2MarginY = (HEIGHT/2);
+
 
     // Array med alle UFO-objekter skjerm 1
     private Array<UFO> ufos1;
@@ -52,43 +65,43 @@ public class MultiplayerState extends State implements PlayState {
         super(gsm);
         playerOneCamera = new OrthographicCamera();
         playerTwoCamera = new OrthographicCamera();
-        playerOneCamera.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
-        playerTwoCamera.setToOrtho(false, MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
+        playerOneCamera.setToOrtho(false, WIDTH, HEIGHT/2);
+        playerTwoCamera.setToOrtho(false, WIDTH, HEIGHT/2);
         playerTwoCamera.rotate(180);
 
 
 
         ScreenViewport playerOneViewport = new ScreenViewport(playerOneCamera);
         ScreenViewport playerTwoViewport = new ScreenViewport(playerTwoCamera);
-        playerOneViewport.update(MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
-        playerTwoViewport.update(MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
-        playerTwoViewport.setScreenY(MyGdxGame.HEIGHT/2);
+        playerOneViewport.update(WIDTH, HEIGHT/2);
+        playerTwoViewport.update(WIDTH, HEIGHT/2);
+        playerTwoViewport.setScreenY(HEIGHT/2);
 
         player1 = new Player();
         player1.setName("Player 1");
         player2 = new Player();
         player2.setName("Player 2");
         font = new BitmapFont();
-        font.getData().setScale(3, 3);
+        font.getData().setScale(fontSize, fontSize);
 
-        cov_delta = new COV_delta(80);
-        cov_omikron = new COV_omikron(55);
-        cov_alpha = new COV_alpha(35);
-        sick_person = new SickPerson(70);
+        cov_delta = new COV_delta(deltaSize);
+        cov_omikron = new COV_omikron(omikronSize);
+        cov_alpha = new COV_alpha(alphaSize);
+        sick_person = new SickPerson(personSize);
         syringe = Syringe.getInstance();
 
-        cov_delta2 = new COV_delta(80);
-        cov_omikron2 = new COV_omikron(55);
-        cov_alpha2 = new COV_alpha(35);
-        sick_person2 = new SickPerson(70);
+        cov_delta2 = new COV_delta(deltaSize);
+        cov_omikron2 = new COV_omikron(omikronSize);
+        cov_alpha2 = new COV_alpha(alphaSize);
+        sick_person2 = new SickPerson(personSize);
 
 
 
         //Pause (Fikse hardkodet verdier)
-        pause.setSize(50, 50);
-        pause.setPosition(MyGdxGame.WIDTH-60,(MyGdxGame.HEIGHT/2)-60);
-        pause2.setSize(50, 50);
-        pause2.setPosition(19,416);
+        pause.setSize(pauseSize, pauseSize);
+        pause.setPosition(pause1MarginX,pause1MarginY);
+        pause2.setSize(pauseSize, pauseSize);
+        pause2.setPosition(pause2MarginX,pause2MarginY);
 
         // Slice posisjon til player
         touchPoint = new Vector3();
@@ -106,8 +119,8 @@ public class MultiplayerState extends State implements PlayState {
     @Override
     protected void handleInput() {
         if(Gdx.input.isTouched()) {
-            touchPoint.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
-            touchPoint2.set(Gdx.input.getX(),MyGdxGame.HEIGHT - Gdx.input.getY(),0);
+            touchPoint.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
+            touchPoint2.set(Gdx.input.getX(),HEIGHT - Gdx.input.getY(),0);
             if (pause.getBoundingRectangle().contains(touchPoint.x, touchPoint.y)) {
                 gsm.push(new PauseState(gsm));
             }
@@ -117,7 +130,7 @@ public class MultiplayerState extends State implements PlayState {
 
             // User 1
             for (UFO ufo : ufos1) {
-                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < MyGdxGame.HEIGHT/2) {
+                if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
                         gameOver(player2);
@@ -144,7 +157,7 @@ public class MultiplayerState extends State implements PlayState {
 
             // User 2
             for (UFO ufo : ufos2) {
-                if(ufo.getBoundingRectangle().contains(MyGdxGame.WIDTH - touchPoint.x, MyGdxGame.HEIGHT - touchPoint.y) && touchPoint.y > MyGdxGame.HEIGHT/2) {
+                if(ufo.getBoundingRectangle().contains(WIDTH - touchPoint.x, HEIGHT - touchPoint.y) && touchPoint.y > HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
                         gameOver(player1);
@@ -196,28 +209,15 @@ public class MultiplayerState extends State implements PlayState {
 
     @Override
     public void render(SpriteBatch sb) {
-        /*sb.begin();
-        sb.draw(bg1, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
-        sb.draw(bg2, 0, MyGdxGame.HEIGHT/2, MyGdxGame.WIDTH, MyGdxGame.HEIGHT/2);
-        sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y/2, cov_delta.getSize(), cov_delta.getSize());
-        sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y/2, cov_omikron.getSize(), cov_omikron.getSize());
-        sb.draw(sick_person.getTexture(), sick_person.getPosition().x,sick_person.getPosition().y/2, sick_person.getSize(), sick_person.getSize());
-
-        sb.draw(cov_delta2.getTexture(), cov_delta2.getPosition().x,cov_delta2.getPosition().y/2, cov_delta2.getSize(), cov_delta2.getSize());
-        sb.draw(cov_omikron2.getTexture(), cov_omikron2.getPosition().x,cov_omikron2.getPosition().y/2, cov_omikron2.getSize(), cov_omikron2.getSize());
-        sb.draw(sick_person2.getTexture(), sick_person2.getPosition().x,sick_person2.getPosition().y/2, sick_person2.getSize(), sick_person2.getSize());
-
-        sb.end();*/
         sb.setProjectionMatrix(playerOneCamera.combined);
-        Gdx.gl.glViewport(0,0,MyGdxGame.WIDTH,MyGdxGame.HEIGHT/2);
+        Gdx.gl.glViewport(0,0,WIDTH,HEIGHT/2);
         sb.begin();
-        sb.draw(bg1, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        sb.draw(bg1, 0, 0, WIDTH, HEIGHT);
         for (int i = 0; i < player1.getLivesLeft(); i++) {
             // Gjøre disse piksel-verdiene ikke hardkodet.
-            sb.draw(health, 10+i*60, (MyGdxGame.HEIGHT/2)-60, 50, 50);
+            sb.draw(health, (WIDTH/32)+i*(WIDTH/10), (HEIGHT/2)-(WIDTH/10), WIDTH/12, WIDTH/12);
         }
-        font.draw(sb, "Score: " + player1.getScore(), MyGdxGame.WIDTH/2 -130, MyGdxGame.HEIGHT-120);
-        sb.draw(pause, MyGdxGame.WIDTH-60,(MyGdxGame.HEIGHT/2)-60, 50, 50);
+        sb.draw(pause, pause1MarginX,pause1MarginY, pauseSize, pauseSize);
         sb.draw(cov_delta.getTexture(), cov_delta.getPosition().x,cov_delta.getPosition().y, cov_delta.getSize(), cov_delta.getSize());
         sb.draw(cov_alpha.getTexture(), cov_alpha.getPosition().x,cov_alpha.getPosition().y, cov_alpha.getSize(), cov_alpha.getSize());
         sb.draw(cov_omikron.getTexture(), cov_omikron.getPosition().x,cov_omikron.getPosition().y, cov_omikron.getSize(), cov_omikron.getSize());
@@ -228,15 +228,14 @@ public class MultiplayerState extends State implements PlayState {
         sb.end();
 
         sb.setProjectionMatrix(playerTwoCamera.combined);
-        Gdx.gl.glViewport(0,MyGdxGame.HEIGHT/2,MyGdxGame.WIDTH,MyGdxGame.HEIGHT/2);
+        Gdx.gl.glViewport(0,HEIGHT/2, WIDTH,HEIGHT/2);
         sb.begin();
-        sb.draw(bg1, 0, 0, MyGdxGame.WIDTH, MyGdxGame.HEIGHT);
+        sb.draw(bg1, 0, 0, WIDTH, HEIGHT);
         for (int i = 0; i < player2.getLivesLeft(); i++) {
             // Gjøre disse piksel-verdiene ikke hardkodet.
-            sb.draw(health, 10+i*60, (MyGdxGame.HEIGHT/2)-60, 50, 50);
+            sb.draw(health, (WIDTH/32)+i*(WIDTH/10), (HEIGHT/2)-(WIDTH/10), WIDTH/12, WIDTH/12);
         }
-        font.draw(sb, "Score: " + player2.getScore(), MyGdxGame.WIDTH/2 -130, MyGdxGame.HEIGHT-120);
-        sb.draw(pause2, MyGdxGame.WIDTH-60,(MyGdxGame.HEIGHT/2)-60, 50, 50);
+        sb.draw(pause2, pause1MarginX, pause1MarginY, pauseSize, pauseSize);
         sb.draw(cov_delta2.getTexture(), cov_delta2.getPosition().x,cov_delta2.getPosition().y, cov_delta2.getSize(), cov_delta2.getSize());
         sb.draw(cov_alpha2.getTexture(), cov_alpha2.getPosition().x,cov_alpha2.getPosition().y, cov_alpha2.getSize(), cov_alpha2.getSize());
         sb.draw(cov_omikron2.getTexture(), cov_omikron2.getPosition().x,cov_omikron2.getPosition().y, cov_omikron2.getSize(), cov_omikron2.getSize());
