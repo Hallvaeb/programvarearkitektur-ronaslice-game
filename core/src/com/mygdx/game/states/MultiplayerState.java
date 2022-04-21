@@ -20,7 +20,6 @@ import com.mygdx.game.sprites.Player;
 import com.mygdx.game.sprites.SickPerson;
 import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
-import com.mygdx.game.sprites.UFO2;
 
 public class MultiplayerState extends State implements PlayState {
 
@@ -135,7 +134,7 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     else{
                         // One of the viruses are reposition
-                        player1.increaseScore(ufo.getPoints());
+                        player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
                     }
                 }
@@ -145,7 +144,7 @@ public class MultiplayerState extends State implements PlayState {
 
                 System.out.println(touchPoint2);
 
-                if(ufo.getBoundingRectangle().contains(touchPoint2.x, touchPoint2.y)) {
+                if(ufo.getBoundingRectangle().contains(MyGdxGame.WIDTH - touchPoint2.x, MyGdxGame.HEIGHT - touchPoint2.y)) {
                     if (ufo instanceof SickPerson) {
                         System.out.println("GAME OVER");
 
@@ -160,7 +159,7 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     else{
                         // One of the viruses are reposition
-                        player2.increaseScore(ufo.getPoints());
+                        player2.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
                     }
                 }
@@ -177,6 +176,13 @@ public class MultiplayerState extends State implements PlayState {
             ufo.update(dt, player1);
         }
         if (player1.getLivesLeft() == 0) {
+            // GAME OVER
+            System.out.println("GAME OVER");
+        }
+        for (UFO ufo : ufos2) {
+            ufo.update(dt, player2);
+        }
+        if (player2.getLivesLeft() == 0) {
             // GAME OVER
             System.out.println("GAME OVER");
         }
