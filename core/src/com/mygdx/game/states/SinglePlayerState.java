@@ -61,7 +61,7 @@ public class SinglePlayerState extends State implements PlayState {
     }
 
     public void gameOver(Player player) {
-        Syringe.getInstance().reset();
+        syringe.reset();
         gsm.push(new GameOverState(gsm, player));
     }
 
