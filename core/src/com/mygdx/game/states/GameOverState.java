@@ -16,8 +16,8 @@ public class GameOverState extends State {
     private static final float BUTTON_SIZE = WIDTH/4;
     private static final float X_BUTTON = WIDTH/2-BUTTON_SIZE/2;
     private static final float Y_BUTTON = 0.05f*Gdx.graphics.getHeight();
-    private static final float Y_TITLE = 0.9f*Gdx.graphics.getHeight();
-    private static final float X_NAMES = 0.2f*WIDTH;
+    private static final float Y_TITLE = 0.95f*Gdx.graphics.getHeight();
+    private static final float X_NAMES = 0.22f*WIDTH;
     private static final float X_SCORES = WIDTH/1.5f;
     private static final float Y_HEADINGS = 0.75f*Gdx.graphics.getHeight();
     private static final float SPACING = Gdx.graphics.getHeight()/16f;
@@ -55,8 +55,8 @@ public class GameOverState extends State {
         quitBtn.setPosition(X_BUTTON, Y_BUTTON);
         quitBtn.setSize(BUTTON_SIZE, BUTTON_SIZE);
 
-        Y_NAME_SCORE = 0.75f*Gdx.graphics.getHeight() + font.getRegion().getRegionWidth()/9f;
-        X_TITLE = (WIDTH - font.getRegion().getRegionWidth())/2f;
+        Y_NAME_SCORE = 0.80f*Gdx.graphics.getHeight() + font.getRegion().getRegionWidth()/9f;
+        X_TITLE = (WIDTH - font.getRegion().getRegionWidth())/1.8f;
 
         Input.TextInputListener textListener = new Input.TextInputListener() {
             @Override
@@ -100,7 +100,7 @@ public class GameOverState extends State {
         sb.draw(bg, 0, 0, WIDTH, Gdx.graphics.getHeight());
         font.draw(sb, "GAME OVER", X_TITLE, Y_TITLE);
 
-        /**
+        /*
          * Here we use writeHighscoreListBool to write highscores only after the user has
          * given his/her name.
          * writeOnlyOneScoreRedBool is used to make sure the players name becomes red,
@@ -118,7 +118,7 @@ public class GameOverState extends State {
                         newNameFont.setColor(Color.RED);
                         newScoreFont.setColor(Color.RED);
                         newNameFont.draw(sb, "" + names.get(i),
-                                X_NAMES, Y_HEADINGS + (i * SPACING));
+                                X_NAMES, Y_HEADINGS - (i * SPACING));
                         newScoreFont.draw(sb, "" + scores.get(i),
                                 X_SCORES, Y_HEADINGS - (i * SPACING));
                         writeOnlyOneScoreRedBool = false;
