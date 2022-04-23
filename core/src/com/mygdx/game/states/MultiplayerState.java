@@ -69,21 +69,22 @@ public class MultiplayerState extends State implements PlayState {
         playerTwoCamera.setToOrtho(false, WIDTH, HEIGHT/2);
         playerTwoCamera.rotate(180);
 
-
-
         ScreenViewport playerOneViewport = new ScreenViewport(playerOneCamera);
         ScreenViewport playerTwoViewport = new ScreenViewport(playerTwoCamera);
         playerOneViewport.update(WIDTH, HEIGHT/2);
         playerTwoViewport.update(WIDTH, HEIGHT/2);
         playerTwoViewport.setScreenY(HEIGHT/2);
 
-        /** Initializing the two players with the names "Player 1" and "Player 2" */
+        // Initializing the two players with the names "Player 1" and "Player 2"
         player1 = new Player();
         player1.setName("Player 1");
+        // We're attaching to player1, to get updates for when difficulty should increase.
+        player1.attach(this);
         player2 = new Player();
         player2.setName("Player 2");
+        player2.attach(this);
 
-        /** Initializing the rest of the variables declared */
+        // Initializing the rest of the variables declared
         font = new BitmapFont();
         font.getData().setScale(fontSize, fontSize);
 
@@ -107,7 +108,7 @@ public class MultiplayerState extends State implements PlayState {
         touchPoint = new Vector3();
         touchPoint2 = new Vector3();
 
-        /** Adding the covid variants to the two lists of ufos */
+        // Adding the covid variants to the two lists of ufos
         ufos1 = new Array<>();
         ufos1.add(cov_delta, cov_omicron, sick_person, syringe);
         ufos1.add(cov_alpha);
@@ -131,16 +132,16 @@ public class MultiplayerState extends State implements PlayState {
                 gsm.push(new PauseState(gsm));
             }
 
-            /** User 1 */
+            // User 1
             for (UFO ufo : ufos1) {
-                /** Slicing ufo */
+                // Slicing ufo
                 if(ufo.getBoundingRectangle().contains(touchPoint.x, touchPoint.y) && touchPoint.y < HEIGHT/2) {
-                    /** Slicing the sick patient */
+                    // Slicing the sick patient
                     if (ufo instanceof SickPerson) {
                         gameOver(player2);
                         break;
                     }
-                    /** Slicing the syringe */
+                    // Slicing the syringe
                     else if (ufo instanceof Syringe) {
                         ufo.reposition();
                         player1.gainLife();
@@ -148,22 +149,16 @@ public class MultiplayerState extends State implements PlayState {
                             syringe.setSpawnable(false);
                         }
                     }
-                    /**
-                     * Slicing one of the covid variants
-                     * Increasing difficulty when the score gets higher
-                     */
+                    // Slicing one of the covid variants and increasing difficulty when the score gets higher
                     else{
-                        int difficulty = player1.increaseScoreAndDifficulty(ufo.getPoints());
+                        player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        if(difficulty != -1 && difficulty != currentDifficulty){
-                            setUFODifficulty(difficulty);
-                        }
                     }
                 }
 
             }
 
-            /** User 2 */
+            // User 2
             for (UFO ufo : ufos2) {
                 if(ufo.getBoundingRectangle().contains(WIDTH - touchPoint.x, HEIGHT - touchPoint.y) && touchPoint.y > HEIGHT/2) {
                     if (ufo instanceof SickPerson) {
@@ -179,11 +174,8 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     else{
                         // One of the viruses are reposition
-                        int difficulty = player2.increaseScoreAndDifficulty(ufo.getPoints());
+                        player2.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        if(difficulty != -1 && difficulty != currentDifficulty){
-                            setUFODifficulty(difficulty);
-                        }
                     }
                 }
 
@@ -214,7 +206,7 @@ public class MultiplayerState extends State implements PlayState {
 
     @Override
     public void render(SpriteBatch sb) {
-        /** Setting screen 1 */
+        // Setting screen 1
         sb.setProjectionMatrix(playerOneCamera.combined);
         Gdx.gl.glViewport(0,0,WIDTH,HEIGHT/2);
         sb.begin();
@@ -231,7 +223,7 @@ public class MultiplayerState extends State implements PlayState {
             sb.draw(syringe.getTexture(), syringe.getPosition().x, syringe.getPosition().y, syringe.getSize(), syringe.getSize());
         }
         sb.end();
-        /** Setting screen 2 */
+        // Setting screen 2
         sb.setProjectionMatrix(playerTwoCamera.combined);
         Gdx.gl.glViewport(0,HEIGHT/2, WIDTH,HEIGHT/2);
         sb.begin();
@@ -267,18 +259,18 @@ public class MultiplayerState extends State implements PlayState {
     }
 
     @Override
-    public void setUFODifficulty(int difficulty) {
-        for (int i = 0; i < ufos1.size; i++){
-            ufos1.get(i).setDifficulty(difficulty);
-        }
-        for (int i = 0; i < ufos2.size; i++){
-            ufos2.get(i).setDifficulty(difficulty);
-        }
+    public void gameOver(Player player) {
+        syringe.reset();
+        gsm.push(new MultiPlayerGameOverState(gsm, player));
     }
 
     @Override
-    public void gameOver(Player player) {
-        Syringe.getInstance().reset();
-        gsm.push(new MultiPlayerGameOverState(gsm, player));
+    public void observerUpdate() {
+        for (int i = 0; i < ufos1.size; i++){
+            ufos1.get(i).increaseDifficulty();
+        }
+        for (int i = 0; i < ufos2.size; i++){
+            ufos2.get(i).increaseDifficulty();
+        }
     }
 }

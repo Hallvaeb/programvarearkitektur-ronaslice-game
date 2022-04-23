@@ -41,7 +41,7 @@ public class MenuState extends State {
 
     @Override
     public void handleInput() {
-        /** Method for updating nameList and scoreList with the data from Firebase */
+        // Method for updating nameList and scoreList with the data from Firebase
         MyGdxGame.get_FBIC().SetTop10Lists();
         if (Gdx.input.justTouched()) {
             if (playBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {

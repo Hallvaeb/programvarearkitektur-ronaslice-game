@@ -43,7 +43,7 @@ public abstract class UFO {
         }
         velocity.scl(dt);
         if (position.y > 0) {
-            velocity.add(0, (GRAVITY+difficulty), 0);
+            velocity.add(0, (GRAVITY-difficulty), 0);
         }
         position.add(0, velocity.y, 0);
         if (position.y < 0) {
@@ -129,11 +129,14 @@ public abstract class UFO {
     }
 
     /**
-     * Sets the difficulty.
-     * @param difficulty int value representing the difficulty.
+     * Sets the difficulty. Multiplied with DIFFICULTY_INCREASE_FACTOR for easier modifiability
+     * of the users difficulty level (increase this factor and difficulty increases more rapidly).
      */
-    public void setDifficulty(int difficulty){
-        this.difficulty = difficulty*(-DIFFICULTY_INCREASE_FACTOR);
+    public void increaseDifficulty(){
+        float temp = (difficulty+1)*DIFFICULTY_INCREASE_FACTOR;
+        if(this instanceof Syringe)
+            temp = temp/2f;
+        this.difficulty = temp;
     }
 
     /**
@@ -141,5 +144,12 @@ public abstract class UFO {
      */
     public abstract void dispose();
 
+    /**
+     * Used thus far only by syringe as it's a singleton object to
+     * reset it's difficulty between games.
+     */
+    protected void resetDifficulty(){
+        difficulty = 0;
+    }
 }
 

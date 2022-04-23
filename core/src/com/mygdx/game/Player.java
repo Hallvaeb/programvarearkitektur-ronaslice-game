@@ -1,19 +1,22 @@
 package com.mygdx.game;
 
+import com.mygdx.game.states.PlayState;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player {
 
-    private int livesLeft;
-    private int score;
+    private int livesLeft = 3;
+    private int score = 0;
     private String name;
     private int currentDifficulty;
+    private List<PlayState> observers = new ArrayList<>();
 
     /**
      * Constructor for a player. Starts with 3 lives, 0 score and 0 difficulty.
      */
     public Player(){
-        livesLeft = 3;
-        score = 0;
+        // This value can be modified to easily increase what score the players should start on.
         currentDifficulty = 0;
     }
 
@@ -69,17 +72,23 @@ public class Player {
 
     /**
      * Increases score, checks for difficulty increase.
-     * @return -1 if difficulty is not updated, otherwise the new difficulty score 0-10.
      **/
-    public int increaseScoreAndDifficulty(double score) {
+    public void increaseScoreAndDifficulty(double score) {
         this.score += score;
         int newDifficulty = getDifficulty();
         if(currentDifficulty != newDifficulty){
             currentDifficulty = newDifficulty;
-            return newDifficulty;
+            updateObservers();
         }
-        else{
-            return -1;
+    }
+
+    /**
+     * This updates all the states, which in this app will be only one state, but it's made this
+     * way to be easily scalable.
+     */
+    private void updateObservers() {
+        for (PlayState observer : observers){
+            observer.observerUpdate();
         }
     }
 
@@ -94,5 +103,9 @@ public class Player {
             }
         }
         return 0;
+    }
+
+    public void attach(PlayState state) {
+        observers.add(state);
     }
 }
