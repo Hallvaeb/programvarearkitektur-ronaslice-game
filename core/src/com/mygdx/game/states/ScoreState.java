@@ -40,7 +40,8 @@ public class ScoreState extends State{
     protected ScoreState(GameStateManager gsm) {
         super(gsm);
         img = new Texture("bg_sky.png");
-        /** Initializing the lists "names" and "scores" with Firebase getters */
+        // Initializing the lists "names" and "scores" with Firebase getters, through the
+        // "AndroidInterfaceClass".
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
 

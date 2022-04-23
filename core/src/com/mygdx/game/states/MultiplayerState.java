@@ -69,8 +69,6 @@ public class MultiplayerState extends State implements PlayState {
         playerTwoCamera.setToOrtho(false, WIDTH, HEIGHT/2);
         playerTwoCamera.rotate(180);
 
-
-
         ScreenViewport playerOneViewport = new ScreenViewport(playerOneCamera);
         ScreenViewport playerTwoViewport = new ScreenViewport(playerTwoCamera);
         playerOneViewport.update(WIDTH, HEIGHT/2);
@@ -80,8 +78,11 @@ public class MultiplayerState extends State implements PlayState {
         // Initializing the two players with the names "Player 1" and "Player 2"
         player1 = new Player();
         player1.setName("Player 1");
+        // We're attaching to player1, to get updates for when difficulty should increase.
+        player1.attach(this);
         player2 = new Player();
         player2.setName("Player 2");
+        player2.attach(this);
 
         // Initializing the rest of the variables declared
         font = new BitmapFont();
@@ -150,11 +151,8 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     // Slicing one of the covid variants and increasing difficulty when the score gets higher
                     else{
-                        int difficulty = player1.increaseScoreAndDifficulty(ufo.getPoints());
+                        player1.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        if(difficulty != -1 && difficulty != currentDifficulty){
-                            setUFODifficulty(difficulty);
-                        }
                     }
                 }
 
@@ -176,11 +174,8 @@ public class MultiplayerState extends State implements PlayState {
                     }
                     else{
                         // One of the viruses are reposition
-                        int difficulty = player2.increaseScoreAndDifficulty(ufo.getPoints());
+                        player2.increaseScoreAndDifficulty(ufo.getPoints());
                         ufo.reposition();
-                        if(difficulty != -1 && difficulty != currentDifficulty){
-                            setUFODifficulty(difficulty);
-                        }
                     }
                 }
 
@@ -264,18 +259,18 @@ public class MultiplayerState extends State implements PlayState {
     }
 
     @Override
-    public void setUFODifficulty(int difficulty) {
-        for (int i = 0; i < ufos1.size; i++){
-            ufos1.get(i).setDifficulty(difficulty);
-        }
-        for (int i = 0; i < ufos2.size; i++){
-            ufos2.get(i).setDifficulty(difficulty);
-        }
+    public void gameOver(Player player) {
+        syringe.reset();
+        gsm.push(new MultiPlayerGameOverState(gsm, player));
     }
 
     @Override
-    public void gameOver(Player player) {
-        Syringe.getInstance().reset();
-        gsm.push(new MultiPlayerGameOverState(gsm, player));
+    public void observerUpdate() {
+        for (int i = 0; i < ufos1.size; i++){
+            ufos1.get(i).increaseDifficulty();
+        }
+        for (int i = 0; i < ufos2.size; i++){
+            ufos2.get(i).increaseDifficulty();
+        }
     }
 }

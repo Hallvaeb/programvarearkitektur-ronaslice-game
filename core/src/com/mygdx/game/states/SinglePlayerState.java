@@ -42,7 +42,10 @@ public class SinglePlayerState extends State implements PlayState {
      */
     public SinglePlayerState(GameStateManager gsm){
         super(gsm);
+        // This classes subject (observer pattern)
         player = new Player();
+        player.attach(this);
+
         font = new BitmapFont();
         font.getData().setScale(HEIGHT/400f);
         syringe = Syringe.getInstance();
@@ -55,14 +58,22 @@ public class SinglePlayerState extends State implements PlayState {
     }
 
     public void setUFODifficulty(int difficulty) {
-        for (int i = 0; i < ufos.size; i++){
-            ufos.get(i).setDifficulty(difficulty);
-        }
+
     }
 
     public void gameOver(Player player) {
         syringe.reset();
         gsm.push(new GameOverState(gsm, player));
+    }
+
+    /**
+     * Increases difficulty of all UFOs once a players score determines so.
+     */
+    @Override
+    public void observerUpdate() {
+        for (int i = 0; i < ufos.size; i++){
+            ufos.get(i).increaseDifficulty();
+        }
     }
 
     @Override
@@ -90,10 +101,7 @@ public class SinglePlayerState extends State implements PlayState {
                         }
                     }
                     else{
-                        int difficulty = player.increaseScoreAndDifficulty(ufo.getPoints());
-                        if(difficulty != -1){
-                            setUFODifficulty(difficulty);
-                        }
+                        player.increaseScoreAndDifficulty(ufo.getPoints());
                     }
                 }
             }
