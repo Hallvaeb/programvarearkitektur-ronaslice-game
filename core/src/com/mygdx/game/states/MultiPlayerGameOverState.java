@@ -52,7 +52,7 @@ public class MultiPlayerGameOverState extends State {
         if (Gdx.input.justTouched()) {
             if (playAgainBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
-                gsm.set(new MultiplayerState(gsm));
+                gsm.set(new MultiPlayerState(gsm));
             }
             if (returnBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();

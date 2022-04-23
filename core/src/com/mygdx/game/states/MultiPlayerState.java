@@ -17,7 +17,7 @@ import com.mygdx.game.sprites.Syringe;
 import com.mygdx.game.sprites.UFO;
 import com.mygdx.game.sprites.Virus;
 
-public class MultiplayerState extends State implements PlayState {
+public class MultiPlayerState extends State implements PlayState {
     private static final int WIDTH = Gdx.graphics.getWidth();
     private static final int HEIGHT = Gdx.graphics.getHeight();
     private static final int deltaSize = WIDTH/6;
@@ -61,7 +61,7 @@ public class MultiplayerState extends State implements PlayState {
     OrthographicCamera playerTwoCamera;
 
 
-    protected MultiplayerState(GameStateManager gsm) {
+    protected MultiPlayerState(GameStateManager gsm) {
         super(gsm);
         playerOneCamera = new OrthographicCamera();
         playerTwoCamera = new OrthographicCamera();

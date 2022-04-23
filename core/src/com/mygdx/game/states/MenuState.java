@@ -5,8 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
-import java.util.List;
-
 import com.mygdx.game.MyGdxGame;
 
 public class MenuState extends State {
@@ -50,7 +48,7 @@ public class MenuState extends State {
             }
             if (multiBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
-                gsm.set(new MultiplayerState(gsm));
+                gsm.set(new MultiPlayerState(gsm));
             }
             if (scoreBtn.getBoundingRectangle().contains(Gdx.input.getX(), HEIGHT - Gdx.input.getY())) {
                 MyGdxGame.sound.play();
