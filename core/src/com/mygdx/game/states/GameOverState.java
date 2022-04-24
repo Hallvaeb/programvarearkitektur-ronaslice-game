@@ -78,6 +78,7 @@ public class GameOverState extends State {
 
     @Override
     protected void handleInput() {
+        // getting the lists initialized in AndroidInterfaceClass
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {

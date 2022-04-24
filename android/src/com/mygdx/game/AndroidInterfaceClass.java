@@ -34,7 +34,7 @@ public class AndroidInterfaceClass implements FireBaseInterface{
 
     @Override
     public void SetTop10Lists() {
-        /**
+        /*
          * Getting names and score from the 10 users with highest score.
          * Initializing "nameList" and "scoreList".
          */
@@ -54,7 +54,6 @@ public class AndroidInterfaceClass implements FireBaseInterface{
                 //nameList = names;
                 nameList = names;
                 scoreList = scores;
-                //System.out.println(nameList);
             }
 
             @Override
