@@ -1,4 +1,4 @@
-# TDT4240_progark_prosjekt
+# TDT4240 Software Architecture Project
 
 ## Structure
 
@@ -26,15 +26,29 @@ Revised Requirement doc: https://docs.google.com/document/d/13PWQWDiKjDEfKm4LUth
 
 Revised Architecture Doc: https://docs.google.com/document/d/1Y0ZubPTq533rQiknSoR4TUVC8YPNiHN2CoA3Xx6wIMA/edit?usp=sharing
 
-ATAM document: https://docs.google.com/document/d/1PVcFvEJtueOERqvG7KvCJqINjn_IJ3nLkPKgcxcMizg/edit#heading=h.wifw9teveri4
 
-Første innlevering:
+
+## Diagrams
+
+Diagrams:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/view?usp=sharing
+
+## ATAM
+
+ATAM evaluation of this project: [ATAM.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558228/ATAM.pdf)
+
+ATAM evalutation of group 5, done by this group: https://docs.google.com/document/d/1PVcFvEJtueOERqvG7KvCJqINjn_IJ3nLkPKgcxcMizg/edit#heading=h.wifw9teveri4
+
+
+## First submission (outdated):
 
 Requirements:  https://docs.google.com/document/d/17_xFGxvue2xvbUH-N1ImPpMiIEx3t3rC0wpJVPmIN-A/edit
 
 Architecture:  https://docs.google.com/document/d/1HzAi8gTwZqwSEfr6mED551_65aetOPkZC-gfHLCh7A0/edit?usp=sharing
 
-
----
-
-Diagrams:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/view?usp=sharing
+###Contributors and creators of this project:
+*authors: Bjørgen, Hallvard 
+Bø, Andreas Lindkjenn
+Eek, Mads Olav 
+Guddingsmo, Mats 
+Rørnes, Ulrik 
+Sejersted, Kristofer 
