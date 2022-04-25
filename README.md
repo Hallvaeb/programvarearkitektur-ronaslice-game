@@ -30,10 +30,9 @@ Diagrams:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/vie
 
 ## Architecture tradeoff analysis method (ATAM) evalutaions
 
-Of this project, by group 5: [ATAM.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558228/ATAM.pdf)
+Of this project, by group 5: [ATAM_24.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558258/ATAM_24.pdf)
 
-Of group 5, done by group 24 (this): https://docs.google.com/document/d/1PVcFvEJtueOERqvG7KvCJqINjn_IJ3nLkPKgcxcMizg/edit#heading=h.wifw9teveri4
-
+Of group 5, by group 24 (this): [ATAM_5.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558261/ATAM_5.pdf)
 
 ## First submission (outdated):
 
@@ -42,6 +41,7 @@ Requirements:  https://docs.google.com/document/d/17_xFGxvue2xvbUH-N1ImPpMiIEx3t
 Architecture:  https://docs.google.com/document/d/1HzAi8gTwZqwSEfr6mED551_65aetOPkZC-gfHLCh7A0/edit?usp=sharing
 
 ###Contributors and creators of this project:
+
 *authors: 
 Bjørgen, Hallvard 
 Bø, Andreas Lindkjenn
