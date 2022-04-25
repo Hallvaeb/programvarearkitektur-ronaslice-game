@@ -48,8 +48,6 @@ public class GameOverState extends State {
     protected GameOverState(GameStateManager gsm, final Player player) {
         super(gsm);
         this.player = player;
-        scores = MyGdxGame.get_FBIC().GetTopScores();
-        names = MyGdxGame.get_FBIC().GetTopNames();
         font.setColor(0,0,0,1);
         font.getData().setScale(2.5f);
         quitBtn.setPosition(X_BUTTON, Y_BUTTON);
@@ -78,7 +76,8 @@ public class GameOverState extends State {
 
     @Override
     protected void handleInput() {
-        // getting the lists initialized in AndroidInterfaceClass
+        // Getting the lists initialized in AndroidInterfaceClass
+        // The lists are updated every delta time, so the highscore list shows new name and score.
         scores = MyGdxGame.get_FBIC().GetTopScores();
         names = MyGdxGame.get_FBIC().GetTopNames();
         if (Gdx.input.isTouched()) {

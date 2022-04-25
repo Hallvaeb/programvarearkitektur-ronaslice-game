@@ -32,12 +32,12 @@ public class AndroidInterfaceClass implements FireBaseInterface{
 
     }
 
+    /**
+     * Getting names and score from the 10 users with highest score.
+     * Initializing "nameList" and "scoreList".
+     */
     @Override
     public void SetTop10Lists() {
-        /*
-         * Getting names and score from the 10 users with highest score.
-         * Initializing "nameList" and "scoreList".
-         */
         Query query = myRef.child("users").orderByChild("score").limitToLast(10);
         query.addValueEventListener(new ValueEventListener() {
             @Override
@@ -51,7 +51,6 @@ public class AndroidInterfaceClass implements FireBaseInterface{
                     names.add(0, name);
                     scores.add(0, score);
                 }
-                //nameList = names;
                 nameList = names;
                 scoreList = scores;
             }
