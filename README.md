@@ -1,4 +1,4 @@
-# TDT4240 Software Architecture Project Group 24
+# Software Architecture Project Group 24
 
 ## Structure
 
@@ -15,6 +15,10 @@ Naturally, all java files contain a single class each.
 * Open the project in Android Studio, and connect your android device. Alternatively, open AVD Manager and create a virtual machine.
 * Sync the project with Gradle Files.
 * Run the game on an Android device or emulator.
+
+## Check out the promo video!
+
+https://www.youtube.com/watch?v=EZ7M69i-h0I
 
 ## Documents (PDF and link to document)
 
