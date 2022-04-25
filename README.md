@@ -16,13 +16,19 @@ Naturally, all java files contain a single class each.
 * Sync the project with Gradle Files.
 * Run the game on an Android device or emulator.
 
-## Documents
+## Documents (PDF and link to document)
 
-Implementation: https://docs.google.com/document/d/1jBnVcHUP_Hb9u4QUir3vwYQaqqF0Wt-BxIg5OgHqPrQ/edit_
+Implementation: [Implementation.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558292/Implementation.pdf)
 
-Revised Requirement Design: https://docs.google.com/document/d/13PWQWDiKjDEfKm4LUthJ8bh87NpBgKr6ONiFqN0u1pQ/edit?usp=sharing
+https://docs.google.com/document/d/1jBnVcHUP_Hb9u4QUir3vwYQaqqF0Wt-BxIg5OgHqPrQ/edit_
 
-Revised Architecture: https://docs.google.com/document/d/1Y0ZubPTq533rQiknSoR4TUVC8YPNiHN2CoA3Xx6wIMA/edit?usp=sharing
+Revised Requirement Design: [Requirements Design.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558293/Requirements.Design.pdf)
+
+https://docs.google.com/document/d/13PWQWDiKjDEfKm4LUthJ8bh87NpBgKr6ONiFqN0u1pQ/edit?usp=sharing
+
+Revised Architecture: [Architecture.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558296/Architecture.pdf)
+
+https://docs.google.com/document/d/1Y0ZubPTq533rQiknSoR4TUVC8YPNiHN2CoA3Xx6wIMA/edit?usp=sharing
 
 ## Diagrams
 
