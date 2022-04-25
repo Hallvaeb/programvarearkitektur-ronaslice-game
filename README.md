@@ -40,7 +40,7 @@ Requirements:  https://docs.google.com/document/d/17_xFGxvue2xvbUH-N1ImPpMiIEx3t
 
 Architecture:  https://docs.google.com/document/d/1HzAi8gTwZqwSEfr6mED551_65aetOPkZC-gfHLCh7A0/edit?usp=sharing
 
-### Contributors and creators of this project:
+### Contributors and creators of this project (alphabetical):
 
-Hallvard Enger Bjørgen, Andreas Lindkjenn Bæ, Mads Olav Eek, Mats Guddingsmo, Ulrik 
+Hallvard Enger Bjørgen, Andreas Lindkjenn Bø, Mads Olav Eek, Mats Guddingsmo, Ulrik 
 Rørnes, Kristofer Sejersted
