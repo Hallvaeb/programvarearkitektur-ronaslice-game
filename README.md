@@ -1,6 +1,20 @@
 # TDT4240_progark_prosjekt
 
-explain structure and how to compile/run project here
+## Structure
+
+You will find the main parts of the code under core/src/com/mygdx/game/.
+In this folder you will see four classes, a package for all the sprites, and a package for all the states.
+The four classes not contained within one of the packages are dealing with higher level tasks and can not be classified as either a state nor a sprite. This is the MyGdxGame.java module, dealing with general application tasks, and the FireBaseInterface.java and CoreInterfaceClass.java modules, which both deal with the communication to the Firebase server. 
+
+Naturally, all java files contain a single class each.
+
+## Installation and running the game
+
+* Install Android Studio
+* Get the project by cloning with “git clone https://github.com/Hallvaeb/TDT4240_progark_prosjekt.git” in a terminal at the location where you wish the project to exist, or by downloading the zip-file.
+* Open the project in Android Studio, and connect your android device. Alternatively, open AVD Manager and create a virtual machine.
+* Sync the project with Gradle Files.
+* Run the game on an Android device or emulator.
 
 
 
