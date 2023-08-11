@@ -1,5 +1,11 @@
 # Software Architecture Project Group 24
 
+This project was done as a part of the evaluation of the subject TDT4240 “Software
+Architecture” during the Spring of 2022. The educational goal of the project was
+“Learn to design, evaluate, implement and test a software architecture through game
+development”. Therefore, we have made a game for Android with software
+architecture as the main focus.
+
 ## Structure
 
 You will find the main parts of the code under core/src/com/mygdx/game/.
