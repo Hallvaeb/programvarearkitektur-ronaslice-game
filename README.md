@@ -16,8 +16,8 @@ Naturally, all java files contain a single class each.
 
 ## Installation and running the game
 
-* Install Android Studio
-* Get the project by cloning with “git clone https://github.com/Hallvaeb/TDT4240_progark_prosjekt.git” in a terminal at the location where you wish the project to exist, or by downloading the zip-file.
+* Install Android Studio.
+* Clone this repository.
 * Open the project in Android Studio, and connect your android device. Alternatively, open AVD Manager and create a virtual machine.
 * Sync the project with Gradle Files.
 * Run the game on an Android device or emulator.
