@@ -20,25 +20,19 @@ Naturally, all java files contain a single class each.
 
 https://www.youtube.com/watch?v=EZ7M69i-h0I
 
-## Documents (PDF and link to document)
+## Documents
 
 Implementation: [Implementation.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558292/Implementation.pdf)
 
-https://docs.google.com/document/d/1jBnVcHUP_Hb9u4QUir3vwYQaqqF0Wt-BxIg5OgHqPrQ/edit_
-
 Revised Requirement Design: [Requirements Design.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558293/Requirements.Design.pdf)
 
-https://docs.google.com/document/d/13PWQWDiKjDEfKm4LUthJ8bh87NpBgKr6ONiFqN0u1pQ/edit?usp=sharing
-
 Revised Architecture: [Architecture.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558296/Architecture.pdf)
-
-https://docs.google.com/document/d/1Y0ZubPTq533rQiknSoR4TUVC8YPNiHN2CoA3Xx6wIMA/edit?usp=sharing
 
 ## Diagrams
 
 Diagrams:  https://drive.google.com/file/d/15TcfDem8b2CAecJHgehR5X1ClGo7eGnT/view?usp=sharing
 
-## Architecture tradeoff analysis method (ATAM) evalutaions
+## Architecture tradeoff analysis method (ATAM) evaluations
 
 Of this project, by group 5: [ATAM_24.pdf](https://github.com/Hallvaeb/TDT4240_progark_prosjekt/files/8558258/ATAM_24.pdf)
 
